@@ -1,6 +1,6 @@
 # run trimmomatic
 
-```
+```one
 sbatch ../jade_scripts/2020_trimmomatic.sh ./
 ```
 
