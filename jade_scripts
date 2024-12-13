@@ -1,0 +1,56 @@
+## Picard (adding read groups)
+
+#!/bin/sh
+#SBATCH --job-name=readgroups
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=readgroups.%J.out
+#SBATCH --error=readgroups.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this
+# sbatch ./2021_picard_add_read_groups.sh /home/ben/projects/rrg-ben/ben/2020_GBS_muel_fish_allo_cliv_laev/raw_data/cutadd
+# apted_by_species_across_three_plates/clivii/ 
+
+module load StdEnv/2023  picard/3.1.0
+
+for file in ${1}*_sorted.bam
+do
+    java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${file} O=${file}_rg.bam RGID=4 RGLB=$(basename $file) RGPL=ILLUMINA RGPU=$(basename $file) RGSM=$(basename $file)
+done
+
+## merge
+
+#!/bin/sh
+#SBATCH --job-name=merge2
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=32:00:00
+#SBATCH --mem=16gb
+#SBATCH --output=merge2.%J.out
+#SBATCH --error=merge2.%J.err
+#SBATCH --account=def-ben
+
+# run by passing an argument like this (in the directory with the files)
+# sbatch 2024_samtools_merge2.sh merged_path_and_file in1_path_and_file in2_path_and_file 
+ module load StdEnv/2023  gcc/12.3 samtools/1.20
+
+samtools merge ${1} ${2} ${3}
+samtools index ${1}
+
+## depth per site
+
+#!/bin/sh
+#SBATCH --job-name=samtools_depth
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=samtools_depth.%J.out
+#SBATCH --error=samtools_depth.%J.err
+#SBATCH --account=def-ben
+
+module load StdEnv/2023  gcc/12.3 samtools/1.20
+samtools coverage -q 20 --plot-depth ${1} -o ${1}_coverage.txt
