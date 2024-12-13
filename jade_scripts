@@ -1,5 +1,6 @@
 ## Picard (adding read groups)
 
+```
 #!/bin/sh
 #SBATCH --job-name=readgroups
 #SBATCH --nodes=1
@@ -20,9 +21,11 @@ for file in ${1}*_sorted.bam
 do
     java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${file} O=${file}_rg.bam RGID=4 RGLB=$(basename $file) RGPL=ILLUMINA RGPU=$(basename $file) RGSM=$(basename $file)
 done
+```
 
 ## merge
 
+```
 #!/bin/sh
 #SBATCH --job-name=merge2
 #SBATCH --nodes=4
@@ -39,9 +42,11 @@ done
 
 samtools merge ${1} ${2} ${3}
 samtools index ${1}
+```
 
 ## depth per site
 
+```
 #!/bin/sh
 #SBATCH --job-name=samtools_depth
 #SBATCH --nodes=1
@@ -54,3 +59,4 @@ samtools index ${1}
 
 module load StdEnv/2023  gcc/12.3 samtools/1.20
 samtools coverage -q 20 --plot-depth ${1} -o ${1}_coverage.txt
+```
