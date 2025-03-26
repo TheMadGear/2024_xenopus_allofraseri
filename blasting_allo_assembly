@@ -1,5 +1,5 @@
 # make blast db
-```r
+```R
 makeblastdb -in allo.fasta.contigs_nobubbles.fasta.gz -dbtype nucl -out allo.fasta.contigs_nobubbles.fasta.gz_blastable
 ```
 
