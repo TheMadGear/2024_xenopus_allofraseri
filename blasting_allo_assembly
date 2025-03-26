@@ -10,11 +10,14 @@ makeblastdb -in allo.fasta.contigs_nobubbles.fasta.gz -dbtype nucl -out allo.fas
 blastn -query allo_notch4_region.fa -db allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_notch4_to_pacbio6.out
 ```
 
-make bed file, manually check that start < stop
+# make bed file, manually check that start < stop
 ```
 cut -f2,9,10 allo_notch4_to_pacbio6.out > allo_notch4_to_pacbio6.bed
 ```
 
-
+# extract fasta seqs
+```
+bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta.gz -bed allo_notch4_to_pacbio6.bed -fo allo_notch4_to_pacbio6.fasta
+```
 
 
