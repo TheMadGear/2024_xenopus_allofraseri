@@ -1,0 +1,20 @@
+# make blast db
+```
+makeblastdb -in allo.fasta.contigs_nobubbles.fasta.gz -dbtype nucl -out allo.fasta.contigs_nobubbles.fasta.gz_blastable
+```
+
+# use consensus sequence as a query
+# do same for laevis seq
+# pull out diverged sequences with dc-megablast
+```
+blastn -query allo_notch4_region.fa -db allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_notch4_to_pacbio6.out
+```
+
+make bed file, manually check that start < stop
+```
+cut -f2,9,10 allo_notch4_to_pacbio6.out > allo_notch4_to_pacbio6.bed
+```
+
+
+
+
