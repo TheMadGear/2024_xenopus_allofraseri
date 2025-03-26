@@ -1,5 +1,7 @@
 # make blast db
-`makeblastdb -in allo.fasta.contigs_nobubbles.fasta.gz -dbtype nucl -out allo.fasta.contigs_nobubbles.fasta.gz_blastable`{unix}
+```
+makeblastdb -in allo.fasta.contigs_nobubbles.fasta.gz -dbtype nucl -out allo.fasta.contigs_nobubbles.fasta.gz_blastable
+```
 
 # use consensus sequence as a query
 # do same for laevis seq
