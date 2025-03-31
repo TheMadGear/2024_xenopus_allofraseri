@@ -8,7 +8,12 @@
 
 
 
-# extract sequence from assembly
+# extract sequence from laevis assembly 
 ```
 blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -out 2024_primerDesign_1.fa
+```
+
+# extract sequence from allo assembly 
+```
+blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_primerDesign_1.fa
 ```
