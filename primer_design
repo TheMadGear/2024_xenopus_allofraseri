@@ -17,3 +17,9 @@ blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-b
 ```
 blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_primerDesign_1.fa
 ```
+
+# scp command that won't work
+```
+scp /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_primerDesign_1.fa /Users/jadebohbot/Downloads/Masters_Documents/Depth
+```
+
