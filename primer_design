@@ -20,6 +20,6 @@ blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-b
 
 # scp command that won't work
 ```
-scp /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_primerDesign_1.fa /Users/jadebohbot/Downloads/Masters_Documents/Depth
+scp froglady@graham.computecanada.ca:~/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_primerDesign_1.fa C:/Users/jadebohbot/Downloads/Masters_Documents/Depth
 ```
 
