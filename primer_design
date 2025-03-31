@@ -1,3 +1,13 @@
+# regions:
+
+# Chr8S:80930024..80930064 (notch4.S coding region)
+ 
+# Chr8L:126371023..126371065 (LOC108699408 = skint-1 (not sex related) 
+ 
+# Chr9_10S:76918194..76918281 (upstream of dbr1 (not sex related) 
+
+
+
 # extract sequence from assembly
 ```
 blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -out 2024_primerDesign_1.fa
