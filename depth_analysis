@@ -23,7 +23,22 @@ module load python 3.11
 
 # load virtual environment
 ```
+virtualenv --no-download ENV
+```
 
+# activate
+```
+source ENV/bin/activate
+```
+
+# upgrade pip
+```
+pip install --no-index --upgrade pip
+```
+
+# install deepTools
+```
+pip install deepTools --no-index
 ```
 
 
