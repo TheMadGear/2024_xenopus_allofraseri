@@ -12,7 +12,10 @@ sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt
 # from X. allofraseri data that was already mapped etc. with final deduped bam files
 
 # include script, filepaths & command
-```
 
+# install pip and deeptools
+```
+pip3 install --upgrade setuptools
+python3 -m pip install --upgrade pip
 ```
 
