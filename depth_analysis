@@ -11,6 +11,11 @@ sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt
 
 ####################################################################################
 
+# currently using to extract depth data from deduped files
+sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh
+
+####################################################################################
+
 # from X. allofraseri data that was already mapped etc. with final deduped bam files
 
 # include script, filepaths & command
