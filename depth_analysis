@@ -12,7 +12,11 @@ sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt
 ####################################################################################
 
 # currently using to extract depth data from deduped files
+# 28393647
 sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh
+
+# 28393758
+sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh list_of_bams_allo.txt
 
 ####################################################################################
 
