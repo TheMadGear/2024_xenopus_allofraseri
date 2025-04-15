@@ -27,7 +27,7 @@ sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh list_of_ba
 
 # load python
 ```
-module load python 3.11
+module load python #3.11
 ```
 
 # load virtual environment
