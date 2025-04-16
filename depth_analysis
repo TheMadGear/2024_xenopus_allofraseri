@@ -53,6 +53,11 @@ pip install deepTools --no-index
 # deeptools stored
 # ./ENV/lib/python3.11/site-packages
 
+# trying to run bamCoverage
+```
+sbatch ../../froglady/2024_allo/jade_scripts/bam_coverage.sh -b fwd.bam -o a.fwd.bigWig
+```
+
 
 
 
