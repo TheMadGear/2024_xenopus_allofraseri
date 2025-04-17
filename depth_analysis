@@ -59,7 +59,6 @@ sbatch ../../froglady/2024_allo/jade_scripts/bam_coverage.sh -b fwd.bam -o a.fwd
 ```
 
 # use "chmod 775 filepath" to allow access to files
-
 ```
 chmod 775 filepath
 ```
