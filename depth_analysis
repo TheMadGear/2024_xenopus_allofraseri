@@ -58,7 +58,17 @@ pip install deepTools --no-index
 sbatch ../../froglady/2024_allo/jade_scripts/bam_coverage.sh -b fwd.bam -o a.fwd.bigWig
 ```
 
-use "chmod 775 filepath" to allow access to files
+# use "chmod 775 filepath" to allow access to files
+
+```
+chmod 775 filepath
+```
+
+# uninstall and reinstall numpy.....
+```
+pip uninstall numpy
+pip install numpy
+```
 
 
 
