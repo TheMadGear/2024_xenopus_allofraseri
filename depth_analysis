@@ -69,6 +69,8 @@ pip uninstall numpy
 pip install numpy
 ```
 
+# ben code
+# module load StdEnv/2023 python/3.13.2
 
 
 
