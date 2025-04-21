@@ -45,9 +45,4 @@ module load StdEnv/2023 python/3.11
 /home/froglady/projects/rrg-ben/for_jade/bam_files_mapped_to_allo_genome/ENV/lib/python3.11/site-packages/deeptools/bamCoverage.py -b ${1} --outFileFormat bedgraph --binSize 100000 --ignoreDuplicates --minMappingQuality 30 -o ${1}_bamCoverage.bw
 ```
 
-# code to run script
-```
-sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/bam_coverage.sh .
-```
-
 
