@@ -71,6 +71,7 @@ pip install numpy
 
 # ben code
 # module load StdEnv/2023 python/3.13.2
+# ./bamCoverage -b ../../BJE3485_sorted_rg_dedup.bam --outFileFormat bedgraph --binSize 100000 --ignoreDuplicates --minMappingQuality 30 -o $temp_bamCoverage.bw
 
 
 
