@@ -1,4 +1,0 @@
-```
-blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -out 2024_primerDesign_1.fa
-```
-
