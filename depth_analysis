@@ -11,68 +11,21 @@ sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt
 
 ####################################################################################
 
-# currently using to extract depth data from deduped files
-# 28393647
-sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh
-
-# 28393758
-sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh list_of_bams_allo.txt
-
-####################################################################################
-
 # from X. allofraseri data that was already mapped etc. with final deduped bam files
 
 # include script, filepaths & command
 
-
-# load python
-```
-module load python #3.11
-```
-
-# load virtual environment
-```
-virtualenv --no-download ENV
-```
-
-# activate
-```
-source ENV/bin/activate
-```
-
-# upgrade pip
-```
-pip install --no-index --upgrade pip
-```
-
-# install deepTools
-```
-pip install deepTools --no-index
-```
-
-# deeptools stored
-# ./ENV/lib/python3.11/site-packages
-
-# trying to run bamCoverage
-```
-sbatch ../../froglady/2024_allo/jade_scripts/bam_coverage.sh -b fwd.bam -o a.fwd.bigWig
-```
 
 # use "chmod 775 filepath" to allow access to files
 ```
 chmod 775 filepath
 ```
 
-# uninstall and reinstall numpy.....
+# WORKING CODE
 ```
-pip uninstall numpy
-pip install numpy
+module load StdEnv/2023 python/3.13.2
+./bamCoverage -b ../../BJE3485_sorted_rg_dedup.bam --outFileFormat bedgraph --binSize 100000 --ignoreDuplicates --minMappingQuality 30 -o $temp_bamCoverage.bw
 ```
-
-# ben code
-# module load StdEnv/2023 python/3.13.2
-# ./bamCoverage -b ../../BJE3485_sorted_rg_dedup.bam --outFileFormat bedgraph --binSize 100000 --ignoreDuplicates --minMappingQuality 30 -o $temp_bamCoverage.bw
-
 
 
 # script
