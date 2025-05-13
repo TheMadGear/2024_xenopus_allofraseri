@@ -45,7 +45,17 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 ```
 
 
+```
 
+# use consensus sequence as a query
+# do same for laevis seq
+# pull out diverged sequences with dc-megablast
+```
+blastn -query XL_dock1_3UTR_seq.fa -db allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_dock1_to_pacbio6.out
+```
+
+
+```
 
 
 
