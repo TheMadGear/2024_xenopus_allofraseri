@@ -41,6 +41,7 @@ module load StdEnv/2023 mafft/7.526
 ```
 blastdbcmd -entry all -range 18699167-18968533 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_dock1_primerDesign.fa
 
+# cd into depth folder
 scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_dock1_primerDesign.fa .
 ```
 
