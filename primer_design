@@ -27,3 +27,25 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 
 # repeat with other primer regions
 
+
+
+
+
+# new way with ben & primer3
+
+```
+module spider mafft
+module spider mafft/7.526
+module load StdEnv/2023 mafft/7.526
+```
+
+
+
+
+
+
+
+
+
+
+
