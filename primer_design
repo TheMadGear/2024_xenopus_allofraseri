@@ -1,4 +1,4 @@
-# regions:
+ls -l# regions:
 
 # Chr8S:80930024..80930064 (notch4.S coding region)
  
@@ -39,6 +39,7 @@ module spider mafft/7.526
 module load StdEnv/2023 mafft/7.526
 ```
 ```
+# allo seq
 blastdbcmd -entry all -range 18699167-18968533 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_dock1_primerDesign.fa
 
 # cd into depth folder
