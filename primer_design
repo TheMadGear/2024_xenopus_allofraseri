@@ -55,7 +55,7 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 blastn -query XL_dock1_3UTR_seq.fa -db allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_dock1_to_pacbio6.out
 
 cut -f2,9,10 allo_dock1_to_pacbio6.out > allo_dock1_to_pacbio6.bed
-
+#check start < end
 bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta.gz -bed allo_dock1_to_pacbio6.bed -fo allo_dock1_to_pacbio6.fasta
 ```
 
