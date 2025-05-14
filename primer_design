@@ -32,12 +32,31 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 
 
 # new way with ben & primer3
+# download sequence from xenbase, scp to compute canada cluster
+```
+scp ./Reference_sequence-Chr7L-18962346..18968605.fasta froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers
+```
+
 # set up
 ```
 module spider mafft
 module spider mafft/7.526
 module load StdEnv/2023 mafft/7.526
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 # allo seq
 blastdbcmd -entry all -range 18699167-18968533 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_dock1_primerDesign.fa
