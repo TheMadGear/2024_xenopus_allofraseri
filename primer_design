@@ -31,10 +31,14 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 
 
 
+##############################################################################
+
+
+
 # new way with ben & primer3
 # download sequence from xenbase, scp to compute canada cluster
 ```
-Reference_sequence-Chr7L-18967381..18968534.fasta
+# ran from personal laptop directory (Downloads)
 scp ./Reference_sequence-Chr7L-18967381..18968534.fasta froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers
 ```
 
@@ -62,7 +66,9 @@ bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta.gz -bed allo_dock1_to_p
 mafft --adjustdirectionaccurately allo_dock1_to_pacbio6.fasta > allo_dock1_to_pacbio6_align.fasta
 ```
 
-
+# from personal terminal window set to Downloads folder
+```
+scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers/allo_dock1_to_pacbio6_align.fasta .
 
 
 
