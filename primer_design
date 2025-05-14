@@ -50,36 +50,7 @@ mv Reference_sequence-Chr7L-18967381..18968534.fasta Reference_sequence-Chr7L-18
 blastn -query Reference_sequence-Chr7L-18967381..18968534.fa -db ../../../for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_dock1_to_pacbio6.out
 cut -f2,9,10 allo_dock1_to_pacbio6.out > allo_dock1_to_pacbio6.bed
 ```
-
-
-
-
-
-
-
-
-
-```
-# allo seq
-blastdbcmd -entry all -range 18699167-18968533 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_dock1_primerDesign.fa
-
-# cd into depth folder
-scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_dock1_primerDesign.fa .
-```
-
-
-
-
-# use consensus sequence as a query
-# do same for laevis seq
-# pull out diverged sequences with dc-megablast
-
-
-# extract sequence from laevis assembly 
-```
-blastdbcmd -entry all -range 18968061-18968542 -db /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -out allo_dock1_primerDesign.fa
-```
-
+#check start < end
 
 ```
 blastn -query allo_dock1_primerDesign.fa -db allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_dock1_to_pacbio6.out
