@@ -51,8 +51,7 @@ module load StdEnv/2023 mafft/7.526
 
 ```
 mv Reference_sequence-Chr7L-18967381..18968534.fasta Reference_sequence-Chr7L-18967381..18968534.fa
-blastn -query Reference_sequence-Chr7L-18967381..18968534.fa -db ../../../for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_dock1_to_pacbio6.out
-cut -f2,9,10 allo_dock1_to_pacbio6.out > allo_dock1_to_pacbio6.bed
+
 ```
 #check start < end
 
