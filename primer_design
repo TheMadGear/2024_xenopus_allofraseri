@@ -71,7 +71,7 @@ mafft --adjustdirectionaccurately allo_dock1_to_pacbio6.fasta > allo_dock1_to_pa
 scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers/allo_dock1_to_pacbio6_align.fasta .
 
 
-
+ Chr7L:18612557..18613557
 
 
 
