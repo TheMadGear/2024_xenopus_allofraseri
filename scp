@@ -1,9 +1,9 @@
 # from remote machine, to personal computer
 ```
-scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_primerDesign_1.fa .
+scp froglady@graham.computecanada.ca:/remote.file.path/file.of.interest .
 ```
 
 # from personal computer, to remote machine
 ```
-scp ./Reference_sequence-Chr7L-18967381..18968534.fasta froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers
+scp ./file.of.interest froglady@graham.computecanada.ca:/file.path
 ```
