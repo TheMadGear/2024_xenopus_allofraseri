@@ -7,3 +7,4 @@ scp froglady@graham.computecanada.ca:/remote.file.path/file.of.interest .
 ```
 scp ./file.of.interest froglady@graham.computecanada.ca:/file.path
 ```
+
