@@ -27,6 +27,12 @@ module load StdEnv/2023 python/3.13.2
 ./bamCoverage -b ../../BJE3485_sorted_rg_dedup.bam --outFileFormat bedgraph --binSize 100000 --ignoreDuplicates --minMappingQuality 30 -o $temp_bamCoverage.bw
 ```
 
+# runs script
+```
+sbatch ./try_bam_coverage.sh ../../../for_jade/bam_files_mapped_to_allo_genome/BJE3485_sorted_rg_dedup.bam .
+```
+
+try importing bamCoverage?
 
 # script
 ```
