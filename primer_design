@@ -33,6 +33,20 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 
 ##############################################################################
 
+(1) copy the region in XL. This is possible using xenbase - make sure the "Reference sequence" box on the left side of the attached screenshot is attached. Then go to the pull down menu in the attached screenshot and select "Save track data" and this will show you the XL seq.
+(2) make a fasta file with the XL seq. It has this format:
+>header
+ATATCGCTCGGCGCG
+(3) Use this XL seq as a query into the allo blast database. You do not need to use makeblastdb again because all the files are already there. This is the commandline format:
+blastn -query XL_seq.fa -db allo.fasta.contigs.fasta.gz__blastable -outfmt 6 -out my_outputfile.txt
+(4) modify this output file ("my_outputfile.txt") so that the coordinates are lower in column 2 than the ones in column 3
+(5) use bedtools to extract the seqs from the allofraseri genome
+(6) use mafft --adjustdirectionaccurately to align these seqs (you should also add the original XL seq you used as a query for blast ("XL_seq.fa") into the alignment as well - this will help you determine which allo seq is Chr7L because the XL seq will be more similar to allo Chr7L than to allo Chr7S.
+(7) import into Mesquite
+(8) using xenbase, check the orientation of the transcription and reverse complement the entire alignment if needed
+(9) realign as needed
+(10) using xenbase, figure out the codon reading frame and set this up
+(11) make primers for Chr7L using the allo seq; make sure they do not match Chr7S
 
 
 # new way with ben & primer3
