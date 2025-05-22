@@ -54,6 +54,9 @@ cut -f2,9,10 allo_foxi2_ex2_to_pacbio6.out > allo_foxi2_ex2_to_pacbio6.bed
 
 bedtools getfasta -fi ../../../for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable -bed allo_foxi2_ex2_to_pacbio6.bed  -fo allo_foxi2_ex2_to_pacbio6.fasta
 
+bedtools getfasta -fi allo.fasta.contigs.fasta_blastable -bed ../../froglady/2024_allo/2024_allo_primers/allo_foxi2_ex2_to_pacbio6.bed -fo allo_foxi2_ex2_to_pacbio6.fasta
+
+
 (6) use mafft --adjustdirectionaccurately to align these seqs (you should also add the original XL seq you used as a query for blast ("XL_seq.fa") into the alignment as well - this will help you determine which allo seq is Chr7L because the XL seq will be more similar to allo Chr7L than to allo Chr7S.
 (7) import into Mesquite
 (8) using xenbase, check the orientation of the transcription and reverse complement the entire alignment if needed
