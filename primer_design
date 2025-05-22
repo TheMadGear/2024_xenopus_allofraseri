@@ -61,6 +61,10 @@ mafft --adjustdirectionaccurately allo_foxi2_to_pacbio6.fasta > allo_foxi2_ex2_t
 
 
 (7) import into Mesquite
+
+scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_foxi2_ex2_to_pacbio6_align.fasta .
+
+
 (8) using xenbase, check the orientation of the transcription and reverse complement the entire alignment if needed
 (9) realign as needed
 (10) using xenbase, figure out the codon reading frame and set this up
