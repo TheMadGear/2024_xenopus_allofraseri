@@ -16,7 +16,7 @@ sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt
 
 # correctly runs script
 ```
-sbatch ./try_bam_coverage.sh ../../../for_jade/bam_files_mapped_to_allo_genome/BJE3485_sorted_rg_dedup.bam .
+sbatch ./bam_coverage.sh ../../../for_jade/bam_files_mapped_to_allo_genome/BJE3485_sorted_rg_dedup.bam .
 ```
 
 ```
