@@ -19,6 +19,11 @@ sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt
 sbatch ./try_bam_coverage.sh ../../../for_jade/bam_files_mapped_to_allo_genome/BJE3485_sorted_rg_dedup.bam .
 ```
 
+```
+sbatch ./bam_coverage.sh retry_BJE3485_sorted_rg_dedup.bam .
+
+```
+
 # script
 ```
 #!/bin/sh
