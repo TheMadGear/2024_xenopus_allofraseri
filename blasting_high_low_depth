@@ -2,7 +2,8 @@
 
 
 ```
-
+# not working 
+ blastdbcmd -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable -entry tig00000003 > c1724.fasta
 ```
 
 
