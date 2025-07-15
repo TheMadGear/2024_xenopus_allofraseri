@@ -7,8 +7,9 @@
 ```
 
 ```
-# also not working
-"tig00001724[ATCGactg]*\>" allo.fasta.contigs_copy.fasta > try_file.fasta
+# works but not how expected
+grep "tig00001724[ATCGactg]*\>" allo.fasta.contigs.fasta > try_file.fasta
+
 
 ```
 
