@@ -8,7 +8,7 @@
 
 ```
 # also not working
-egrep “tig00001724*>” allo.fasta.contigs.fasta > try_file.fasta
+"tig00001724[ATCGactg]*\>" allo.fasta.contigs_copy.fasta > try_file.fasta
 
 ```
 
