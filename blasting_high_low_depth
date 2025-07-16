@@ -16,11 +16,21 @@ grep -a1 "tig00001724
 # maybe progress?
  pcregrep -M "tig00001724[A-Za-z0-9\=\-]*[\nACTGactg]*\>" allo.fasta.contigs.fasta > try_file.fasta
 
+
+
+
+
 ```
 # IT WORKSSSSSS
 ```
 awk '/^>/ {print (NR==1 ? " " : RS) $0; next} { printf "%s", $0} END {printf RS}' $1 copy_allo.fasta.contigs.fasta > copy_allo.fasta.contigs.fasta
 ```
+# work in progress
+```
+grep -A1 "^>tig00001724" copy_allo.fasta.contigs.fasta > try_file.fasta
+```
+
+
 
 
 # Veronica help
