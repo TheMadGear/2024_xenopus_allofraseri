@@ -10,10 +10,12 @@
 # works but not how expected
 grep "tig00001724[ATCGactg]*\>" allo.fasta.contigs.fasta > try_file.fasta
 
+# get rid of line breaks
+grep -a1 "tig00001724
 
 # maybe progress?
  pcregrep -M "tig00001724[A-Za-z0-9\=\-]*[\nACTGactg]*\>" allo.fasta.contigs.fasta > try_file.fasta
 
 ```
-
+grep -A 1 "^>name" file > aSDFGH.ASDAS
 
