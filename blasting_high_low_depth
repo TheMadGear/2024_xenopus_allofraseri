@@ -23,11 +23,10 @@ grep -a1 "tig00001724
 ```
 # IT WORKSSSSSS
 ```
-awk '/^>/ {print (NR==1 ? " " : RS) $0; next} { printf "%s", $0} END {printf RS}' $1 copy_allo.fasta.contigs.fasta > copy_allo.fasta.contigs.fasta
-```
-# work in progress
-```
-grep -A1 "^>tig00001724" copy_allo.fasta.contigs.fasta > try_file.fasta
+awk '/^>/ {print (NR==1 ? " " : RS) $0; next} { printf "%s", $0} END {printf RS}' $1 copy_allo.fasta.contigs.fasta > noNew_allo.fasta.contigs.fasta
+
+grep -A 1 "^>tig00001724" noNew_allo.fasta.contigs.fasta > try_file.fasta
+
 ```
 
 
