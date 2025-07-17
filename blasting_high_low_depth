@@ -8,6 +8,8 @@ awk '/^>/ {print (NR==1 ? " " : RS) $0; next} { printf "%s", $0} END {printf RS}
 # grep the contig of interest and send to new fasta file
 grep -A 1 "^>tig00001724" noNew_allo.fasta.contigs.fasta > c1724.fasta
 
+# blasting allo contig against laevis reference to find homologous region (not working yet)
+blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/c1724.fasta -db ../../../for_jade/home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out c1724.out
 ```
 
 
