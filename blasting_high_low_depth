@@ -13,10 +13,19 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly
 ```
 
 
+# Ben Solution
+
+```
+# make .bed file from .dict file
+
+# grab fasta from allo multifasta file
+bedtools getfasta -bed bedfile.bed -fi multifasta.fa -fo out.fa
+
+# blast allo fasta file against laevis reference 
+
+```
 
 
-# Veronica help
-grep -A 1 "^>name" file > aSDFGH.ASDAS
 
-NEWFILE="${1%*.*}_fixed.${1##*.}"
-awk '/^>/ {print (NR==1 ? "" : RS) $0; next} { printf "%s", $0} END {printf RS}' $1 > $NEWF
+
+
