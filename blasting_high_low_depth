@@ -16,6 +16,25 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly
 # Ben Solution
 
 ```
+# make dictionary file
+
+#!/bin/sh
+#SBATCH --job-name=dictionary
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --account=rrg-ben
+
+
+module load java
+module load StdEnv/2023 picard/3.1.0
+
+
+# code to run: sbatch make_dict.sh allo.fasta.contigs.fasta 
+
+java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1} OUTPUT=allo_reference_contigs.dict
+
 # make .bed file from .dict file
 
 # grab fasta from allo multifasta file
