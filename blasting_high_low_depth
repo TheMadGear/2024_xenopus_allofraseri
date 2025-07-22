@@ -36,7 +36,7 @@ module load StdEnv/2023 picard/3.1.0
 java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1} OUTPUT=allo_reference_contigs.dict
 ```
 
-# make .bed file from .dict file
+# manually make .bed file from .dict file (grep)
 
 # grab fasta from allo multifasta file
 bedtools getfasta -bed bedfile.bed -fi multifasta.fa -fo out.fa
