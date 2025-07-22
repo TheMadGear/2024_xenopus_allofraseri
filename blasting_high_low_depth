@@ -40,7 +40,7 @@ java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1} OUTPU
  grep "SN:tig00001764" allo_reference_contigs.dict
 
 # grab fasta from allo multifasta file
-bedtools getfasta -bed bedfile.bed -fi multifasta.fa -fo out.fa
+bedtools getfasta -bed tig1764.bed -fi allo.fasta.contigs.fasta  -fo tig1764.fa
 
 # blast allo fasta file against laevis reference 
 
