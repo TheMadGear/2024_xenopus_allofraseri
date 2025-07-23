@@ -42,7 +42,7 @@ java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1} OUTPU
 # grab fasta from allo multifasta file
 bedtools getfasta -bed tig1764.bed -fi allo.fasta.contigs.fasta  -fo tig1764.fa
 
-# blast allo fasta file against laevis reference (NOT WORKING PROPERLY)
+# blast allo fasta file against laevis reference (NOT WORKING PROPERLY ....hmmm no yes it is)
 
 blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1764.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -out tig1764.out
 
