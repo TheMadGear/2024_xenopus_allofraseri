@@ -47,7 +47,19 @@ bedtools getfasta -bed tig1764.bed -fi allo.fasta.contigs.fasta  -fo tig1764.fa
 blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1764.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -out tig1764.out
 
 ```
+
+# 2 OPTIONS HERE:
+
 # WRITE MORE CODE that specifically pulls out the area of high depth from the contig
+
+# OR
+
+# filter blast result by top 20 by percent id
+
+
+
+
+
 
 
 
