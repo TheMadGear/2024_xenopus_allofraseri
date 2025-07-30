@@ -56,7 +56,23 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly
 # filter blast result by top 20 by percent id
 
 
+#!/bin/sh
+#SBATCH --job-name=allo_v_laev
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=allo_v_laev.%J.out
+#SBATCH --error=allo_v_laev.%J.err
+#SBATCH --account=rrg-ben
 
+# run by passing: sbatch allo_v_laev.sh tigName NO EXTENSION !!!
+
+module load StdEnv/2023
+module load gcc/12.3 blast+/2.14.1
+
+blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/${1}.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -task dc-megablast -max_hsps 1 -out ${1}.out
+~                                                                                             
 
 
 
