@@ -5,7 +5,8 @@ bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta. -bed tig00008587_1_109
 
 # can I do this with an array or loop to automatically do each contig?
 ```
-grep "tig[0-9]........" allo.fasta.contigs.fasta
+# grabs name of every contig
+grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 ```
 
 
