@@ -1,1 +1,13 @@
+```
+# ben code
+bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta. -bed tig00008587_1_10920835.bed -fo tig00008587_1_10920835.fasta
+```
+
+# can I do this with an array or loop to automatically do each contig?
+```
+grep "tig[0-9]*" allo.fasta.contigs.fasta
+```
+
+
+
 
