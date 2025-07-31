@@ -50,17 +50,13 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly
 # 2 OPTIONS HERE:
 
 # WRITE MORE CODE that specifically pulls out the area of high depth from the contig
-
-# OR
-
-# filter blast result by top 20 by percent id
-
 ```
-# the sort code works!!!!
-sort -r -n -k 4 tig1764.out > tig1764_sorted.out
+# RUN IN R
+small2 <- subset(c6146, M_F_dif >= 2000, select = c(start, M_F_dif)) # 3300000
 ```
 
 
+```
 #!/bin/sh
 #SBATCH --job-name=allo_v_laev
 #SBATCH --nodes=1
@@ -76,11 +72,14 @@ sort -r -n -k 4 tig1764.out > tig1764_sorted.out
 module load StdEnv/2023
 module load gcc/12.3 blast+/2.14.1
 
-blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/${1}.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -task dc-megablast -max_hsps 1 -out ${1}.out
-~                                                                                             
-
-
-
+blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/${1}.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -task dc-megablast -out ${1}.out
+                                                                                       
+```
+# filter blast result by top 20 by percent id
+```
+# the sort code works!!!!
+sort -r -n -k 4 tig1764.out > tig1764_sorted.out
+```
 
 
 
