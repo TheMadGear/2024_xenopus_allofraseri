@@ -47,14 +47,11 @@ bedtools getfasta -bed tig1724.bed -fi allo.fasta.contigs.fasta  -fo tig1724.fa
 blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -task dc-megablast -out tig1724.out
 ```
 
-# 2 OPTIONS HERE:
-
 # WRITE MORE CODE that specifically pulls out the area of high depth from the contig
 ```
 # RUN IN R
 small2 <- subset(c6146, M_F_dif >= 2000, select = c(start, M_F_dif)) # 3300000
 ```
-
 
 ```
 #!/bin/sh
