@@ -48,9 +48,11 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 cut -f2,9,10 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
 # MANUALLY adjust so col 1 < 2
+# NOOO NEED TO WRITE A COMMAND TO DO IT
+
 
 # bed file to bam file
 ```
-bedToBam
+bedToBam -i XL_CDS_to_tig1724.bed -g genome ??? allo or laevis ???
 ```
 
