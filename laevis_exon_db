@@ -25,4 +25,16 @@ bedtools getfasta -fi  /home/frogdy/projects/rrg-ben/froglady/2024_allo/2021_XL_
 
 ```
 
+# Ben code
+# blast contig against CDS database
+```
+makeblastdb -in tig00008587_1_10920835.fasta -dbtype nucl -out tig00008587_1_10920835.fasta_blastable
+```
+
+# you need to check out bamCoverage files with different --binSizes values (default is 50)
+
+
+
+
+
 
