@@ -2,19 +2,19 @@
 
 # you need to check out bamCoverage files with different --binSize values (default is 50)
 
-
-```
-# grabs fasta from from multifasta
-bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed -fo tig1724_small.fa
-```
-
 # can I do this with an array or loop to automatically do each contig?
 # ghhhhh realized only necessary for high depth contigs (but useful for later)
 ```
 # grabs name of every contig
 grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 ```
+#############################################################################################################
 
+
+```
+# grabs fasta from from multifasta
+bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed -fo tig1724_small.fa
+```
 
 
 # tig1724_small.fa
