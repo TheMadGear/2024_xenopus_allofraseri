@@ -18,10 +18,10 @@ makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
 
 
-# erroring 
+# this works slayyyy just need to put it in a script so faster
 ```
 # gets coding fasta seqs from CDS bed file
-bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/ laevis_ref_genome.fa_blastable -bed XL_v10.1_all_CDS.bed -fo XL_CDS_all_v10.1.fasta
+XL_CDS_all_v10.1.fasta
 
 ```
 
