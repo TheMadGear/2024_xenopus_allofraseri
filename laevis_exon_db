@@ -1,10 +1,15 @@
+
+
+# you need to check out bamCoverage files with different --binSize values (default is 50)
+
+
 ```
-# ben code
+# grabs fasta from from multifasta
 bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed -fo tig1724_small.fa
 ```
 
 # can I do this with an array or loop to automatically do each contig?
-# ghhhhh realized only necessary for high depth contigs
+# ghhhhh realized only necessary for high depth contigs (but useful for later)
 ```
 # grabs name of every contig
 grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
@@ -28,10 +33,8 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 # Ben code
 # blast contig against CDS database
 ```
-makeblastdb -in tig00008587_1_10920835.fasta -dbtype nucl -out tig00008587_1_10920835.fasta_blastable
+makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
-
-# you need to check out bamCoverage files with different --binSize values (default is 50)
 
 
 
