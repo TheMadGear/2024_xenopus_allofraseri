@@ -1,6 +1,6 @@
 ```
 # ben code
-bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig00001724.bed -fo 0000tig1724.fasta
+bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed -fo tig1724_small.fa
 ```
 
 # can I do this with an array or loop to automatically do each contig?
@@ -8,6 +8,13 @@ bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig00001724.bed -f
 ```
 # grabs name of every contig
 grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
+```
+
+
+
+# tig1724_small.fa
+```
+makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
 
 
