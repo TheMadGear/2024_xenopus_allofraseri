@@ -16,7 +16,11 @@ grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 ```
 makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
+# runs but out file is blank
+```
+# gets coding fasta seqs from CDS bed file
+bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/ laevis_ref_genome.fa_blastable -bed XL_v10.1_all_CDS.bed -fo XL_CDS_all_v10.1.fasta
 
-
+```
 
 
