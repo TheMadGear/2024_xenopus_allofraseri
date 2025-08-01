@@ -22,15 +22,12 @@ bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed 
 makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
 
-
-# this works slayyyy just need to put it in a script so faster
-```
 # gets coding fasta seqs from CDS bed file
+```
 bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa.gz -bed XL_v10.1_all_CDS.bed -fo XL_CDS_all_v10.1.fasta
 
 ```
 
-# Ben code
 # blast contig against CDS database
 ```
 makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
