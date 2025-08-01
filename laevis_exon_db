@@ -28,6 +28,7 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 
 ```
 
+
 # make blastdb out of contig of interest
 ```
 makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
@@ -38,5 +39,14 @@ makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assemb
 blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_all_v10.1.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable -outfmt 6 -out XL_CDS_to_tig1724.txt 
 ```
 
-# ben does samtools depth here but I would like to use bamCoverage if possible for consistency (?)
+#########################################################################################################
+
+# ben does "samtools depth" here but I would like to use bamCoverage if possible for consistency (?)
+
+# .txt to bed file
+
+# bed file to bam file
+```
+bedToBam
+```
 
