@@ -35,7 +35,7 @@ makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assemb
 
 
 ```
-blastn -query XL_CDS_all_v10.1.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable -outfmt 6 -out XL_CDS_to_tig1724.txt
+blastn -query XL_CDS_all_v10.1.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable -outfmt 6 -out /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_to_tig1724.txt
 ```
 
 
