@@ -44,6 +44,10 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 # ben does "samtools depth" here but I would like to use bamCoverage if possible for consistency (?)
 
 # .txt to bed file
+```
+cut -f2,9,10 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
+```
+# MANUALLY adjust so col 1 < 2
 
 # bed file to bam file
 ```
