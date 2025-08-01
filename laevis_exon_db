@@ -28,9 +28,9 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 
 ```
 
-# blast contig against CDS database
+# blast ALLO contig against XL CDS database
 ```
-makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
+makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
 ```
 
 
