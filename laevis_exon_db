@@ -8,6 +8,8 @@
 # grabs name of every contig
 grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 ```
+
+*** = why did I do this twice??
 #############################################################################################################
 
 
@@ -17,7 +19,7 @@ bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed 
 ```
 
 
-# tig1724_small.fa
+# make database for contig of interest ***
 ```
 makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
@@ -29,7 +31,7 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 ```
 
 
-# make blastdb out of contig of interest
+# make blastdb out of contig of interest ***
 ```
 makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
 ```
