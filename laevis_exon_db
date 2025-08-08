@@ -36,7 +36,7 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
 ```
 
-# blasts XL coding region against contig blastable database
+# blasts XL coding region against high-depth-contig blastable database
 ```
 blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_all_v10.1.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable -outfmt 6 -out XL_CDS_to_tig1724.txt 
 ```
@@ -47,7 +47,8 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 
 # .txt to bed file
 ```
-cut -f2,9,10 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
+# bed file will have allo position name, allo contig start/end, E value
+cut -f2,9,10,11 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
 
 
@@ -72,15 +73,14 @@ awk -F '\t' 'BEGIN {OFS="\t"}
         sstart = send;
         send = temp;
         strand = "-";
-    			}
+                        }
 
     #Print relevant columns, now with start <= end and a strand indicator
-    print $1, sstart, send, $4, $5, strand; #Here, I printed sseqid, sstart, send, qseqid, evalue, strand but you can change this
+    print $1, sstart, send, strand, $4; #Here, I printed sseqid, sstart, send, qseqid, evalue, strand but you can change this
 
 }' 
 
 $1 > $2.bed
-
 ```
 
 # bed file to bam file
