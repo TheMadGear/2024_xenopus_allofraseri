@@ -81,6 +81,6 @@ $1 > $2.bed
 
 # bed file to bam file
 ```
-bedToBam -i XL_CDS_to_tig1724.bed -g genome ??? allo or laevis ???
+bedToBam -i XL_CDS_to_tig1724_fixed.bed -g genome ??? allo or laevis ???
 ```
 
