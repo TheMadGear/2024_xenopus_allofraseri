@@ -83,6 +83,11 @@ awk -F '\t' 'BEGIN {OFS="\t"}
 $1 > $2.bed
 ```
 
+# ran with
+```
+/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/switch_bed_strands.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724.bed XL_CDS_to_tig1724_fixed.bed
+```
+
 # bed file to bam file
 ```
 bedToBam -i XL_CDS_to_tig1724_fixed.bed -g genome ??? allo or laevis ???
