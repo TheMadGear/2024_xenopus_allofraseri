@@ -49,8 +49,10 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 ```
 cut -f2,9,10 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
-# Sam's script to switch the start/end columns if start > end
 
+
+# Sam's script to switch the start/end columns if start > end
+```
 #!/bin/bash
 
 #run like this: ./switch_bed_strands.sh input_file_name output_file_name
@@ -78,6 +80,8 @@ awk -F '\t' 'BEGIN {OFS="\t"}
 }' 
 
 $1 > $2.bed
+
+```
 
 # bed file to bam file
 ```
