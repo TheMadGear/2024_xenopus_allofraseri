@@ -89,17 +89,8 @@ awk -F'\t' 'BEGIN {OFS="\t"} {
 
 # sort the bed file by pident (descending)
 ```
-sort -n -k 4 XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
+sort -n -k 4 -r XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 ```
-
-
-
-# GO BACK AND MAKE SURE IT'S TAB DELIMITED !!!!!!!!!!!!
-
-
-
-
-
 
 
 # CHECK WITH BEN: maybe can either sort by length and/or pident
