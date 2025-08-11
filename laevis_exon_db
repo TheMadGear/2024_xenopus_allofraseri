@@ -100,3 +100,9 @@ sort -n -k 4 -r XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 bedToBam -i XL_CDS_to_tig1724_fixed.bed -g genome ??? allo or laevis ???
 ```
 
+# and FINALLY we will be using bamcoverage!!!! (prob use much smaller bins)
+
+
+
+
+
