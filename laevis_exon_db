@@ -92,7 +92,7 @@ sort -n -k 4 -r XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 
 # CHECK WITH BEN: maybe can either sort by length and/or pident
 
-# bed file to bam file
+# bed file to bam file (USE ALLOFRASERI RERERENCE)
 ```
 bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g genome ??? allo or laevis ???
 ```
