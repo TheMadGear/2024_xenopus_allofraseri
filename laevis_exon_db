@@ -47,9 +47,29 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 
 # .txt to bed file
 ```
-# bed file will have allo position name, allo contig start/end, E value
-cut -f1,9,10,11 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
+# bed file will have allo position name, allo contig start/end, pident
+cut -f1,9,10,3 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
+
+
+# now have to reorder columns so pident is last
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Sam's script to switch the start/end columns if start > end
@@ -86,6 +106,8 @@ awk -F'\t' 'BEGIN {OFS="\t"} {
 ```
 sort -n -k 4 XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 ```
+
+# CHECK WITH BEN: maybe can either sort by length and/or pident
 
 # bed file to bam file
 ```
