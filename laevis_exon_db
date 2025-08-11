@@ -24,16 +24,15 @@ bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed 
 makeblastdb -in tig1724_small.fa -dbtype nucl -out tig1724_blastable
 ```
 
+# make blastdb out of contig of interest ***
+```
+makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
+```
+
 # gets coding fasta seqs from CDS bed file
 ```
 bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa.gz -bed XL_v10.1_all_CDS.bed -fo XL_CDS_all_v10.1.fasta
 
-```
-
-
-# make blastdb out of contig of interest ***
-```
-makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
 ```
 
 # blasts XL coding region against high-depth-contig blastable database
@@ -50,7 +49,6 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 # bed file will have allo position name, allo contig start/end, pident
 cut -f1,9,10,3 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
-
 
 # now have to reorder columns so pident is last
 ```
@@ -92,12 +90,11 @@ awk -F'\t' 'BEGIN {OFS="\t"} {
 sort -n -k 4 -r XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 ```
 
-
 # CHECK WITH BEN: maybe can either sort by length and/or pident
 
 # bed file to bam file
 ```
-bedToBam -i XL_CDS_to_tig1724_fixed.bed -g genome ??? allo or laevis ???
+bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g genome ??? allo or laevis ???
 ```
 
 # and FINALLY we will be using bamcoverage!!!! (prob use much smaller bins)
