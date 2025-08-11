@@ -81,6 +81,12 @@ awk -F'\t' 'BEGIN {OFS="\t"} {
  ./sam_switch_bed.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724.bed XL_CDS_to_tig1724_sam
 ```
 
+
+# sort the bed file by E (descending)
+```
+sort -n -k 4 XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
+```
+
 # bed file to bam file
 ```
 bedToBam -i XL_CDS_to_tig1724_fixed.bed -g genome ??? allo or laevis ???
