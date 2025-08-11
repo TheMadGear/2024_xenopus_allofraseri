@@ -56,16 +56,13 @@ cut -f1,9,10,11 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
 #!/bin/bash
 
-#run like this: ./switch_bed_strands.sh input_file_name output_file_name
+#run like this: add_strands_bed.sh input_file_name output_file_name
 #call the awk command and then feed it other commands:
-
-awk -F '\t' 'BEGIN {OFS="\t"} 
-{
+awk -F'\t' 'BEGIN {OFS="\t"} {
 #add a default + in the last column (which will be changed later if needed)
     sstart = $2;
     send = $3;
     strand = "+"; # Default to forward strand
-
 #check if the 2nd column is larger than the 3rd column. if so, swap the order, and add - in the last column
     if (sstart > send) {
         # Swap start and end, and set strand to reverse
@@ -73,19 +70,15 @@ awk -F '\t' 'BEGIN {OFS="\t"}
         sstart = send;
         send = temp;
         strand = "-";
-                        }
-
+    }
     #Print relevant columns, now with start <= end and a strand indicator
-    print $1, sstart, send, strand, $4; #Here, I printed sseqid, sstart, send, qseqid, evalue, strand but you can change this
-
-}' 
-
-$1 > $2
+    print $1, sstart, send, $4, strand; #Here, I printed sseqid, sstart, send, qseqid, evalue, strand but you can change this
+}' $1 > $2.bed
 ```
 
 # ran with
 ```
-sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/switch_bed_strands.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724.bed XL_CDS_to_tig1724_fixed.bed
+ ./sam_switch_bed.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724.bed XL_CDS_to_tig1724_sam
 ```
 
 # bed file to bam file
