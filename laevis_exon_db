@@ -54,9 +54,7 @@ cut -f1,9,10,3 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 
 # now have to reorder columns so pident is last
 ```
-awk -F '\t' '{print $1, $3, $4, $2}' XL_CDS_to_tig1724.bed > XL_CDS_to_tig1724_col.bed
-# new
-awk -F ‘\t’ OFS='\t' ‘{print $1, $3, $4, $2}’ XL_CDS_to_tig1724.bed > XL_CDS_to_tig1724_col.bed
+awk 'BEGIN{FS="\t"; OFS=FS}{print $1, $3, $4, $2}' XL_CDS_to_tig1724.bed > XL_CDS_to_tig1724_col.bed
 ```
 
 # Sam's script to switch the start/end columns if start > end
