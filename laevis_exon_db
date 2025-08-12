@@ -95,7 +95,7 @@ sort -n -k 4 -r XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 # bed file to bam file (USE ALLOFRASERI RERERENCE)
 ``` 
 # NOT WORKING
-bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g allo.fasta.contigs.fasta.fai > XL_CDS_to_tig1724_FINAL.bam
+bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta.fai > XL_CDS_to_tig1724_FINAL.bam
 ```
 
 # and FINALLY we will be using bamcoverage!!!! (prob use much smaller bins)
