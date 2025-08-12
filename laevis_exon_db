@@ -103,7 +103,7 @@ bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g /home/froglady/projects/rrg-ben/
 
 # create index file for bam file
 ```
-samtools sort XL_CDS_to_tig1724_FINAL.bam -o XL_CDS_to_tig1724_FINAL_sort.bam
+samtools sort XL_CDS_to_tig1724_FINAL.bam -o XL_CDS_to_tig1724_FINAL_sort.bai
 ```
 
 
