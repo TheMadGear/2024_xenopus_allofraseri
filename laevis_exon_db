@@ -104,6 +104,7 @@ bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g /home/froglady/projects/rrg-ben/
 # create index file for bam file
 ```
 # NOT WORKING
+# MAYBE need to convert to sam, sort, back to bam, bamCoverage
 samtools index XL_CDS_to_tig1724_FINAL.bam -o XL_CDS_to_tig1724_FINAL.bai
 ```
 
