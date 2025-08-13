@@ -108,7 +108,7 @@ samtools sort XL_CDS_to_tig1724_FINAL.bam -o XL_CDS_to_tig1724_FINAL_sort.bam
 
 # create index file for bam file
 ```
-samtools index XL_CDS_to_tig1724_FINAL_sort.bam -o XL_CDS_to_tig1724_FINAL_sort.bai
+samtools index XL_CDS_to_tig1724_FINAL_sort.bam -o XL_CDS_to_tig1724_FINAL_sort.bam.bai
 ```
 
 
