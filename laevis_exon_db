@@ -42,7 +42,10 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 
 # BEN GITHUB INSTRUCTIONS
 
-This produces a file that can be downloaded, opened with excel, and sorted by column 9 (sstart, "I") and column 3 (pident "C"). Before sorting I highlighted the matches to CDS on Chr7L because this is what is expected for these chromosomes. Then one can check the region of interest. For example, around 1Mb on contig tig00011029, the cuzd1.2 appears to be located.
+This produces a file that can be downloaded, opened with excel, and sorted by column 9 (sstart, "I") 
+# and column 3 (pident "C"). Before sorting I highlighted the matches to CDS on Chr7L because this is 
+# what is expected for these chromosomes. Then one can check the region of interest. For example, around 
+# 1Mb on contig tig00011029, the cuzd1.2 appears to be located.
 
 
 
