@@ -1,5 +1,14 @@
+# fastQC
+
 # cutadapt
 
-# fastQC
+# adaptor sequences:
+
+# >NEBNext_3p
+# AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+# >NEBNext_5p
+# AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+# fastQC again
 
 # assembly with trinity
