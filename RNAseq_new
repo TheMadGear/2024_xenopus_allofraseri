@@ -59,7 +59,7 @@ fastqc ${1} $"out" $"file_at_task"
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-# run with: sbatch ./cutadapt.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
+# run with: sbatch ./cutadapt_script.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
 
 path=$/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq
 
