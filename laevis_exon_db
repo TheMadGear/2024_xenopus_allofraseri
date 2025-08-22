@@ -101,7 +101,7 @@ awk -F'\t' 'BEGIN {OFS="\t"} {
 
 # ran with
 ```
-./sam_switch_bed.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724_col.bed XL_CDS_to_tig1724_sam
+./sam_switch_bed.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724_col.bed XL_CDS_to_tig1724_sam.bed
 ```
 
 
