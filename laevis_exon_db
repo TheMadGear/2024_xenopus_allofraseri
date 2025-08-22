@@ -12,6 +12,7 @@ grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 *** = why did I do this twice??
 #############################################################################################################
 
+# manually make bed file !!!!!
 
 ```
 # grabs fasta from from multifasta
