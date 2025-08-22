@@ -1,4 +1,49 @@
+# MUST RENAME FINAL OUT FILE
+
+
+
 # run with the following where there is a pre-made bed file named tig4787_small.bed (DO NOT use extension)
 ```
 ./depth_pipeline.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs_nobubbles.fasta /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig4787_small
 ```
+
+# script
+```
+#!/bin/sh
+
+
+# RUN WITH: sbatch ./depth_pipeline.sh ref_genome (allo.fasta.contigs_nobubbles.fasta) contig_of_interest (tig1724_small NO EXTENSION) INCLUDE PATH (SHOULD I INCLUDE LAEVIS REFERENCE)
+
+
+# loading stuff
+module load StdEnv/2023 
+module load gcc/12.3 blast+/2.14.1
+module load bedtools/2.31.0
+# reference multifasta
+
+# contig of interest
+deep_tig=${2}
+
+# grabs fasta from from multifasta (if pipe doesn't work, make output "${2}.fa" and input for next command) 
+bedtools getfasta -fi ${ref} -bed "${deep_tig}.bed" -fo "${2}.fa"
+
+# make database for contig of interest
+# NOT FINDING TIG_BLASTABLE- rename or bake db before?
+makeblastdb -in "${2}.fa" -dbtype nucl -out "${2}_blastable"
+
+# greps Chr7L positions from laevis coding regions bed file
+grep "Chr7L" /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_v10.1_all_CDS.bed > /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_allo_sexLinked_region.bed
+
+# gets coding fasta seqs from CDS bed file
+bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa.gz -bed /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_allo_sexLinked_region.bed -fo XL_CDS_all_v10.1.fasta
+
+# blasts XL coding region against high-depth-contig blastable database
+blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_all_v10.1.fasta -db "${2}_blastable" -outfmt 6 -out final_excel.txt
+
+
+cat final_excel.txt > excel_final.txt
+# final out can be opened and sorted in excel
+```
+
+
+
