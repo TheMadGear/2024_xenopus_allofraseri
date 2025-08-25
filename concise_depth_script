@@ -4,8 +4,8 @@
 
 # run with the following where there is a pre-made bed file named tig4787_small.bed (DO NOT use extension)
 ```
-# SHOULD YOU NOT USE BUBBLED ASSEMBLY?
-./depth_pipeline.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig4787_small
+# bed file should contain all locations from all contigs- can split up later by contig
+bedtools getfasta -fi  /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/boy_girl_extreme.bed -fo boy_girl_extreme.fa
 ```
 
 # script
