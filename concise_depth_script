@@ -46,15 +46,8 @@ cat final_excel.txt > excel_final.txt
 # final out can be opened and sorted in excel
 ```
 
-
-
-
-# YES YES YES IT RUNSSSS
-tig6146_small.bed -fo tig6146_small.fa
-./depth_pipeline.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig7799_small
-
-
-
+# now splitting up final excel-
+# need to create one file per contig and then sort within each contig file
 
 
 
