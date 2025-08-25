@@ -48,3 +48,20 @@ cat final_excel.txt > excel_final.txt
 
 
 
+
+# YES YES YES IT RUNSSSS
+tig6146_small.bed -fo tig6146_small.fa
+./depth_pipeline.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig7799_small
+
+
+
+
+
+
+
+
+
+
+
+
+
