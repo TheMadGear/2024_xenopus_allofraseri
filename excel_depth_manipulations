@@ -1,7 +1,10 @@
+# on all_tigs_final_excel sheet sort by col I (sstart- allo start) then col C (pident)
+
 # MANUALLY subsets multi-bed-to-excel file by every contig on sub-worksheets 
 ```
 =FILTER(all_tigs_final_excel!A1:L2145,all_tigs_final_excel!B1:B2145=all_tigs_final_excel!B12)
 ```
+
 # copy and pasted values only to same excel sheet, different place
 
 # removed "Chr7L:" from range to do operations on positionss
@@ -15,6 +18,6 @@
 
 # highlighted in green positions below 20 Mb, and in purple percent identity > 95
 
-# sort by col I (sstart- allo start) then col C (pident)
+
 
 
