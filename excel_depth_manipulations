@@ -6,7 +6,10 @@
 
 # removed "Chr7L:" from range to do operations on positionss
 ```
+# pasted into col O
 =TEXTAFTER(P1, "Chr7L:")
+# copy pasted below values only on top of col O formula and "converted text to numbers"
+=TEXTBEFORE(O1, "=")
 ```
 
 # sort by col I (sstart- allo start) then col C (pident)
