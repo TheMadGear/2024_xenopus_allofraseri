@@ -2,7 +2,12 @@
 ```
 =FILTER(all_tigs_final_excel!A1:L2145,all_tigs_final_excel!B1:B2145=all_tigs_final_excel!B12)
 ```
-# HOW DO YOU MAKE IT NOT AN ARRAY
+# copy and pasted values only to same excel sheet, different place
+
+# removed "Chr7L:" from range to do operations on positionss
+```
+=TEXTAFTER(P1, "Chr7L:")
+```
 
 # sort by col I (sstart- allo start) then col C (pident)
 
