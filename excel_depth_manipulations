@@ -8,9 +8,12 @@
 ```
 # pasted into col O
 =TEXTAFTER(P1, "Chr7L:")
+
 # copy pasted below values only on top of col O formula and "converted text to numbers"
 =TEXTBEFORE(O1, "=")
 ```
+
+# highlighted in green positions below 20 Mb, and in purple percent identity > 95
 
 # sort by col I (sstart- allo start) then col C (pident)
 
