@@ -82,6 +82,32 @@ cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGT
 
 
 
+# OKAY transfered RNAseq files, cutadapt.sh and fastQC.sh to cedar
+```
+scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz .
+```
+
+# running fastQC and cutadapt again because graham not working
+```
+# fastQC
+sbatch ./fastQC.sh /home/froglady/projects/def-ben/froglady/RNAseq_transfer/*001.fastq.gz
+
+# cutadapt
+sbatch ./cutadapt.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 # adaptor sequences:
 
 # >NEBNext_3p
