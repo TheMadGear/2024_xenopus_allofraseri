@@ -1,6 +1,6 @@
-# UPDATE TO USE NIBI PATHWAYS
+- UPDATE TO USE NIBI PATHWAYS
 
-# fastQC
+fastQC
 
 ```
 #!/bin/sh
@@ -80,16 +80,16 @@ num_files = ${#for_run[@]}
 cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o ${for_run}_cut_trimmed.fastq -p ${rev_run}_cut_trimmed.fastq ${for_run} ${rev_run}
 
 ```
+# redo all this on nibi
 
 
 
-
-# OKAY transfered RNAseq files, cutadapt.sh and fastQC.sh to cedar because graham not working
+- OKAY transfered RNAseq files, cutadapt.sh and fastQC.sh to cedar because graham not working
 ```
 scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz .
 ```
 
-# running fastQC and cutadapt again because graham not working
+- running fastQC and cutadapt again because graham not working
 ```
 # fastQC
 sbatch ./fastQC.sh /home/froglady/projects/def-ben/froglady/RNAseq_transfer/*001.fastq.gz
