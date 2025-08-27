@@ -1,14 +1,17 @@
 
-```
+
 # IT WORKSSSSSS
 ```
-# get rid of all newlines in multifasta file
+- get rid of all newlines in multifasta file
+```
 awk '/^>/ {print (NR==1 ? " " : RS) $0; next} { printf "%s", $0} END {printf RS}' $1 copy_allo.fasta.contigs.fasta > noNew_allo.fasta.contigs.fasta
-
+```
 # grep the contig of interest and send to new fasta file
+```
 grep -A 1 "^>tig00001724" noNew_allo.fasta.contigs.fasta > c1724.fasta
-
+```
 # blasting allo contig against laevis reference to find homologous region (not working yet)
+```
 blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/c1724.fasta -db ../../../for_jade/home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -outfmt 6 -out c1724.out
 ```
 
@@ -72,7 +75,7 @@ module load gcc/12.3 blast+/2.14.1
 blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/${1}.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -task dc-megablast -out ${1}.out
                                                                                        
 ```
-# filter blast result by top 20 by percent id
+- filter blast result by top 20 by percent id
 ```
 # the sort code works!!!!
 sort -r -n -k 4 tig1764.out > tig1764_sorted.out
