@@ -1,50 +1,50 @@
 
-# UPDATE TO USE NIBI PATHWAYS
+UPDATE TO USE NIBI PATHWAYS
 
 
-# working in jade_scripts and Adam_allo_genome_assembly_with_bubbles
+working in jade_scripts and Adam_allo_genome_assembly_with_bubbles
 
-# you need to check out bamCoverage files with different --binSize values (default is 50)
+ you need to check out bamCoverage files with different --binSize values (default is 50)
 
 ```
-# grabs name of every contig
+ grabs name of every contig
 grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 ```
 
 
-# NEVER REMOVED MITOCHONDRIAL DNA
+ NEVER REMOVED MITOCHONDRIAL DNA
 
 
-#############################################################################################################
 
-# manually make bed file !!!!!
 
-# FIGURE OUT how to deal with multi-contig bed file from R vs. individual contig blastables
+ manually make bed file !!!!!
+
+ FIGURE OUT how to deal with multi-contig bed file from R vs. individual contig blastables
 
 
 
 ```
-# grabs fasta from from multifasta
+ grabs fasta from from multifasta
 bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta -bed tig1724_small.bed -fo tig1724_small.fa
 ```
 
-# make blastdb out of contig of interest 
+ make blastdb out of contig of interest 
 ```
 makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_small.fa -dbtype nucl -out /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable
 ```
 
-# RESTART PIPELINE
+ RESTART PIPELINE
 
 
 
-# fixed code using laevis gtf file
+ fixed code using laevis gtf file
 
-# USE AWK to filter exons&position and turn gtf>bed simultaneously
+ USE AWK to filter exons&position and turn gtf>bed simultaneously
 ```
 awk '$3=="exon" && $1=="Chr7L" && $5<20000000 {print $1 "\t" $4 "\t" $5}' XL_exons.gtf > XL_exons_filtered.bed
 ```
 
-# turn from bed > fasta file
+ turn from bed > fasta file
 ```
 bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa.gz -bed XL_exons_filtered.bed -fo XL_exons_filtered.fasta
 ```
@@ -56,100 +56,100 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 
 
 
-# blasts XL coding region against high-depth-contig blastable database
+ blasts XL coding region against high-depth-contig blastable database
 ```
 blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_all_v10.1.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable -outfmt 6 -out XL_CDS_to_tig1724.txt 
 ```
 
-# BEN GITHUB INSTRUCTIONS
+ BEN GITHUB INSTRUCTIONS
 
 This produces a file that can be downloaded, opened with excel, and sorted by column 9 (sstart, "I") 
-# and column 3 (pident "C"). Before sorting I highlighted the matches to CDS on Chr7L because this is 
-# what is expected for these chromosomes. Then one can check the region of interest. For example, around 
-# 1Mb on contig tig00011029, the cuzd1.2 appears to be located.
+ and column 3 (pident "C"). Before sorting I highlighted the matches to CDS on Chr7L because this is 
+ what is expected for these chromosomes. Then one can check the region of interest. For example, around 
+ 1Mb on contig tig00011029, the cuzd1.2 appears to be located.
 
 
 
 
 
-# NEVER REMOVED MITOCHONDRIAL DNA
+ NEVER REMOVED MITOCHONDRIAL DNA
 
 
-#########################################################################################################
 
-# ben does "samtools depth" here but I would like to use bamCoverage if possible for consistency (?)
 
-# .txt to bed file
+ ben does "samtools depth" here but I would like to use bamCoverage if possible for consistency (?)
+
+ .txt to bed file
 ```
-# bed file will have allo position name, allo contig start/end, pident
+ bed file will have allo position name, allo contig start/end, pident
 cut -f1,9,10,3 XL_CDS_to_tig1724.txt > XL_CDS_to_tig1724.bed
 ```
 
-# now have to reorder columns so pident is last
+ now have to reorder columns so pident is last
 ```
 awk 'BEGIN{FS="\t"; OFS=FS}{print $1, $3, $4, $2}' XL_CDS_to_tig1724.bed > XL_CDS_to_tig1724_col.bed
 ```
 
-# Sam's script to switch the start/end columns if start > end
+ Sam's script to switch the start/end columns if start > end
 ```
-#!/bin/bash
+!/bin/bash
 
-#run like this: add_strands_bed.sh input_file_name output_file_name
-#call the awk command and then feed it other commands:
+run like this: add_strands_bed.sh input_file_name output_file_name
+call the awk command and then feed it other commands:
 awk -F'\t' 'BEGIN {OFS="\t"} {
-#add a default + in the last column (which will be changed later if needed)
+add a default + in the last column (which will be changed later if needed)
     sstart = $2;
     send = $3;
-    strand = "+"; # Default to forward strand
-#check if the 2nd column is larger than the 3rd column. if so, swap the order, and add - in the last column
+    strand = "+";  Default to forward strand
+check if the 2nd column is larger than the 3rd column. if so, swap the order, and add - in the last column
     if (sstart > send) {
-        # Swap start and end, and set strand to reverse
+         Swap start and end, and set strand to reverse
         temp = sstart;
         sstart = send;
         send = temp;
         strand = "-";
     }
-    #Print relevant columns, now with start <= end and a strand indicator
-    print $1, sstart, send, $4, strand; #Here, I printed sseqid, sstart, send, qseqid, evalue, strand but you can change this
+    Print relevant columns, now with start <= end and a strand indicator
+    print $1, sstart, send, $4, strand; Here, I printed sseqid, sstart, send, qseqid, evalue, strand but you can change this
 }' $1 > $2.bed
 ```
 
-# ran with
+ ran with
 ```
 ./sam_switch_bed.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/XL_CDS_to_tig1724_col.bed XL_CDS_to_tig1724_sam.bed
 ```
 
 
-# sort the bed file by pident (descending)
+ sort the bed file by pident (descending)
 ```
 sort -n -k 4 -r XL_CDS_to_tig1724_sam.bed > XL_CDS_to_tig1724_sam_SORTED.bed
 ```
 
-# CHECK WITH BEN: maybe can either sort by length and/or pident
+ CHECK WITH BEN: maybe can either sort by length and/or pident
 
-# bed file to bam file (USE ALLOFRASERI RERERENCE)
+ bed file to bam file (USE ALLOFRASERI RERERENCE)
 ``` 
-# NOT WORKING
+ NOT WORKING
 bedToBam -i XL_CDS_to_tig1724_sam_SORTED.bed -g /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta.fai > XL_CDS_to_tig1724_FINAL.bam
 ```
 
 
 
 
-# sort bam file so can index
+ sort bam file so can index
 ```
 samtools sort XL_CDS_to_tig1724_FINAL.bam -o XL_CDS_to_tig1724_FINAL_sort.bam
 ```
 
-# create index file for bam file
+ create index file for bam file
 ```
 samtools index XL_CDS_to_tig1724_FINAL_sort.bam -o XL_CDS_to_tig1724_FINAL_sort.bam.bai
 ```
 
 
-# and FINALLY we will be using bamcoverage!!!! (prob use much smaller bins)
+ and FINALLY we will be using bamcoverage!!!! (prob use much smaller bins)
 ```
-# changed bin size to 100
+ changed bin size to 100
 sbatch ./try_bam_coverage.sh XL_CDS_to_tig1724_FINAL_sort.bam . 
 ```
 
