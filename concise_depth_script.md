@@ -1,8 +1,8 @@
 # MUST RENAME FINAL OUT FILE
 
-# I THINK need to run with premade fa file ???
+-I THINK need to run with premade fa file ???
 
-# run with the following where there is a pre-made bed file named tig4787_small.bed (DO NOT use extension)
+- run with the following where there is a pre-made bed file named tig4787_small.bed (DO NOT use extension)
 ```
 # bed file should contain all locations from all contigs- can split up later by contig
 ./depth_pipeline.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/boy_girl_extreme
@@ -47,7 +47,7 @@ cat final_excel.txt > excel_final.txt
 ```
 
 # now splitting up final excel-
-# need to create one file per contig and then sort within each contig file
+- need to create one file per contig and then sort within each contig file
 
 
 
