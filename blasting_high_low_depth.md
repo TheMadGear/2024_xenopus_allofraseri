@@ -76,8 +76,8 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly
                                                                                        
 ```
 - filter blast result by top 20 by percent id
-```
 # the sort code works!!!!
+```
 sort -r -n -k 4 tig1764.out > tig1764_sorted.out
 ```
 
