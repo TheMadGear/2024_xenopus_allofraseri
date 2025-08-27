@@ -52,12 +52,6 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 
 # fixed code using laevis gtf file
 
-# greps only exons from laevis gtf file
-```
-grep ".*exon.*" XENLA_10.1_Xenbase.gtf > XL_exons.gtf
-```
-
-
 # USE AWK to filter exons&position and turn gtf>bed simultaneously
 ```
 awk '$3=="exon" && $1=="Chr7L" && $5<20000000 {print $1 "\t" $4 "\t" $5}' XL_exons.gtf > XL_exons_filtered.bed
