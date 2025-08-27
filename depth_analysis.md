@@ -1,17 +1,17 @@
 
 # from X. laevis data
-# analysis run on merged files
+-analysis run on merged files
 
 ```
 sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt 
 ```
 
 # where Chr7.bed was as follows:
-#  Chr7L	8000000	20000000
+Chr7L	8000000	20000000
 
 ####################################################################################
 
-# from X. allofraseri data that was already mapped etc. with final deduped bam files
+- from X. allofraseri data that was already mapped etc. with final deduped bam files
 
 
 # correctly runs script
