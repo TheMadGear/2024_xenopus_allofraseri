@@ -112,11 +112,12 @@ sbatch ./cutadapt.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
 
 # adaptor sequences:
 
-# >NEBNext_3p
-# AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
-# >NEBNext_5p
-# AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+ >NEBNext_3p
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+ >NEBNext_5p
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 
-# fastQC again
+# next steps
+- fastQC again
 
-# assembly with trinity
+- assembly with trinity
