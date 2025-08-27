@@ -1,6 +1,6 @@
 
 # from X. laevis data
--analysis run on merged files
+- analysis run on merged files
 
 ```
 sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt 
