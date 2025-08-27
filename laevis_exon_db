@@ -6,12 +6,15 @@
 
 # you need to check out bamCoverage files with different --binSize values (default is 50)
 
-# can I do this with an array or loop to automatically do each contig?
-# ghhhhh realized only necessary for high depth contigs (but useful for later)
 ```
 # grabs name of every contig
 grep -o "tig[0-9]......." allo.fasta.contigs.fasta > contig_list.txt
 ```
+
+
+# NEVER REMOVED MITOCHONDRIAL DNA
+
+
 #############################################################################################################
 
 # manually make bed file !!!!!
