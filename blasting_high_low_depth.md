@@ -1,7 +1,7 @@
 
 
 # IT WORKSSSSSS
-```
+
 - get rid of all newlines in multifasta file
 ```
 awk '/^>/ {print (NR==1 ? " " : RS) $0; next} { printf "%s", $0} END {printf RS}' $1 copy_allo.fasta.contigs.fasta > noNew_allo.fasta.contigs.fasta
