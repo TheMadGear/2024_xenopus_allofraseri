@@ -32,19 +32,7 @@ makeblastdb -in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assemb
 
 # RESTART PIPELINE
 
-# grep exons NOT CDS
-###############################################
-# greps out all Chr7L positions
-```
-grep "Chr7L" XL_v10.1_all_CDS.bed > XL_CDS_allo_sexLinked_region.bed
-```
 
-# gets coding fasta seqs from CDS bed file
-```
-bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa.gz -bed XL_CDS_allo_sexLinked_region.bed -fo XL_CDS_all_v10.1.fasta
-
-```
-######################################################
 
 # fixed code using laevis gtf file
 
