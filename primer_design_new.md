@@ -1,37 +1,37 @@
-ls -l# regions:
+ls -l- regions:
 
-# Chr8S:80930024..80930064 (notch4.S coding region)
+- Chr8S:80930024..80930064 (notch4.S coding region)
  
-# Chr8L:126371023..126371065 (LOC108699408 = skint-1 (not sex related) 
+- Chr8L:126371023..126371065 (LOC108699408 = skint-1 (not sex related) 
  
-# Chr9_10S:76918194..76918281 (upstream of dbr1 (not sex related) 
+- Chr9_10S:76918194..76918281 (upstream of dbr1 (not sex related) 
 
 
 
-# extract sequence from laevis assembly 
+- extract sequence from laevis assembly 
 ```
 blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa_blastable -out 2024_primerDesign_1.fa
 ```
 
-# extract sequence from allo assembly 
+- extract sequence from allo assembly 
 ```
 blastdbcmd -entry all -range 80930024-80930064 -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo.fasta.contigs_nobubbles.fasta.gz_blastable -out allo_2024_primerDesign_1.fa
 ```
 
-# download to laptop
+- download to laptop
 ```
 cd /Users/jadebohbot/Downloads/Masters_Documents/Depth
 
 scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly/allo_2024_primerDesign_1.fa .
 ```
 
-# repeat with other primer regions
+- repeat with other primer regions
 
 
 
 
 
-##############################################################################
+------------------------------------------------------------------------------
 
 (1) copy the region in XL. This is possible using xenbase - make sure the "Reference sequence" box on the left side of the attached screenshot is attached. Then go to the pull down menu in the attached screenshot and select "Save track data" and this will show you the XL seq.
 (2) make a fasta file with the XL seq. It has this format:
@@ -52,7 +52,7 @@ cut -f2,9,10 allo_foxi2_ex2_to_pacbio6.out > allo_foxi2_ex2_to_pacbio6.bed
 
 (5) use bedtools to extract the seqs from the allofraseri genome
 
-# move all files to same folder (not necessary)
+- move all files to same folder (not necessary)
 bedtools getfasta -fi ../../../for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed allo_foxi2_ex2_to_pacbio6.bed -fo allo_foxi2_ex2_to_pacbio6.fasta
 
 
@@ -73,14 +73,14 @@ scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/for_jade/Ad
 (11) make primers for Chr7L using the allo seq; make sure they do not match Chr7S
 
 
-# new way with ben & primer3
-# download sequence from xenbase, scp to compute canada cluster
+- new way with ben & primer3
+- download sequence from xenbase, scp to compute canada cluster
 ```
-# ran from personal laptop directory (Downloads)
+- ran from personal laptop directory (Downloads)
 scp ./Reference_sequence-Chr7L-18967381..18968534.fasta froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers
 ```
 
-# set up
+- set up
 ```
 module spider mafft
 module spider mafft/7.526
@@ -91,19 +91,19 @@ module load StdEnv/2023 mafft/7.526
 mv Reference_sequence-Chr7L-18967381..18968534.fasta Reference_sequence-Chr7L-18967381..18968534.fa
 
 ```
-#check start < end
+-check start < end
 
 ```
 blastn -query allo_dock1_primerDesign.fa -db allo.fasta.contigs_nobubbles.fasta.gz_blastable -task dc-megablast -outfmt 6 -out allo_dock1_to_pacbio6.out
 
 cut -f2,9,10 allo_dock1_to_pacbio6.out > allo_dock1_to_pacbio6.bed
-#check start < end
+-check start < end
 bedtools getfasta -fi allo.fasta.contigs_nobubbles.fasta.gz -bed allo_dock1_to_pacbio6.bed -fo allo_dock1_to_pacbio6.fasta
 
 mafft --adjustdirectionaccurately allo_dock1_to_pacbio6.fasta > allo_dock1_to_pacbio6_align.fasta
 ```
 
-# from personal terminal window set to Downloads folder
+- from personal terminal window set to Downloads folder
 ```
 scp froglady@graham.computecanada.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_primers/allo_dock1_to_pacbio6_align.fasta .
 
