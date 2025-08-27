@@ -40,13 +40,15 @@ java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1} OUTPU
 ```
 
 # grep location (SN) from .dict file and manually make .bed file
+``` 
  grep "SN:tig00001724" allo_reference_contigs.dict
-
+```
 # grab fasta from allo multifasta file
+```
 bedtools getfasta -bed tig1724.bed -fi allo.fasta.contigs.fasta  -fo tig1724.fa
-
+```
 # blast allo fasta file against laevis reference (NOT WORKING PROPERLY ....hmmm no yes it is)
-
+```
 blastn -query /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724.fa -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -task dc-megablast -out tig1724.out
 ```
 
