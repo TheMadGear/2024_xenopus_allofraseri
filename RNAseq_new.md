@@ -2,7 +2,8 @@
 
 fastQC
 - duh change last few $file mentions to $file_at_task
-- also change array so it also does reverse run... I think it's only doing forward or half of them?
+- right now it's only doing X_allofraseri_tad13_S1_L001_R1_001.fastq.gz
+- it's doing it correctly ?? but only for that file
 
 ```
 #!/bin/sh
