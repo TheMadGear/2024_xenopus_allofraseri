@@ -23,7 +23,7 @@ fastQC
 
 # loading stuff
 module load StdEnv/2023
-
+module load fastqc/0.12.1
 
 # grabs all the files I want
 file=/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz
