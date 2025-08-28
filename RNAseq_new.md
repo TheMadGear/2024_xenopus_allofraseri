@@ -1,6 +1,7 @@
 - UPDATE TO USE NIBI PATHWAYS
 
 fastQC
+- duh change last few $file mentions to $file_at_task
 
 ```
 #!/bin/sh
@@ -40,7 +41,7 @@ num_files=$"ls *001.fastq.gz | wc -l"
 
 # runs through slurm job array & names output
 file_at_task=($file[$SLURM_ARRAY_TASK_ID]) # does this need quotes or another $ at beginning ?
-out="${file}_fastQC"
+out="${file_at_task}_fastQC"
 
 fastqc ${1} $"out" $"file_at_task" 
 ```
