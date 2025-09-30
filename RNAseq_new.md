@@ -1,5 +1,4 @@
-- UPDATE TO USE NIBI PATHWAYS
-
+# fastQC before cutadapt
 
 ```
 #!/bin/sh
