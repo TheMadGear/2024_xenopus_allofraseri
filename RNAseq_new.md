@@ -1,51 +1,30 @@
 - UPDATE TO USE NIBI PATHWAYS
 
-fastQC
-- duh change last few $file mentions to $file_at_task
-- right now it's only doing X_allofraseri_tad13_S1_L001_R1_001.fastq.gz
-- it's doing it correctly ?? but only for that file
 
 ```
 #!/bin/sh
 #SBATCH --job-name=fastQC
 #SBATCH --nodes=4
 #SBATCH --time=32:00:00
+#SBATCH --cpus-per-task=20
 #SBATCH --mem=16gb
-#SBATCH --array=0-17
-#SBATCH --output=fastQC.%a.out
-#SBATCH --error=fastQC.%a.err
+#SBATCH --array=0-19
+#SBATCH --output=fastQC.%J.out
+#SBATCH --error=fastQC.%J.err
 ##SBATCH --mail-user=bohbom1@mcmaster.ca
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 #SBATCH --account=def-ben
 
-# run with sbatch fastQC_script.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz
+# run with sbatch fastQC_script.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/
 
-# (if the $file variable already grabs names maybe no need to input as arg in sbatch command?) 
 
 # loading stuff
 module load StdEnv/2023
 module load fastqc/0.12.1
 
-# grabs all the files I want
-file=/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz
-
-echo "$file"
-
-# above currently set to just run all at once- need to iterate
-
-
-# counts number of RNAseq files
-num_files=$"ls *001.fastq.gz | wc -l"
-# convert to int datatype ? i don't think necessary in bash
-
-
-# runs through slurm job array & names output
-file_at_task=($file[$SLURM_ARRAY_TASK_ID]) # does this need quotes or another $ at beginning ?
-out="${file_at_task}_fastQC"
-
-fastqc ${1} $"out" $"file_at_task" 
+parallel -j $SLURM_CPUS_PER_TASK fastqc -t 1 -o /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq {} ::: /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz
 ```
 
 # cutadapt
