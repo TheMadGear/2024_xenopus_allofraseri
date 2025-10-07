@@ -29,6 +29,7 @@ parallel -j $SLURM_CPUS_PER_TASK fastqc -t 1 -o /home/froglady/projects/rrg-ben/
 
 # PYTHON ENVIRONMENT
 ```
+# setting up VE in jade_scripts
 # load python and stdenv first
 BASE=software/cutadapt-3.1/
 virtualenv $BASE/venv
@@ -37,6 +38,10 @@ $BASE/venv/bin/pip install cutadapt==5.1
 mkdir $BASE/bin
 cd $BASE/bin
 ln -s ../venv/bin/cutadapt
+
+# add directory to path
+# the path:
+/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/software/cutadapt-3.1/bin
 ```
 
 
