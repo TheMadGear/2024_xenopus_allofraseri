@@ -42,6 +42,8 @@ ln -s ../venv/bin/cutadapt
 # add directory to path
 # the path:
 /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/software/cutadapt-3.1/bin
+# supposedly below should work? getting unexpected token error
+prepend_path("PATH", "/software/cutadapt-3.1/bin")
 ```
 
 
