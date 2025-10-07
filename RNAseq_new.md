@@ -32,8 +32,11 @@ parallel -j $SLURM_CPUS_PER_TASK fastqc -t 1 -o /home/froglady/projects/rrg-ben/
 # load python and stdenv first
 BASE=software/cutadapt-3.1/
 virtualenv $BASE/venv
-$BASE/venv/bin/pip install dnaio==1.2.1
-
+$BASE/venv/bin/pip install dnaio==1.2.1 # it next auto uninstalls, and installs 1.2.3
+$BASE/venv/bin/pip install cutadapt==5.1
+mkdir $BASE/bin
+cd $BASE/bin
+ln -s ../venv/bin/cutadapt
 ```
 
 
