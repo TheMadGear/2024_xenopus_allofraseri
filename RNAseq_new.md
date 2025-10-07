@@ -26,6 +26,21 @@ module load fastqc/0.12.1
 parallel -j $SLURM_CPUS_PER_TASK fastqc -t 1 -o /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq {} ::: /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/*001.fastq.gz
 ```
 
+
+# PYTHON ENVIRONMENT
+```
+# load python and stdenv first
+BASE=software/cutadapt-3.1/
+virtualenv $BASE/venv
+$BASE/venv/bin/pip install dnaio==1.2.1
+
+```
+
+
+
+
+
+
 # cutadapt
 ```
 #!/bin/sh
