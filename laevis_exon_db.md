@@ -56,7 +56,8 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_X
 
 
 
- blasts XL coding region against high-depth-contig blastable database
+ blasts XL coding region against high-depth-contig blastable database (1724)
+ # REDO for all contigs
 ```
 blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_CDS_all_v10.1.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/tig1724_blastable -outfmt 6 -out XL_CDS_to_tig1724.txt 
 ```
