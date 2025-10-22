@@ -19,6 +19,7 @@ scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_a
 # next steps:
 * automate using GTF file:
 * use laevis GTF file to create allo GTF file with ONLY exons
+* OR just use outfmt 6 file to automate graph? no makes more sense to do GTF first
 
 
 
