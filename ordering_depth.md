@@ -1,5 +1,5 @@
-# query: XL exons
-# db: allo assembly
+# query: XL exons (7-8, G-H)
+# db: allo assembly (9-10, I-J)
 
 # re-make *proper* blast database from allofraseri assembly (db was probably fine, just length of time)
 ```
