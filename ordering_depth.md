@@ -16,6 +16,10 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_depth_pos.txt .
 ```
 
+# next steps:
+* automate using GTF file:
+* create GTF file for allofraseri? OR use laevis GTF file to create allo GTF file with ONLY exons
+
 
 
 
