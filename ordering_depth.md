@@ -1,3 +1,5 @@
+# query: XL exons
+# db: allo assembly
 
 # re-make *proper* blast database from allofraseri assembly (db was probably fine, just length of time)
 ```
@@ -10,7 +12,9 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 ```
 
 # export to excel with scp
-
+```
+scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_depth_pos.txt .
+```
 
 
 
