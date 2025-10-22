@@ -18,7 +18,7 @@ scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_a
 
 # next steps:
 * automate using GTF file:
-* create GTF file for allofraseri? OR use laevis GTF file to create allo GTF file with ONLY exons
+* use laevis GTF file to create allo GTF file with ONLY exons
 
 
 
