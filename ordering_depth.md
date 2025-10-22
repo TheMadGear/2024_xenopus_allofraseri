@@ -1,7 +1,7 @@
 
 # create blast database from laevis exons?
 ```
-
+makeblastdb -in /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XL_exons_filtered.fasta -dbtype nucl -out /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/laevis_exon_blastable
 ```
 
 # find laevis exon positions in allofraseri contigs 
