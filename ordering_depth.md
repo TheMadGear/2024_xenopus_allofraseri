@@ -15,11 +15,12 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 ```
 scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_depth_pos.txt .
 ```
+order in excel
 
-# next steps:
-* automate using GTF file:
-* use laevis GTF file to create allo GTF file with ONLY exons
-* OR just use outfmt 6 file to automate graph? no makes more sense to do GTF first
+## switch negative strands in bed file
+```
+cut -f1,2,3,4,4 ../2025_depth/allo_ordered_contigs.txt > switched_allo_ordered_contigs.bed
+```
 
 
 
