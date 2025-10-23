@@ -20,6 +20,10 @@ order in excel
 ## switch negative strands in bed file
 ```
 cut -f1,2,3,4,4 ../2025_depth/allo_ordered_contigs.txt > switched_allo_ordered_contigs.bed
+
+./sam_switch_bed.sh switched_allo_ordered_contigs.txt switched_allo_ordered_contigs.bed
+
+mv switched_allo_ordered_contigs.bed.bed switched_allo_ordered_contigs.bed
 ```
 
 
