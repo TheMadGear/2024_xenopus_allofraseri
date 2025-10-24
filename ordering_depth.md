@@ -26,6 +26,7 @@ cut -f1,2,3,4,4 ../2025_depth/allo_ordered_contigs.txt > switched_allo_ordered_c
 mv switched_allo_ordered_contigs.bed.bed switched_allo_ordered_contigs.bed
 ```
 
+# filter based on length in excel (remove match < 200 bp)
 
 
 
