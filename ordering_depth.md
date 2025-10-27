@@ -16,16 +16,6 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
  awk  '{ if ($4 > 200) print $0}' allo_depth_pos.txt > allo_depth_pos_filter200.txt
 ```
 
-
-
-# in R need to fix the column for pos/neg
-# export to excel with scp
-```
-scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_depth_pos_filter200.txt .
-```
-
-# order in excel
-
 ## switch negative strands in bed file ALSO include gene name
 ```
 cut -f1,2,3,4,4 ../2025_depth/allo_ordered_contigs.txt > switched_allo_ordered_contigs.bed
@@ -35,6 +25,13 @@ cut -f1,2,3,4,4 ../2025_depth/allo_ordered_contigs.txt > switched_allo_ordered_c
 mv switched_allo_ordered_contigs.bed.bed switched_allo_ordered_contigs.bed
 ```
 
+
+
+# export to excel with scp
+# in R need to fix the column for pos/neg
+```
+scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_depth_pos_filter200.txt .
+```
 
 
 # at the very end I think can probably use laevis GTF file to get gene names and/pr gene IDs
