@@ -35,5 +35,5 @@ mv switched_allo_ordered_contigs.bed.bed switched_allo_ordered_contigs.bed
 ```
 
 
-
+# at the very end I think can probably use laevis GTF file to get gene names and/pr gene IDs
 
