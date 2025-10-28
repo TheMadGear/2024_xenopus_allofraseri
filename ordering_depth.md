@@ -28,9 +28,9 @@ head true_switched_allo_ordered_contigs.bed
 
 
 # export to excel with scp
-# in R need to fix the column for pos/neg
 ```
-scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_depth_pos_filter200.txt .
+cd /Users/jadebohbot/Downloads/Masters_Documents/Depth
+scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/true_switched_allo_ordered_contigs.bed .
 ```
 
 
