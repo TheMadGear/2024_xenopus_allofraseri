@@ -107,6 +107,18 @@ sbatch ./cutadapt.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
 
 
 
+# Trinity Assembly (Brian's Machine)
+# run on info114
+```
+ssh jade@info.mcmaster.ca
+ssh info114
+./trinity_assembly.sh .
+```
+
+# Trinity script
+```
+
+```
 
 
 
@@ -115,8 +127,7 @@ sbatch ./cutadapt.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
 
 
 
-
-# adaptor sequences:
+### adaptor sequences:
 
  >NEBNext_3p
 AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
