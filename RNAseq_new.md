@@ -115,9 +115,13 @@ ssh info114
 # echos all paths clearly
 echo -e ${PATH//:/\\n}
 ```
-
+# the original path in case I break it
 ```
+.:/home/jade/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/jade/.local/bin:/home/jade/bin
+```
+
 # runs script
+```
 ./trinity_assembly.sh .
 ```
 
