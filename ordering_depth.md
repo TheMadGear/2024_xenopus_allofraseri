@@ -18,8 +18,7 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 
 ## switch negative strands in bed file ALSO include gene name
 ```
-cut -f2,9,10,1 allo_depth_pos_filter200.txt > bed_allo_ordered_contigs.bed
-# need to change column order (1st > last)
+ awk '{print $2, $9, $10, $1}' allo_depth_pos_filter200.txt > awk_bed_allo_ordered_contigs.bed
 
 # below not working so far
 ./sam_switch_bed.sh switched_allo_ordered_contigs.txt switched_allo_ordered_contigs.bed
