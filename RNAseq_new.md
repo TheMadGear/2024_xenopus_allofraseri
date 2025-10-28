@@ -114,6 +114,8 @@ ssh jade@info.mcmaster.ca
 ssh info114
 # echos all paths clearly
 echo -e ${PATH//:/\\n}
+# add to path
+export PATH="$PATH:/home/jade/rnaseq/"
 ```
 # the original path in case I break it
 ```
