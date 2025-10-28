@@ -23,8 +23,6 @@ blastn -query /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_ref
 # switch start/end
 ../jade_scripts/sam_switch_bed.sh awk_bed_allo_ordered_contigs.bed true_switched_allo_ordered_contigs
 head true_switched_allo_ordered_contigs.bed
-
-
 ```
 
 
