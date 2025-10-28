@@ -112,6 +112,12 @@ sbatch ./cutadapt.sh *L001_R1_001.fastq.gz *L001_R2_001.fastq.gz
 ```
 ssh jade@info.mcmaster.ca
 ssh info114
+# echos all paths clearly
+echo -e ${PATH//:/\\n}
+```
+
+```
+# runs script
 ./trinity_assembly.sh .
 ```
 
