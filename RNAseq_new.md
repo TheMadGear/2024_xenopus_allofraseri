@@ -116,6 +116,7 @@ ssh info114
 echo -e ${PATH//:/\\n}
 # add to path
 export PATH="$PATH:/home/jade/rnaseq/"
+export PATH="$PATH:/opt/local/trinity/trinityrnaseq-Trinity-v2.4.0/"
 ```
 # the original path in case I break it
 ```
