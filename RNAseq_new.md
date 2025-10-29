@@ -54,39 +54,34 @@ prepend_path("PATH", "/software/cutadapt-3.1/bin")
 # cutadapt
 ```
 #!/bin/sh
-#SBATCH --job-name=cutadapt
+#SBATCH --job-name=ben_cutadapt
 #SBATCH --nodes=4
-#SBATCH --time=32:00:00
-##SBATCH --array=0-9
+#SBATCH --time=8:00:00
 #SBATCH --mem=16gb
-#SBATCH --output=cutadapt.%J.out
-#SBATCH --error=cutadapt.%J.err
-#SBATCH --account=def-ben
+#SBATCH --output=ben_cutadapt.%J.out
+#SBATCH --error=ben_cutadapt.%J.err
+#SBATCH --account=rrg-ben
 #SBATCH --mail-user=bohbom1@mcmaster.ca
-#SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-# run with: sbatch ./cutadapt_script.sh ../2024_allo_RNAseq/*L001_R1_001.fastq.gz ../2024_allo_RNAseq/*L001_R2_001.fastq.gz
 
-path=$/home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq
+module load StdEnv/2023
+module load python/3.13.2
 
-for_run=${path}${1[$SLURM__ARRAY_TASK_ID]}
-rev_run=${path}${2[$SLURM__ARRAY_TASK_ID]}
 
-# NEED MIDDLE BIT TO IDENTIFY SPECIFIC FILE CODES (i.e. BJE3496)
-# ^^ I actually think the slurm task id does this
+v=1
+#  Always use for-loop, prefix glob, check if exists file.
 
-echo "$SLURM_ARRAY_TASK_ID"
-
-# what do the @ and # do?
-# i don't think I need this line, think it was for error checking
-num_files = ${#for_run[@]}
-
-cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o ${for_run}_cut_trimmed.fastq -p ${rev_run}_cut_trimmed.fastq ${for_run} ${rev_run}
-
+for file in $1/*R1_001.fastq.gz ; do         # Use ./* ... NEVER bare *
+	    /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/software/cutadapt-3.1/bin/cutadapt -b "AGATCGGAAGAGCACACGTCTGAACTCCAGTCA" -B "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT" -e 0.2 -q 15,10 -o ${file::-15}cut.twice.R1.fastq -p ${file::-15}cut.twice.R2.fastq ${file::-15}R1_001.fastq.gz ${file::-15}R2_001.fastq.gz
+done 
 ```
-# redo all this on nibi
+
+## run with
+```
+sbatch ./ben_cutadapt.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/2024_allo_RNAseq/
+```
 
 
 
