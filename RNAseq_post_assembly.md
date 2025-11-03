@@ -7,6 +7,12 @@
 screen -S bwa_index -L
 bwa index allo_trinity_assembly.Trinity.fasta
 ```
+## create .fai file?
+```
+ samtools faidx allo_trinity_assembly.Trinity.fasta
+```
+
+
 ## map to transcriptome with bwa-mem
 
 currently going off of these instructions: https://angus.readthedocs.io/en/2013/rnaseq_bwa.html
