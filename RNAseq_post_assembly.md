@@ -4,7 +4,7 @@
 # path 1
 ## index with bwa-mem
 ```
-
+bwa index allo_trinity_assembly.Trinity.fasta
 ```
 ## map to transcriptome with bwa-mem
 
