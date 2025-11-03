@@ -12,9 +12,24 @@ bwa index allo_trinity_assembly.Trinity.fasta
 currently going off of these instructions: https://angus.readthedocs.io/en/2013/rnaseq_bwa.html
 
 ## map cutadapt-trimmed RNAseq files to transcriptome with bwa-mem
+```
 
+# run with: ./bwa_mem.sh
+         
+reference=allo_trinity_assembly.Trinity.fasta
 
+R1=/home/jade/rnaseq/*R1.fastq 
+R2=/home/jade/rnaseq/*R2.fastq
 
+output=RNAseq_bwa_out
+
+bwa mem ${reference} ${R1} ${R2} > ${output}.sam
+
+```
+## then.....
+```
+
+```
 
 # path 2
 ## index with STAR
