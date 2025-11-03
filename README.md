@@ -3,7 +3,7 @@
 Repository for the code used in my master's thesis!
 
 # WGS sample sex & origin
-BJE FROM BIOKO ISLAND:
+## BJE FROM BIOKO ISLAND:
 
 BJE3487 (S5)
 F
@@ -30,7 +30,7 @@ BJE3496 (S8)
 M
 
 
-FROM CAMEROON:
+## FROM CAMEROON:
 
 Z23738 (S9)
 M
