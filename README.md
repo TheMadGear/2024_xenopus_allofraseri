@@ -2,6 +2,13 @@
 
 Repository for the code used in my master's thesis!
 
+
+# Major projects:
+## WGS analysis
+## RNAseq analysis
+## depth analysis
+## annotation
+
 # WGS sample sex & origin
 ## BJE FROM BIOKO ISLAND:
 
