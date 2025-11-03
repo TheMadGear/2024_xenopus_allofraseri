@@ -20,5 +20,6 @@
 
 ## map cutadapt-trimmed RNAseq files to genome with STAR
 
+## featurecounts (maybe part of above step)
 
 
