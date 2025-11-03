@@ -18,7 +18,7 @@
 # path 2
 ## index with STAR
 
-# map cutadapt-trimmed RNAseq files to genome with STAR
+## map cutadapt-trimmed RNAseq files to genome with STAR
 
 
 
