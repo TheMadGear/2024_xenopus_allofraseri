@@ -13,6 +13,7 @@ currently going off of these instructions: https://angus.readthedocs.io/en/2013/
 
 ## map cutadapt-trimmed RNAseq files to transcriptome with bwa-mem
 ```
+#!/bin/sh
 
 # run with: ./bwa_mem.sh
          
