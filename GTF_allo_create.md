@@ -50,16 +50,10 @@ STAR --runMode genomeGenerate \
 ```
 # current error:
 
-EXITING: FATAL INPUT ERROR: empty value for parameter "genomeDir" in input "Command-Line"
-SOLUTION: use non-empty value for this parameter
+EXITING because of FATAL ERROR: could not open genome file /home/ben/projects/rrg-ben/ben/2025_allo_PacBio_assembly/Adam_allo_genome_assembly/with_bubbles//genomeParameters.txt
+SOLUTION: check that the path to genome files, specified in --genomeDir is correct and the files are present, and have user read permsissions
 
-Nov 04 16:22:42 ...... FATAL ERROR, exiting
-!!!!! WARNING:  Could not ls *R1.fastq
-
-EXITING: because of fatal INPUT file error: could not open read file: *R1.fastq
-SOLUTION: check that this file exists and has read permision.
-
-Nov 04 16:22:42 ...... FATAL ERROR, exiting
+Nov 04 16:37:58 ...... FATAL ERROR, exiting
 ```
 
 
