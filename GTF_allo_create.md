@@ -25,11 +25,42 @@ This pass will use the comprehensive set of novel junctions identified in the fi
 
 ## step 1 (STAR index)
 ```
+#!/bin/sh
+#SBATCH --job-name=star_index
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=256gb
+#SBATCH --output=star_index.%J.out
+#SBATCH --error=star_index.%J.err
+#SBATCH --account=rrg-ben
 
+# run with sbatch ./STAR_index_GTF.sh .
+
+module load star/2.7.11b
+
+STAR --runMode genomeGenerate \
+--genomeDir /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/ \
+--genomeFastaFiles /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs_nobubbles.fasta \
+--runThreadN 8 \
+--limitGenomeGenerateRAM=124544990592
 ```
 
 ## step 2 (STAR map)
+```
+# current error:
 
+EXITING: FATAL INPUT ERROR: empty value for parameter "genomeDir" in input "Command-Line"
+SOLUTION: use non-empty value for this parameter
+
+Nov 04 16:22:42 ...... FATAL ERROR, exiting
+!!!!! WARNING:  Could not ls *R1.fastq
+
+EXITING: because of fatal INPUT file error: could not open read file: *R1.fastq
+SOLUTION: check that this file exists and has read permision.
+
+Nov 04 16:22:42 ...... FATAL ERROR, exiting
+```
 
 
 
