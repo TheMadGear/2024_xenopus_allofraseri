@@ -14,6 +14,7 @@ bwa index allo_trinity_assembly.Trinity.fasta
 
 
 ## map to transcriptome with bwa-mem
+## bwa_mem.sh is in transcriptome directory
 
 currently going off of these instructions: https://angus.readthedocs.io/en/2013/rnaseq_bwa.html
 
