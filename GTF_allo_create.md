@@ -48,6 +48,9 @@ STAR --runMode genomeGenerate \
 
 ## step 2 (STAR map)
 ```
+# run with ./STAR_map_GTF.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/*R1.fastq /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/*R2.fastq First_Pass_
+
+
 # current error:
 
 EXITING because of FATAL ERROR: could not open genome file /home/ben/projects/rrg-ben/ben/2025_allo_PacBio_assembly/Adam_allo_genome_assembly/with_bubbles//genomeParameters.txt
