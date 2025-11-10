@@ -1,7 +1,3 @@
-
-# 2 paths at once
-
-# path 1
 ## index with bwa-mem
 ```
 screen -S bwa_index -L
@@ -11,7 +7,6 @@ bwa index allo_trinity_assembly.Trinity.fasta
 ```
  samtools faidx allo_trinity_assembly.Trinity.fasta
 ```
-
 
 ## map to transcriptome with bwa-mem
 # bwa_mem.sh is in transcriptome directory
