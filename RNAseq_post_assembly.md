@@ -70,7 +70,7 @@ samtools faidx ${1}.fa
 java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1}.fa.gz OUTPUT=${1}.dict
 ```
 
-## add picard readgroups
+## use picard to add readgroups
 ```
 
 # run with sbatch ./picard_readgroups.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/
