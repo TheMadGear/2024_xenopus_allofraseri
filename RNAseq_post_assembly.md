@@ -115,7 +115,7 @@ done
 # make and execute the GATK command "RealignerTargetCreator" on these files. 
 
 # execute like this:
-#  sbatch haplotype_caller.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
+#  sbatch haplotype_caller.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/allo_trinity_assembly.Trinity.fasta /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
