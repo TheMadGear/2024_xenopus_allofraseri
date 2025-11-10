@@ -126,7 +126,19 @@ done
 ```
 
 
+## combine GVCFs using DBI or GATK
 
+
+
+## genotype GVCFs, using one of 2 GATK versions based on whether DBI or GATK were used
+
+
+
+## variant filtration
+
+
+
+## select variants
 
 
 
