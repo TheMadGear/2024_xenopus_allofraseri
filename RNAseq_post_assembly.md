@@ -51,16 +51,30 @@ done
 
 ```
 
-## then.....
+## then use picard to create .dict fil
+```
+#!/bin/sh
+#SBATCH --job-name=picard_dict_fai
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=samtools_fai_picard_dict.%J.out
+#SBATCH --error=samtools_fai_picard_dict.%J.err
+#SBATCH --account=rrg-ben
+
+# run by passing an argument like this
+# sbatch ./dict_picard.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/allo_trinity_assembly.Trinity (without the `.fa` suffix)
+
+module load StdEnv/2023 gcc/12.3 picard/3.1.0 samtools/1.20
+
+# make a .fai file
+samtools faidx ${1}.fa
+
+# make a .dict file
+java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1}.fa.gz OUTPUT=${1}.dict
 ```
 
-```
 
-# path 2
-## index with STAR
-
-## map cutadapt-trimmed RNAseq files to genome with STAR
-
-## featurecounts (maybe part of above step)
 
 
