@@ -73,7 +73,7 @@ java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1}.fa.gz
 ## add picard readgroups
 ```
 
-# run with sbatch ./picard_readgroups.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
+# run with sbatch ./picard_readgroups.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/
 
 ```
 
