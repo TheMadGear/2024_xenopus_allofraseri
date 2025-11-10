@@ -95,7 +95,39 @@ do
     java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${file} O=${file}_rg.bam RGID=4 RGLB=$(basename $file) RGPL=ILLUMINA RGPU=$(basename $file) RGSM=$(basename $file)
 done
 ```
-## I think I don't need to deduplicate because rnaSEQ is type ofGBS
+
+## DO NOT deduplicate 
+
+## haplotype caller
+```
+
+
+
+
+#!/bin/sh
+#SBATCH --job-name=HaplotypeCaller
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=32gb
+#SBATCH --output=HaplotypeCaller.%J.out
+#SBATCH --error=HaplotypeCaller.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will read in the *_sorted.bam file names in a directory, and 
+# make and execute the GATK command "RealignerTargetCreator" on these files. 
+
+# execute like this:
+#  sbatch haplotype_caller.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable/home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+for file in ${2}*_bwa_sort.bam_rg.bam
+do
+    gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -O ${file}.g.vcf -ERC GVCF
+done
+```
 
 
 
