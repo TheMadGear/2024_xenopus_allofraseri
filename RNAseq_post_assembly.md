@@ -46,7 +46,7 @@ done
 
 ```
 
-## then use picard to create .dict fil
+## then use picard to create .dict file
 ```
 #!/bin/sh
 #SBATCH --job-name=picard_dict_fai
@@ -69,6 +69,19 @@ samtools faidx ${1}.fa
 # make a .dict file
 java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1}.fa.gz OUTPUT=${1}.dict
 ```
+
+## add picard readgroups
+```
+
+# run with sbatch ./picard_readgroups.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
+
+```
+
+
+
+
+
+
 
 
 
