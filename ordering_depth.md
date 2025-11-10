@@ -21,6 +21,7 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /ho
  awk  '{ if ($4 > 200) print $0}' allo_depth_pos.txt > allo_depth_pos_filter200.txt
 
 # with gene names (Ben file)
+ awk  '{ if ($4 > 200) print $0}' allo_CDS_depth_pos.txt > allo_CDS_depth_pos_filter200.txt
 ```
 
 ## switch negative strands in bed file ALSO include gene name
