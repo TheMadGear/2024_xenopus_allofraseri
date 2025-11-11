@@ -36,7 +36,6 @@ head true_switched_allo_ordered_contigs.bed
  awk '{print $2, $9, $10, $1}' allo_CDS_depth_pos_filter200.txt > awk_allo_CDS_depth_pos_filter200.bed
 
 /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/sam_switch_bed.sh awk_allo_CDS_depth_pos_filter200.bed CDS_switched_allo_ordered_contigs.bed
-head true_switched_allo_ordered_contigs.bed
 
 # checks all start < stop
 awk '$2 < $3 {print $0}' CDS_switched_allo_ordered_contigs.bed > test.file.txt
@@ -49,8 +48,10 @@ awk '$2 < $3 {print $0}' CDS_switched_allo_ordered_contigs.bed > test.file.txt
 ```
 cd /Users/jadebohbot/Downloads/Masters_Documents/Depth
 scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/true_switched_allo_ordered_contigs.bed .
+
+# ben's version
+scp froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/CDS_switched_allo_ordered_contigs.bed .
 ```
 
 
-# at the very end I think can probably use laevis GTF file to get gene names and/pr gene IDs
 
