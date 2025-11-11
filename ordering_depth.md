@@ -31,6 +31,16 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /ho
 # switch start/end
 ../jade_scripts/sam_switch_bed.sh awk_bed_allo_ordered_contigs.bed true_switched_allo_ordered_contigs
 head true_switched_allo_ordered_contigs.bed
+
+# ben's version
+ awk '{print $2, $9, $10, $1}' allo_CDS_depth_pos_filter200.txt > awk_allo_CDS_depth_pos_filter200.bed
+
+/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/sam_switch_bed.sh awk_allo_CDS_depth_pos_filter200.bed CDS_switched_allo_ordered_contigs.bed
+head true_switched_allo_ordered_contigs.bed
+
+# checks all start < stop
+awk '$2 < $3 {print $0}' CDS_switched_allo_ordered_contigs.bed > test.file.txt
+
 ```
 
 
