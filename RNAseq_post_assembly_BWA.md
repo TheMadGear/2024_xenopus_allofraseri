@@ -127,7 +127,10 @@ done
 
 
 ## combine GVCFs using DBI or GATK
+## first, create bed file from genome dictionary file for contigs & contig length
+```
 
+```
 
 
 ## genotype GVCFs, using one of 2 GATK versions based on whether DBI or GATK were used
