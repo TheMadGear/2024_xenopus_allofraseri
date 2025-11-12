@@ -129,6 +129,13 @@ done
 ## combine GVCFs using DBI or GATK
 ## first, create bed file from genome dictionary file for contigs & contig length
 ```
+cut -f2,3 allo.fasta.contigs.dict > allo_contigs.bed
+sed -i -e 's/SN://g' allo_contigs.bed
+sed -i -e 's/ LN:/ 1 /g' allo_contigs.bed # to insert "tab" in command-line use ctrl-V-tab
+vi allo_contigs.bed # remove first line
+```
+
+```
 
 ```
 
