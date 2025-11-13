@@ -48,16 +48,42 @@ STAR --runMode genomeGenerate \
 
 ## step 2 (STAR map)
 ```
-# run with sbatch ./STAR_map_GTF.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/*R1.fastq /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/*R2.fastq First_Pass_
+#!/bin/sh
+#SBATCH --job-name=STAR_map
+#SBATCH --nodes=6
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=16:00:00
+#SBATCH --mem=64gb
+#SBATCH --output=STAR_map.%J.out
+#SBATCH --error=STAR_map.%J.err
+#SBATCH --account=rrg-ben
 
 
-# current error:
+module load star/2.7.11b
 
-EXITING because of FATAL ERROR: could not open genome file /home/ben/projects/rrg-ben/ben/2025_allo_PacBio_assembly/Adam_allo_genome_assembly/with_bubbles//genomeParameters.txt
-SOLUTION: check that the path to genome files, specified in --genomeDir is correct and the files are present, and have user read permsissions
 
-Nov 04 16:37:58 ...... FATAL ERROR, exiting
+# run with sbatch ./STAR_map_GTF.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/ 
+
+for file in $1/*R1.fastq; do
+STAR --runMode alignReads \
+     --genomeDir /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/ \
+     --runThreadN 6 \
+     --readFilesIn ${file::-8}*R1.fastq ${file::-8}*R2.fastq \
+     --outFileNamePrefix ${file::-19} \
+     --outSAMtype BAM SortedByCoordinate \
+     --outSAMunmapped Within \
+     --outSAMattributes Standard
+done
 ```
 
+## step 3 (concatenate tab splice junction output)
+```
+cat *tab > allo_tad_SJ.out.tab
+```
 
+## step 4 (STAR index pass 2)
+```
 
+```
+
+## step 5 (STAR map pass 2)
