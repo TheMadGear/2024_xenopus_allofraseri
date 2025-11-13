@@ -104,5 +104,5 @@ STAR --runMode genomeGenerate --genomeDir /home/froglady/projects/rrg-ben/for_ja
 
 ```
 
-
+## step 6 (haplotype caller)
 
