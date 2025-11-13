@@ -35,13 +35,11 @@ This pass will use the comprehensive set of novel junctions identified in the fi
 #SBATCH --error=star_index.%J.err
 #SBATCH --account=rrg-ben
 
-# run with sbatch ./STAR_index_GTF.sh .
-
 module load star/2.7.11b
 
 STAR --runMode genomeGenerate \
 --genomeDir /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/ \
---genomeFastaFiles /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs_nobubbles.fasta \
+--genomeFastaFiles /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta \
 --runThreadN 8 \
 --limitGenomeGenerateRAM=124544990592
 ```
