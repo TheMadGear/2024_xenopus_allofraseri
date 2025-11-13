@@ -81,7 +81,28 @@ cat *tab > allo_tad_SJ.out.tab
 
 ## step 4 (STAR index pass 2)
 ```
+#!/bin/sh
+#SBATCH --job-name=star_index
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=256gb
+#SBATCH --output=star_index.%J.out
+#SBATCH --error=star_index.%J.err
+#SBATCH --account=rrg-ben
 
+
+# run with sbatch ./STAR_index_two_GTF.sh
+
+module load star/2.7.11b
+
+STAR --runMode genomeGenerate --genomeDir /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/ --genomeFastaFiles /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta --runThreadN 8 --sjdbFileChrStartEnd /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/allo_tad_SJ.out.tab --limitGenomeGenerateRAM=124544990592
 ```
 
 ## step 5 (STAR map pass 2)
+```
+
+```
+
+
+
