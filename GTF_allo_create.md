@@ -101,6 +101,32 @@ STAR --runMode genomeGenerate --genomeDir /home/froglady/projects/rrg-ben/for_ja
 
 ## step 5 (STAR map pass 2)
 ```
+#!/bin/sh
+#SBATCH --job-name=STAR_map
+#SBATCH --nodes=6
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3-12:00:00
+#SBATCH --mem=64gb
+#SBATCH --output=STAR_map.%J.out
+#SBATCH --error=STAR_map.%J.err
+#SBATCH --account=rrg-ben
+
+
+module load star/2.7.11b
+
+
+# run with sbatch ./STAR_map_two_GTF.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/ 
+
+for file in $1/*R1.fastq; do
+STAR --runMode alignReads \
+     --genomeDir /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/ \
+     --runThreadN 6 \
+     --readFilesIn ${file::-8}*R1.fastq ${file::-8}*R2.fastq \
+     --outFileNamePrefix ${file::-19}_second \
+     --outSAMtype BAM SortedByCoordinate \
+     --outSAMunmapped Within \
+     --outSAMattributes Standard
+done
 
 ```
 
