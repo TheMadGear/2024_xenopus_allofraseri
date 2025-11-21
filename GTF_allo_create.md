@@ -130,5 +130,14 @@ done
 
 ```
 
+
+# fixes
+## samtools index
+## add readgroups (picard)
+## samtools index
+## haplotype caller
+
+
+# last step
 ## step 6 (haplotype caller)
 
