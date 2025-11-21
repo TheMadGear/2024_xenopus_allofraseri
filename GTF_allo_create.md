@@ -132,7 +132,13 @@ done
 
 
 # fixes
+# before samtools index try picard- STAR created .bai files
 ## samtools index
+```
+#samtools index *secondAligned.sortedByCoord.out.bam
+```
+
+
 ## add readgroups (picard)
 ## samtools index
 ## haplotype caller
