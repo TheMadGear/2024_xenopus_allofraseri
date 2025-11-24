@@ -165,7 +165,7 @@ done
 
 ## samtools index
 ```
-
+samtools index -M *secondAligned.sortedByCoord.out.bam_rg.bam
 ```
 
 ## haplotype caller
