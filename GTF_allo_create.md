@@ -140,7 +140,34 @@ done
 
 
 ## add readgroups (picard)
+```
+#!/bin/sh
+#SBATCH --job-name=picard_readgroups
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=readgroups.%J.out
+#SBATCH --error=readgroups.%J.err
+#SBATCH --account=rrg-ben
+
+# run by passing an argument like this
+# sbatch ./STAR_picard_readgroups.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
+
+
+module load StdEnv/2023  picard/3.1.0
+
+for file in ${1}/*secondAligned.sortedByCoord.out.bam
+do
+    java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups I=${file} O=${file}_rg.bam RGID=4 RGLB=$(basename $file) RGPL=ILLUMINA RGPU=$(basename $file) RGSM=$(basename $file)
+done
+```
+
 ## samtools index
+```
+
+```
+
 ## haplotype caller
 
 
