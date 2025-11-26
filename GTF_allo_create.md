@@ -169,8 +169,60 @@ samtools index -M *secondAligned.sortedByCoord.out.bam_rg.bam
 ```
 
 ## haplotype caller
+```
+#!/bin/sh
+#SBATCH --job-name=HaplotypeCaller
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=4-12:00:00
+#SBATCH --mem=30gb
+#SBATCH --output=HaplotypeCaller.%J.out
+#SBATCH --error=HaplotypeCaller.%J.err
+#SBATCH --account=rrg-ben
 
 
-# last step
-## step 6 (haplotype caller)
+# This script will read in the *_sorted.bam file names in a directory, and 
+# make and execute the GATK command "RealignerTargetCreator" on these files. 
+
+# execute like this:
+# sbatch 2021_HaplotypeCaller.sh ref bam chr
+# sbatch 2021_HaplotypeCaller.sh /home/ben/projects/rrg-ben/ben/2021_XL_v10_refgenome/XL_v10.1_concatenatedscaffolds.fa bam
+
+
+# jade execute:
+# sbatch ./STAR_haplotype_caller.sh /path/to/transcriptome path/to/bam/files
+
+# sbatch ./STAR_haplotype_caller.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/
+
+# have to run individually per sample ???
+
+module load StdEnv/2023 gatk/4.4.0.0
+
+for file in $2/*secondAligned.sortedByCoord.out.bam_rg.bam
+do
+gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -O ${file::-41}second_rg.bam_allchrs.g.vcf -ERC GVCF --disable-read-filter MappingQualityAvailableReadFilter
+done
+
+```
+
+# create bed file from genome assembly to feed into combineGVCFs
+```
+cut -f2,3 allo.fasta.contigs.dict > allo_genome_contigs.bed
+sed -i -e 's/SN://g'  allo_genome_contigs.bed
+sed -i -e 's/ LN:/ 1 /g' allo_genome_contigs.bed
+vi allo_genome_contigs.bed # remove first line
+```
+
+# merge gvcfs
+```
+
+```
+# run DBI genotype gvcf
+```
+
+```
+
+
+
+
 
