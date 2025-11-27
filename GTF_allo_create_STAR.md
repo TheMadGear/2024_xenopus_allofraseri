@@ -205,7 +205,8 @@ done
 
 ```
 
-# create bed file from genome assembly to feed into combineGVCFs
+# create bed file from genome assembly to feed into DB import & combineGVCFs
+# use "ctrl, V, tab" to insert tabs into commandline
 ```
 cut -f2,3 allo.fasta.contigs.dict > allo_genome_contigs.bed
 sed -i -e 's/SN://g'  allo_genome_contigs.bed
