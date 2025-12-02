@@ -136,7 +136,8 @@ vi allo_transcript_contigs.bed # remove first line
 ```
 
 ```
-
+# split into for so combine/genotype works
+split -l 4 -d allo_genome_contigs.bed
 ```
 
 
