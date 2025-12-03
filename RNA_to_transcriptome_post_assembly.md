@@ -135,11 +135,15 @@ sed -i -e 's/ LN:/ 1 /g' allo_transcript_contigs.bed
 vi allo_transcript_contigs.bed # remove first line
 ```
 
-```
 # split into for so combine/genotype works
-split -l 4 -d allo_genome_contigs.bed
+```
+split -n 4 -d allo_transcript_contigs.bed
 ```
 
+# run combine GVCFs on each bed file (named x00, x01, x02, x03)
+```
+
+```
 
 ## genotype GVCFs, using one of 2 GATK versions based on whether DBI or GATK were used
 
