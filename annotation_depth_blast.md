@@ -1,6 +1,6 @@
 # scp file to compute canada
 ```
-scp ./male_filtered_blast_depth.bed froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/
+scp ./annotation_depth_exons.bed froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/
 ```
 
 # blast her
