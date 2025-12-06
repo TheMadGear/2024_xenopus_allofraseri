@@ -11,6 +11,7 @@ cut -f4 top3_allo_depth_annotation.txt > top3_allo_genes_depth.txt
 
 # grab fasta seqs from laevis transcriptome
 # right now it just grabs header- need fasta
+# add -10 stuff back from ben's code
 ```
 grep -f top3_allo_genes_depth.txt /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts.fa > top3_windows_xenLaev.fasta
 ```
