@@ -13,24 +13,59 @@ cut -f4 FINAL_annotation_depth_exons.bed.txt > all_allo_genes_depth.txt
 mv FINAL_annotation_depth_exons.bed.txt FINAL_annotation_depth_exons.bed
 ```
 
+# make .dict and .fai files for human tx. and laevis tx.
+```
+sbatch ./2021_picard_dict.sh gencode.v42.transcripts
+sbatch ../humans/2021_picard_dict.sh XENLA_10.1_Xenbase.transcripts
+```
+
+
+
+
+# not run yet
+
+# fixing bed file 
+```
+# pull out name and length from dict with egrep
+
+
+
+# then use cut -f1,2,3 then use sed to do a global replace
+```
+# try for human
+cut -f2,3 gencode.v42.transcripts.dict > hum_laev_allo_transcripts.bed
+sed -i -e 's/SN://g' hum_laev_allo_transcripts.bed
+sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
+vi hum_laev_allo_transcripts.bed # remove first line
+
+# try for laevis
+cut -f2,3 XENLA_10.1_Xenbase.transcripts.dict > laev_allo_transcripts.bed
+sed -i -e 's/SN://g' laev_allo_transcripts.bed
+sed -i -e 's/ LN:/ 1 /g' laev_allo_transcripts.bed
+vi laev_allo_transcripts.bed # remove first line
+
+```
+
+```
+
+# getfasta of human seqs that match laevis header
+```
+
+```
+
+
+
+
+
+
+
+########################################################################################
 # using getfasta instead of grep......
 ```
 bedtools getfasta -fi  /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts.fa  -bed FINAL_annotation_depth_exons.bed -fo gene_fasta_laevis.fasta
 ```
 
-# pull out name and length from dict with egrep
-# then use cut -f1,2,3 then use sed to do a global replace
-```
-cut -f2,3 XENLA_10.1_Xenbase.transcripts.dict > xenLaev_allo_transcripts.bed
 
-
-
-sed -i -e 's/SN://g'  xenLaev_allo_transcripts.bed
-sed -i -e 's/ LN:/ 1 /g' xenLaev_allo_transcripts.bed
-vi xenLaev_allo_transcripts.bed # remove first line
-
-
-```
 
 
 
@@ -47,14 +82,6 @@ grep -f top3_allo_genes_depth.txt /home/froglady/projects/rrg-ben/for_jade/XENLA
 
 # blast fasta seqs against human tx.
 
-
-
-
-
-# blast her
-```
-bedtools getfasta -bed top3_allo_depth_annotation.bed -fi /home/froglady/projects/rrg-ben/froglady/2024_allo/2021_XL_v10_refgenome/XENLA_10.1_genome.fa.gz  -fo high_depth_output_laev.fasta
-```
 
 
 
