@@ -18,22 +18,16 @@ mv FINAL_annotation_depth_exons.bed.txt FINAL_annotation_depth_exons.bed
 bedtools getfasta -fi  /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts.fa  -bed FINAL_annotation_depth_exons.bed -fo gene_fasta_laevis.fasta
 ```
 
-
-
-
-
-###############################################################################
-# cat to new file so can replace newlines for grep to search correctly
-```
-cat top3_windows_xenLaev.fasta > newline_top3_windows_xenLaev.fasta
+# pull out name and length from dict with egrep
+# then use cut -f1,2,3 then use sed to do a global replace
 ```
 
-# make sure delimiter is correct for grep
-```
-awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < newline_top3_windows_xenLaev.fasta > grep_fixed_top3_windows_xenLaev.fasta
 ```
 
-###############################################################################
+
+
+
+
 
 
 # grab fasta seqs from laevis transcriptome
