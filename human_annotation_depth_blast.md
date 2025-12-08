@@ -1,14 +1,16 @@
 # scp file to compute canada
 ```
-scp ./top3_allo_depth_annotation.bed
- froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/
+scp /Users/jadebohbot/FINAL_annotation_depth_exons.bed.txt froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/
 ```
 
 # cut out gene names in laevis
 ```
-cut -f4 top3_allo_depth_annotation.txt > top3_allo_genes_depth.txt
+cut -f4 FINAL_annotation_depth_exons.bed.txt > all_allo_genes_depth.txt
 ```
 
+
+
+###############################################################################
 # cat to new file so can replace newlines for grep to search correctly
 ```
 cat top3_windows_xenLaev.fasta > newline_top3_windows_xenLaev.fasta
@@ -18,6 +20,9 @@ cat top3_windows_xenLaev.fasta > newline_top3_windows_xenLaev.fasta
 ```
 awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < newline_top3_windows_xenLaev.fasta > grep_fixed_top3_windows_xenLaev.fasta
 ```
+
+###############################################################################
+
 
 # grab fasta seqs from laevis transcriptome
 # right now it just grabs header- need fasta
