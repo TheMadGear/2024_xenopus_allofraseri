@@ -220,7 +220,33 @@ vi allo_genome_contigs.bed # remove first line
 ```
 # run DBI genotype gvcf
 ```
+#!/bin/sh
+#SBATCH --job-name=GenotypeGVCFs
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH --mem=23gb
+#SBATCH --output=GenotypeGVCFs.%J.out
+#SBATCH --error=GenotypeGVCFs.%J.err
+#SBATCH --account=def-ben
 
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+# execute like this:
+# sbatch 2021_GenotypeGVCFs_DB.sh ref DB_path chr1L
+
+# jade version:
+# sbatch ./genotype_GVCFs_DNA_to_DNA.sh allo_dna_reference db_path bed_file
+
+# sbatch ./genotype_GVCFs_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/ /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_genome_contigs.bed
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx18G GenotypeGVCFs -R ${1} -V gendb://${2} -O ${2}_out.vcf"
+
+${commandline}
 ```
 
 
