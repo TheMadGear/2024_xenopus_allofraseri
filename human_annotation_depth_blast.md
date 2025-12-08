@@ -8,6 +8,18 @@ scp /Users/jadebohbot/FINAL_annotation_depth_exons.bed.txt froglady@nibi.allianc
 cut -f4 FINAL_annotation_depth_exons.bed.txt > all_allo_genes_depth.txt
 ```
 
+# change name to bed file
+```
+mv FINAL_annotation_depth_exons.bed.txt FINAL_annotation_depth_exons.bed
+```
+
+# using getfasta instead of grep......
+```
+bedtools getfasta -fi  /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts.fa  -bed FINAL_annotation_depth_exons.bed -fo gene_fasta_laevis.fasta
+```
+
+
+
 
 
 ###############################################################################
