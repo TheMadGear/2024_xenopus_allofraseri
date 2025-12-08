@@ -25,7 +25,6 @@ sbatch ../humans/2021_picard_dict.sh XENLA_10.1_Xenbase.transcripts
 # not run yet
 
 # fixing bed file 
-```
 # pull out name and length from dict with egrep
 
 
@@ -36,6 +35,9 @@ sbatch ../humans/2021_picard_dict.sh XENLA_10.1_Xenbase.transcripts
 cut -f2,3 gencode.v42.transcripts.dict > hum_laev_allo_transcripts.bed
 sed -i -e 's/SN://g' hum_laev_allo_transcripts.bed
 sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
+# now need to remove middle bits
+
+
 vi hum_laev_allo_transcripts.bed # remove first line
 
 # try for laevis
