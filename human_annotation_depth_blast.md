@@ -9,6 +9,11 @@ scp ./top3_allo_depth_annotation.bed
 cut -f4 top3_allo_depth_annotation.txt > top3_allo_genes_depth.txt
 ```
 
+# cat to new file so can replace newlines for grep to search correctly
+```
+cat top3_windows_xenLaev.fasta > newline_top3_windows_xenLaev.fasta
+```
+
 # grab fasta seqs from laevis transcriptome
 # right now it just grabs header- need fasta
 # add -10 stuff back from ben's code
