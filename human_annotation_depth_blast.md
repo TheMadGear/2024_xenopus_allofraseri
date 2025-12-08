@@ -16,7 +16,7 @@ cat top3_windows_xenLaev.fasta > newline_top3_windows_xenLaev.fasta
 
 # make sure delimiter is correct for grep
 ```
-
+awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < newline_top3_windows_xenLaev.fasta > grep_fixed_top3_windows_xenLaev.fasta
 ```
 
 # grab fasta seqs from laevis transcriptome
