@@ -127,7 +127,6 @@ STAR --runMode alignReads \
      --outSAMunmapped Within \
      --outSAMattributes Standard
 done
-
 ```
 
 
@@ -202,7 +201,6 @@ for file in $2/*secondAligned.sortedByCoord.out.bam_rg.bam
 do
 gatk --java-options -Xmx24G HaplotypeCaller  -I ${file} -R ${1} -O ${file::-41}second_rg.bam_allchrs.g.vcf -ERC GVCF --disable-read-filter MappingQualityAvailableReadFilter
 done
-
 ```
 
 # create bed file from genome assembly to feed into DB import & combineGVCFs
@@ -214,10 +212,6 @@ sed -i -e 's/ LN:/ 1 /g' allo_genome_contigs.bed
 vi allo_genome_contigs.bed # remove first line
 ```
 
-# merge gvcfs
-```
-
-```
 # run DBI genotype gvcf
 ```
 #!/bin/sh
@@ -285,14 +279,30 @@ gatk --java-options -Xmx8G VariantFiltration -V ${1}\
 
 
 
-
-
-
-
-
-
+# select variants
 ```
-# out file is called _out.vcf and is in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/
+#!/bin/sh
+#SBATCH --job-name=SelectVariants
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=36:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=SelectVariants.%J.out
+#SBATCH --error=SelectVariants.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will execute the GATK command "SelectVariants" on a file
+
+# execute like this:
+# sbatch ./select_variants_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/_out.vcf_filtered.vcf.gz
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+gatk --java-options -Xmx8G SelectVariants \
+        --exclude-filtered \
+        -V ${1} \
+        -O ${1}_filtered_removed.vcf
 ```
 
 
