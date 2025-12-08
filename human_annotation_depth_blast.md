@@ -29,16 +29,16 @@ sbatch ../humans/2021_picard_dict.sh XENLA_10.1_Xenbase.transcripts
 
 
 
-# then use cut -f1,2,3 then use sed to do a global replace
+# creation of a beautiful human tx. bed file
 ```
 # try for human
 cut -f2,3 gencode.v42.transcripts.dict > hum_laev_allo_transcripts.bed
 sed -i -e 's/SN://g' hum_laev_allo_transcripts.bed
 sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
 
-# now need to remove middle bits
-# this makes most of a bed file
+# now THIS is a bed file
  sed -e 's/|.*|//' hum_laev_allo_transcripts.bed > test1.bed
+sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
 
 
 
