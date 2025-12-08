@@ -21,6 +21,14 @@ bedtools getfasta -fi  /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenba
 # pull out name and length from dict with egrep
 # then use cut -f1,2,3 then use sed to do a global replace
 ```
+cut -f2,3 XENLA_10.1_Xenbase.transcripts.dict > xenLaev_allo_transcripts.bed
+
+
+
+sed -i -e 's/SN://g'  xenLaev_allo_transcripts.bed
+sed -i -e 's/ LN:/ 1 /g' xenLaev_allo_transcripts.bed
+vi xenLaev_allo_transcripts.bed # remove first line
+
 
 ```
 
