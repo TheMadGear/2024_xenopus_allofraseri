@@ -249,6 +249,47 @@ commandline="gatk --java-options -Xmx18G GenotypeGVCFs -R ${1} -V gendb://${2} -
 ${commandline}
 ```
 
+# variant filtration
+```
+#!/bin/sh
+#SBATCH --job-name=VariantFiltration
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=36:00:00
+#SBATCH --mem=10gb
+#SBATCH --output=VariantFiltration.%J.out
+#SBATCH --error=VariantFiltration.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will execute the GATK command "VariantFiltration" on a gvcf file
+
+# execute like this:
+# sbatch variant_filter_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/_out.vcf
+
+
+
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+gatk --java-options -Xmx8G VariantFiltration -V ${1}\
+    -filter "QD < 2.0" --filter-name "QD2" \
+    -filter "QUAL < 30.0" --filter-name "QUAL30" \
+    -filter "SOR > 3.0" --filter-name "SOR3" \
+    -filter "FS > 60.0" --filter-name "FS60" \
+    -filter "MQ < 40.0" --filter-name "MQ40" \
+    -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" \
+    -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" \
+    -O ${1}_filtered.vcf.gz
+```
+
+
+
+
+
+
+
+
 
 ```
 # out file is called _out.vcf and is in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/
