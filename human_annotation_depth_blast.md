@@ -14,6 +14,11 @@ cut -f4 top3_allo_depth_annotation.txt > top3_allo_genes_depth.txt
 cat top3_windows_xenLaev.fasta > newline_top3_windows_xenLaev.fasta
 ```
 
+# make sure delimiter is correct for grep
+```
+
+```
+
 # grab fasta seqs from laevis transcriptome
 # right now it just grabs header- need fasta
 # add -10 stuff back from ben's code
