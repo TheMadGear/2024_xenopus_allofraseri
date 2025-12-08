@@ -250,6 +250,10 @@ ${commandline}
 ```
 
 
+```
+# out file is called _out.vcf and is in /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/
+```
+
 
 
 
