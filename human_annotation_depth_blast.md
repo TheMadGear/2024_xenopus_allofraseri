@@ -29,6 +29,12 @@ sed -e 's/|.*|//' laevis_all_bed.bed > all_laevis_all_bed.bed # removes middle b
 vi all_laevis_all_bed.bed # remove first line
 ```
 
+# now here's where we can do it only for ALL allo positions, or only for high depth positions
+
+# grab only genes found in allo OR high depth positions
+```
+
+```
 
 
 
