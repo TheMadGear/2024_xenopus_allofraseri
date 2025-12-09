@@ -31,6 +31,11 @@ vi all_laevis_all_bed.bed # remove first line
 #sed -e 's/|.*|//' laevis_all_bed.bed > all_laevis_all_bed.bed # removes middle bit
 ```
 
+# blast against laevis tx. to get fastas
+```
+bedtools getfasta -fi XENLA_10.1_GCF_XBmodels.transcripts.fa -bed laevis_all_bed.bed -fo all_XL_fasta.fa
+```
+
 # now here's where we can do it only for ALL allo positions, or only for high depth positions
 
 # grab only genes found in allo OR high depth positions
