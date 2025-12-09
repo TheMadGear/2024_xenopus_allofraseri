@@ -22,11 +22,13 @@ cut -f4 FINAL_annotation_depth_exons.bed > FINAL_genes_depth_exons.bed
 ```
 cut -f2,3 XENLA_10.1_GCF_XBmodels.transcripts.dict > laevis_all_bed.bed
 sed -i -e 's/ LN:/ 1 /g' laevis_all_bed.bed
-sed -i -e 's/SN:gnl|//g' laevis_all_bed.bed
+sed -i -e 's/SN://g' laevis_all_bed.bed
 sed -i -e 's/ LN:/ 1 /g' laevis_all_bed.bed
-cut -d '|' -f2 laevis_all_bed.bed > laev_allo_transcripts_RNA.bed # sends the mRNA names to another file
-sed -e 's/|.*|//' laevis_all_bed.bed > all_laevis_all_bed.bed # removes middle bit
 vi all_laevis_all_bed.bed # remove first line
+
+
+#cut -d '|' -f2 laevis_all_bed.bed > laev_allo_transcripts_RNA.bed # sends the mRNA names to another file
+#sed -e 's/|.*|//' laevis_all_bed.bed > all_laevis_all_bed.bed # removes middle bit
 ```
 
 # now here's where we can do it only for ALL allo positions, or only for high depth positions
