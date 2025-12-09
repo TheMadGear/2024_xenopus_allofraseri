@@ -18,8 +18,14 @@ mv FINAL_annotation_depth_exons.bed.txt FINAL_annotation_depth_exons.bed
 cut -f4 FINAL_annotation_depth_exons.bed > FINAL_genes_depth_exons.bed
 ```
 
-
-
+# grabbing all bed positions from laevis dictionary file
+```
+cut -f2,3 XENLA_10.1_GCF_XBmodels.transcripts.dict > laevis_all_bed.bed
+sed -i -e 's/SN://g' laevis_all_bed.bed
+sed -i -e 's/ LN:/ 1 /g' laevis_all_bed.bed
+vi laevis_all_bed.bed # remove first line
+sed -e 's/|.*|//' laevis_all_bed.bed > all_laevis_all_bed.bed # removes middle bit
+```
 
 
 
