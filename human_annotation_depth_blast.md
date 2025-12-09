@@ -13,6 +13,21 @@ cut -f4 FINAL_annotation_depth_exons.bed.txt > all_allo_genes_depth.txt
 mv FINAL_annotation_depth_exons.bed.txt FINAL_annotation_depth_exons.bed
 ```
 
+# cut out list of high depth gene names
+```
+cut -f4 FINAL_annotation_depth_exons.bed > FINAL_genes_depth_exons.bed
+```
+
+
+
+
+
+
+
+
+
+###########################################################################################
+
 # remove weird newlines
 ```
 sed '/^$/d' XENLA_10.1_Xenbase.transcripts.fa > newline_XENLA_10.1_Xenbase.transcripts.fa
@@ -35,8 +50,10 @@ sbatch ../humans/2021_picard_dict.sh new_XENLA_10.1_Xenbase.transcripts.fa
 # not run yet
 
 # fixing bed file 
-# pull out name and length from dict with egrep
-
+# pull out matching gene names from dict with egrep
+```
+egrep 
+```
 
 
 # creation of a beautiful human tx. bed file
