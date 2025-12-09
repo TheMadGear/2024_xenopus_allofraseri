@@ -13,11 +13,21 @@ cut -f4 FINAL_annotation_depth_exons.bed.txt > all_allo_genes_depth.txt
 mv FINAL_annotation_depth_exons.bed.txt FINAL_annotation_depth_exons.bed
 ```
 
+# remove weird newlines
+```
+sed '/^$/d' XENLA_10.1_Xenbase.transcripts.fa > newline_XENLA_10.1_Xenbase.transcripts.fa
+
+sed '/^$/d' XENLA_10.1_Xenbase.transcripts.fa > new_XENLA_10.1_Xenbase.transcripts.fa
+```
+
 # make .dict and .fai files for human tx. and laevis tx.
 ```
-sbatch ./2021_picard_dict.sh gencode.v42.transcripts
-sbatch ../humans/2021_picard_dict.sh XENLA_10.1_Xenbase.transcripts
+# sbatch ./2021_picard_dict.sh gencode.v42.transcripts
+sbatch ../humans/2021_picard_dict.sh newline_XENLA_10.1_Xenbase.transcripts
+sbatch ./2021_picard.sh _XENLA_10.1_Xenbase.transcripts
+sbatch ../humans/2021_picard_dict.sh new_XENLA_10.1_Xenbase.transcripts.fa
 ```
+
 
 
 
@@ -37,7 +47,7 @@ sed -i -e 's/SN://g' hum_laev_allo_transcripts.bed
 sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
 
 # now THIS is a bed file
- sed -e 's/|.*|//' hum_laev_allo_transcripts.bed > test1.bed
+sed -e 's/|.*|//' hum_laev_allo_transcripts.bed > test1.bed
 sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
 
 
@@ -46,7 +56,7 @@ sed -i -e 's/ LN:/ 1 /g' hum_laev_allo_transcripts.bed
 vi hum_laev_allo_transcripts.bed # remove first line
 
 # try for laevis
-cut -f2,3 XENLA_10.1_Xenbase.transcripts.dict > laev_allo_transcripts.bed
+cut -f2,3 newline_XENLA_10.1_Xenbase.transcripts.dict > laev_allo_transcripts.bed
 sed -i -e 's/SN://g' laev_allo_transcripts.bed
 sed -i -e 's/ LN:/ 1 /g' laev_allo_transcripts.bed
 vi laev_allo_transcripts.bed # remove first line
