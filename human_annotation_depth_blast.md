@@ -63,12 +63,7 @@ vi laev_allo_transcripts.bed # remove first line
 
 ```
 
-```
 
-# getfasta of human seqs that match laevis header
-```
-
-```
 
 
 
