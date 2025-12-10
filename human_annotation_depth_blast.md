@@ -38,7 +38,7 @@ bedtools getfasta -fi XENLA_10.1_GCF_XBmodels.transcripts.fa -bed laevis_all_bed
 
 # split laevis multifasta so it runs faster & rename as .fa file
 ```
-split -n 4 -d all_XL_fasta.fa all_XL_fasta
+split -n 10 -d all_XL_fasta.fa all_XL_fasta #(do same for each of 00-09)
 mv all_XL_fasta03 all_XL_fasta03.fa
 mv all_XL_fasta02 all_XL_fasta02.fa
 mv all_XL_fasta01 all_XL_fasta01.fa
@@ -54,6 +54,18 @@ blastn -query all_XL_fasta01.fa -db ../human_transcriptome/gencode.v42.transcrip
 blastn -query all_XL_fasta02.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 02_all_laevis_human.out -task dc-megablast
 
 blastn -query all_XL_fasta03.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 03_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta04.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 04_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta05.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 05_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta06.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 06_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta07.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 07_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta08.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 08_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 09_all_laevis_human.out -task dc-megablast
 ```
 
 
