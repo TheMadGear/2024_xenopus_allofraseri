@@ -68,6 +68,10 @@ blastn -query all_XL_fasta08.fa -db ../human_transcriptome/gencode.v42.transcrip
 blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 09_all_laevis_human.out -task dc-megablast
 ```
 
+# now to merge the out files back together
+```
+cat *all_laevis_human.out > merged_laev_hum_ann.out
+```
 
 
 
