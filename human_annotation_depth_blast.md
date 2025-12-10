@@ -36,10 +36,28 @@ vi all_laevis_all_bed.bed # remove first line
 bedtools getfasta -fi XENLA_10.1_GCF_XBmodels.transcripts.fa -bed laevis_all_bed.bed -fo all_XL_fasta.fa
 ```
 
+# split laevis multifasta so it runs faster & rename as .fa file
+```
+split -n 4 -d all_XL_fasta.fa all_XL_fasta
+mv all_XL_fasta03 all_XL_fasta03.fa # repeat for 00-03
+```
 
-# BLAST LAEVIS FASTA against HUMAN TX. - won't do this
-# I think it's because the gene names don't match- laevis gene names aren't in first column, this is other info
-# figure out how to grab and insert this from the XL tx. reference (fa NOT dict- dict does not have gene names)
+# and now to blast the split laevis fastas
+```
+blastn -query all_XL_fasta00.fa.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 00_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta01.fa.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 01_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta02.fa.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 02_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta03.fa.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 03_all_laevis_human.out -task dc-megablast
+```
+
+
+
+
+
+# BLAST LAEVIS FASTA against HUMAN TX. - won't do this NEED TO SPLIT
 ```
 blastn -query all_XL_fasta.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out all_laevis_human.out -task dc-megablast
 ```
