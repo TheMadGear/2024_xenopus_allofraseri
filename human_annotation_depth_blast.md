@@ -31,14 +31,18 @@ vi all_laevis_all_bed.bed # remove first line
 #sed -e 's/|.*|//' laevis_all_bed.bed > all_laevis_all_bed.bed # removes middle bit
 ```
 
-# blast against laevis tx. to get fastas- won't do this
-# I think it's because the gene names don't match- laevis gene names aren't in first column, this is other info
-# figure out how to grab and insert this from the XL tx. reference (fa NOT dict- dict does not have gene names)
+# blast against laevis tx. to get fastas
 ```
 bedtools getfasta -fi XENLA_10.1_GCF_XBmodels.transcripts.fa -bed laevis_all_bed.bed -fo all_XL_fasta.fa
 ```
 
 
+# BLAST LAEVIS FASTA against HUMAN TX. - won't do this
+# I think it's because the gene names don't match- laevis gene names aren't in first column, this is other info
+# figure out how to grab and insert this from the XL tx. reference (fa NOT dict- dict does not have gene names)
+```
+blastn -query all_XL_fasta.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out all_laevis_human.out -task dc-megablast
+```
 
 
 
