@@ -39,7 +39,10 @@ bedtools getfasta -fi XENLA_10.1_GCF_XBmodels.transcripts.fa -bed laevis_all_bed
 # split laevis multifasta so it runs faster & rename as .fa file
 ```
 split -n 4 -d all_XL_fasta.fa all_XL_fasta
-mv all_XL_fasta03 all_XL_fasta03.fa # repeat for 00-03
+mv all_XL_fasta03 all_XL_fasta03.fa
+mv all_XL_fasta02 all_XL_fasta02.fa
+mv all_XL_fasta01 all_XL_fasta01.fa
+mv all_XL_fasta00 all_XL_fasta00.fa 
 ```
 
 # and now to blast the split laevis fastas
