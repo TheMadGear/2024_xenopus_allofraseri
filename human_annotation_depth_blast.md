@@ -71,7 +71,7 @@ blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcrip
 
 
 
-
+################################################################################
 # BLAST LAEVIS FASTA against HUMAN TX. - won't do this NEED TO SPLIT
 ```
 blastn -query all_XL_fasta.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out all_laevis_human.out -task dc-megablast
@@ -109,15 +109,6 @@ sbatch ../humans/2021_picard_dict.sh new_XENLA_10.1_Xenbase.transcripts.fa
 
 
 
-
-
-# not run yet
-
-# fixing bed file 
-# pull out matching gene names from dict with egrep
-```
-egrep 
-```
 
 
 # creation of a beautiful human tx. bed file
