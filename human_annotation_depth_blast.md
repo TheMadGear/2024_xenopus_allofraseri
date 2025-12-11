@@ -75,9 +75,22 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 
 # now grab human gene annotations and add to allo high depth info
 # /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/FINAL_annotation_depth_exons.bed # allo/laev
-# /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/merged_laev_hum_ann.out # laev/human
-```
 
+## Chr1L	577332	578774	LOC108704856	3835	right overlap	tig00001724	2684931	2686077	XBmRNA28
+
+# /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/merged_laev_hum_ann.out # laev/human
+
+## gnl|XBXL10_1g34611|XBmRNA65388|:1-4241	ENST00000251507.8|ENSG00000152061.24|OTTHUMG00000034899.9|OTTHUMT00000084497.1|RABGAP1L-201|RABGAP1L|2899|protein_coding|	67.814	1976	576	18	718	2681	675	2602	0.0	670
+
+
+# should cut laev bed file & human gene from
+# should find some measure of similarity between allo & human (i.e. blast allo to human for pident or smth)
+```
+cut -f1,2 merged_laev_hum_ann.out > lha_return.out
+sed -i -e 's/|:/  /g' lha_return.out # add tab
+
+
+|*|*|*|*|*|*|
 ```
 
 
