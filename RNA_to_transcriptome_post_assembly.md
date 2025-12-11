@@ -137,7 +137,15 @@ vi allo_transcript_contigs.bed # remove first line
 
 # split into for so combine/genotype works
 ```
-split -n 4 -d allo_transcript_contigs.bed
+split -n 10 -d allo_transcript_contigs.bed  RNA_transcript
+```
+
+# add .bed suffix
+```
+for f in  RNA_transcript0*;
+do 
+	mv "$f" "$(echo "$f".bed)"
+done
 ```
 
 # run combine GVCFs on each bed file (named x00, x01, x02, x03)
