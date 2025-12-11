@@ -74,6 +74,8 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 ```
 
 # now grab human gene annotations and add to allo high depth info
+# /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/FINAL_annotation_depth_exons.bed # allo/laev
+# /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/merged_laev_hum_ann.out # laev/human
 ```
 
 ```
