@@ -78,6 +78,8 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 # /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_GCF_XBmodels.transcripts.fa
 ```
 
+
+
 ```
 
 # now grab human gene annotations and add to allo high depth info
