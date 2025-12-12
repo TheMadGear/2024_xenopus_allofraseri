@@ -96,6 +96,8 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 
 # nested loop- loop through each row of fa and check if it matches the dict entry
 
+grep "gnl|XBXL10_1g34611|XBmRNA65388|" XENLA_10.1_GCF_XBmodels.transcripts.dict
+grep "gnl|XBXL10_1g34611|XBmRNA65388|" XENLA_10.1_GCF_XBmodels.transcripts.fa
 
 ```
 
