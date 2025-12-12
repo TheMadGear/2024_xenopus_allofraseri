@@ -75,8 +75,17 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 
 # THIS is the XL ref for the allo/laev file
 ## /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta 
-# this is the XL reef for laev/human
+## >XBXL10_1g1_LOC108704873_XBmRNA2_XM_041586392.1_Chr1L:46948-47000
+## TGAGGTGGCTCATACTTTTACTCTGGGGGGCAATAGGCCAAGGACTAGAACG
+
+# this is the XL ref AND dict for laev/human
 ## /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_GCF_XBmodels.transcripts.fa
+## >gnl|XBXL10_1g34611|XBmRNA65388| rabgap1.L
+## TCACATGGCTATGACATCACAACCTGCCGAAAGCTACTCTATTCCAGTCGTTCATGGCCTGGATCTGGG
+
+## /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_GCF_XBmodels.transcripts.dict
+## @HD	VN:1.6
+## @SQ	SN:gnl|XBXL10_1g34611|XBmRNA65388|	LN:4241	M5:74eeaa403596d49019c9ae7763444240	UR:file:/project/6019307/ben/2021_XL_ko_tad_RNAseq/XL_v10_transcriptome/XENLA_10.1_GCF_XBmodels.transcripts.fa
 ```
 
 
