@@ -94,6 +94,8 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 # check which rows of .fa & .dict match
 # make hash faSeq=dictSeq & faRow=dictRow
 
+# nested loop- loop through each row of fa and check if it matches the dict entry
+
 
 ```
 
