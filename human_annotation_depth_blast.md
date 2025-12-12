@@ -91,7 +91,8 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 # first link XL .fa and .dict
 
 ```
-
+# check which rows of .fa & .dict match
+# make hash faSeq=dictSeq & faRow=dictRow
 
 
 ```
