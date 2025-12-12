@@ -73,9 +73,10 @@ blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcrip
 cat *all_laevis_human.out > merged_laev_hum_ann.out
 ```
 
-#
-# /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta THIS is the XL ref for the allo/laev file
-# /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_GCF_XBmodels.transcripts.fa
+# THIS is the XL ref for the allo/laev file
+## /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta 
+# this is the XL reef for laev/human
+## /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_GCF_XBmodels.transcripts.fa
 ```
 
 
