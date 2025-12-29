@@ -144,5 +144,53 @@ sed -i -e 's/SN://g' laevis_all_bed.bed
 vi laevis_all_bed.bed # remove first line
 ```
 
+# blast against no-space laev fasta
+```
+bedtools getfasta -fi XENLA_no_tab_rem.transcripts.fa -bed /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/laevis_all_bed.bed -fo all_genes_XL_fasta.fa
+```
+
+```
+split -n 10 -d all_genes_XL_fasta.fa all_genes_XL_fasta
+
+
+mv all_genes_XL_fasta09 all_XL_fasta09.fa
+mv all_genes_XL_fasta08 all_XL_fasta08.fa
+mv all_genes_XL_fasta07 all_XL_fasta07.fa
+mv all_genes_XL_fasta06 all_XL_fasta06.fa
+mv all_genes_XL_fasta05 all_XL_fasta05.fa
+mv all_genes_XL_fasta04 all_XL_fasta04.fa
+mv all_genes_XL_fasta03 all_XL_fasta03.fa
+mv all_genes_XL_fasta02 all_XL_fasta02.fa
+mv all_genes_XL_fasta01 all_XL_fasta01.fa
+mv all_genes_XL_fasta00 all_XL_fasta00.fa 
+```
+
+# and now to blast the split laevis fastas
+```
+blastn -query all_XL_fasta00.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 00_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta01.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 01_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta02.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 02_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta03.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 03_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta04.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 04_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta05.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 05_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta06.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 06_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta07.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 07_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta08.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 08_all_laevis_human.out -task dc-megablast
+
+blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 09_all_laevis_human.out -task dc-megablast
+```
+
+# now to merge the out files back together
+```
+cat *all_laevis_human.out > merged_laev_hum_ann.out
+```
 
 
