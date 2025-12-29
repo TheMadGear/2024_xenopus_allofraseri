@@ -139,6 +139,9 @@ sbatch ./make_dict.sh /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbas
 # make bed file with sed
 ```
 cut -f2,3 allo_reference_contigs.dict > laevis_all_bed.bed
+sed -i -e 's/ LN:/ 1 /g' laevis_all_bed.bed
+sed -i -e 's/SN://g' laevis_all_bed.bed
+vi laevis_all_bed.bed # remove first line
 ```
 
 
