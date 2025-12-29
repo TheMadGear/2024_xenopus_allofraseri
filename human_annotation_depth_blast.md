@@ -1,4 +1,5 @@
 # scp file to compute canada
+# rows: laev, laev, laev, laev, both, depth, allo, allo, allo
 ```
 scp /Users/jadebohbot/FINAL_annotation_depth_exons.bed.txt froglady@nibi.alliancecan.ca:/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/
 ```
