@@ -133,7 +133,7 @@ sbatch ./make_dict.sh /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbas
 
 # this is the dict file
 ```
-/home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/allo_reference_contigs.dict
+/home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/allo_reference_contigs.dict
 ```
 
 
