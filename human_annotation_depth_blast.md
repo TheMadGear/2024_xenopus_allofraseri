@@ -36,42 +36,7 @@ vi all_laevis_all_bed.bed # remove first line
 bedtools getfasta -fi XENLA_10.1_GCF_XBmodels.transcripts.fa -bed laevis_all_bed.bed -fo all_XL_fasta.fa
 ```
 
-# split laevis multifasta so it runs faster & rename as .fa file
-```
-split -n 10 -d all_XL_fasta.fa all_XL_fasta #(do same for each of 00-09)
-mv all_XL_fasta03 all_XL_fasta03.fa
-mv all_XL_fasta02 all_XL_fasta02.fa
-mv all_XL_fasta01 all_XL_fasta01.fa
-mv all_XL_fasta00 all_XL_fasta00.fa 
-```
 
-# and now to blast the split laevis fastas
-```
-blastn -query all_XL_fasta00.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 00_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta01.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 01_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta02.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 02_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta03.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 03_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta04.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 04_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta05.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 05_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta06.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 06_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta07.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 07_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta08.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 08_all_laevis_human.out -task dc-megablast
-
-blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out 09_all_laevis_human.out -task dc-megablast
-```
-
-# now to merge the out files back together
-```
-cat *all_laevis_human.out > merged_laev_hum_ann.out
-```
 
 # THIS is the XL ref for the allo/laev file
 ## /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta 
