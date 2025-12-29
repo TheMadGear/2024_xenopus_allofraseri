@@ -131,7 +131,10 @@ sed 's/ //' XENLA_tab_rem.transcripts.fa > XENLA_no_tab_rem.transcripts.fa
 sbatch ./make_dict.sh /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_no_tab_rem.transcripts.fa
 ```
 
-
+# this is the dict file
+```
+/home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/allo_reference_contigs.dict
+```
 
 
 
