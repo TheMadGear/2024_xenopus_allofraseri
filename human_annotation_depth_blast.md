@@ -170,6 +170,6 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 7: laev start align
 8: laev stop align
 ```
-cut -f 2,3,7,8 merged_laev_hum_ann.out > laev_hum_bed.bed
+cut -f 1,2,7,8,12 merged_laev_hum_ann.out > laev_hum_bed.bed
 ```
 
