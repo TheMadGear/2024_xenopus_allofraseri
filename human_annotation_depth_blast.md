@@ -122,4 +122,19 @@ sed -i -e 's/|:/  /g' lha_return.out # add tab
 ```
 
 
+# hehehe redoing some stuff- space in fa file
+# make new fa file and remove the space
+# create dictionary file from this (NOW it will work)
+```
+cp XENLA_10.1_GCF_XBmodels.transcripts.fa XENLA_tab_rem.transcripts.fa
+sed 's/ //' XENLA_tab_rem.transcripts.fa > XENLA_no_tab_rem.transcripts.fa
+sbatch ./make_dict.sh /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_no_tab_rem.transcripts.fa
+```
+
+
+
+
+
+
+
 
