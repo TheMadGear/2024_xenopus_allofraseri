@@ -178,4 +178,13 @@ cut -f 1,2,7,8,12 merged_laev_hum_ann.out > laev_hum_bed.bed
 ```
 cut -f 1 laev_hum_bed.bed
 ```
+# check if laevis gene name matches in each dataset, THEN add human gene name to allo/laev dataset
+if[no gene name]; then
+	append “unnamed” to column (??? wouldn’t just not include?)
+elif [laev_name_allo == laev_name_hum]
+	APPEND gene name as below 
+fi
 
+[allo1, hum1]
+[allo1, hum2]
+[allo1, hum3]
