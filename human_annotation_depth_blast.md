@@ -174,3 +174,8 @@ cat *all_laevis_human.out > merged_laev_hum_ann.out
 cut -f 1,2,7,8,12 merged_laev_hum_ann.out > laev_hum_bed.bed
 ```
 
+# grab list of laev genes & other info
+```
+cut -f 1 laev_hum_bed.bed
+```
+
