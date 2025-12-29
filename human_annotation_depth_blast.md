@@ -158,4 +158,18 @@ blastn -query all_XL_fasta09.fa -db ../human_transcriptome/gencode.v42.transcrip
 cat *all_laevis_human.out > merged_laev_hum_ann.out
 ```
 
+# ideal end file:
+# laev name
+# laev pos
+# allo name
+# allo pos
+# human name
+
+2: laev
+3: human
+7: laev start align
+8: laev stop align
+```
+cut -f 2,3,7,8 merged_laev_hum_ann.out > laev_hum_bed.bed
+```
 
