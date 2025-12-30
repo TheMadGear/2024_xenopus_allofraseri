@@ -190,3 +190,45 @@ fi
 [allo1, hum2]
 [allo1, hum3]
 ```
+
+# script to smush human, allo, laev info
+```
+!/bin/bash
+
+# total records gone through
+sumCount=1
+
+# how many human records match allo gene
+count=1
+
+# how many total rows in human/laev dataset
+nrow_hum = “wc -l laev_hum_bed.bed”
+
+# grab laevis/allo gene name list
+allo_laev_genes=“cut -f 4 /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/FINAL_annotation_depth_exons.bed”
+
+# empty columns to fill
+declare -a hum_genes=()
+declare -a allo_genes=()
+
+
+# loops through every human record
+while [$count -le $nrow_hum]; do
+
+
+        new_genes=grep -n $”{allo_laev_genes[@]:$count} laev_hum_bed.bed”
+
+        repeats=“grep -c ${allo_laev_genes[@]:$count} laev_hum_bed.bed”
+        # concats human rows vertically
+        hum_genes+=($new_genes)
+
+        # repeats allo row for each associated human annotation
+        for x in $1/$repeats; do
+                allo_genes+=$”{allo_laev_genes[@]:$count}”
+        done
+done
+```
+
+
+
+
