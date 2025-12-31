@@ -193,7 +193,11 @@ fi
 
 # script to smush human, allo, laev info
 ```
-!/bin/bash
+#!/bin/bash
+#SBATCH --job-name=two_annotation
+#SBATCH --output=two_annotation.%J.out
+#SBATCH --error=two_annotation.%J.err
+#SBATCH --account=rrg-ben
 
 # total records gone through
 sumCount=1
@@ -202,10 +206,14 @@ sumCount=1
 count=1
 
 # how many total rows in human/laev dataset
-nrow_hum = “wc -l laev_hum_bed.bed”
+nrow_hum=$(wc -l laev_hum_bed.bed)
 
 # grab laevis/allo gene name list
-allo_laev_genes=“cut -f 4 /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/FINAL_annotation_depth_exons.bed”
+allo_laev_genes=$(cut -f 4 /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/FINAL_annotation_depth_exons.bed)
+
+# grab human/laev file
+hum_laev=$(/home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/laev_hum_bed.bed)
+
 
 # empty columns to fill
 declare -a hum_genes=()
@@ -213,20 +221,27 @@ declare -a allo_genes=()
 
 
 # loops through every human record
-while [$count -le $nrow_hum]; do
+for x in "${allo_laev_genes[@]}"; do
 
+# greps human genes that match the "$x" allo row
+	# list of laev/allo genes
+	new_genes=(grep -n $allo_laev_genes $hum_laev) 
 
-        new_genes=grep -n $”{allo_laev_genes[@]:$count} laev_hum_bed.bed”
+        # counts number of human rows associated with allo row
+        repeats=$(grep -c $allo_laev_genes[@] $hum_laev)
 
-        repeats=“grep -c ${allo_laev_genes[@]:$count} laev_hum_bed.bed”
         # concats human rows vertically
         hum_genes+=($new_genes)
 
-        # repeats allo row for each associated human annotation
+	# repeats allo row for each associated human annotation
         for x in $1/$repeats; do
-                allo_genes+=$”{allo_laev_genes[@]:$count}”
+                allo_genes+=$”{allo_laev_genes[@] $hum_laev}”
         done
 done
+
+
+# before this probably need to export variables from shell (probably stuck in for loop)
+paste ${allo_genes} ${hum_genes} > human_allo_annotation.txt
 ```
 
 
