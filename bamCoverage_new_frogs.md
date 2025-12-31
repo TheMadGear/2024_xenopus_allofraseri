@@ -8,7 +8,7 @@ done
 
 # bamCoverage script
 ```
-# run with sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/bam_coverage.sh 
+# run with sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/bam_coverage.sh *bam
 
 #!/bin/sh
 #SBATCH --job-name=bamCoverage
