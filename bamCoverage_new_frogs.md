@@ -2,13 +2,13 @@
 # use loop to run so many files
 ```
 for f in /home/froglady/projects/rrg-ben/for_jade/2025_allo_bamz/*bam; do
-  sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/bam_coverage.sh "$f"
+  sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh "$f"
 done
 ```
 
 # bamCoverage script
 ```
-# run with sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/bam_coverage.sh *bam
+# run with sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh *bam
 
 #!/bin/sh
 #SBATCH --job-name=bamCoverage
