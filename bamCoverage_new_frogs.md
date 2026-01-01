@@ -1,4 +1,9 @@
 
+# maybe need this first?
+```
+sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt 
+```
+
 # use loop to run so many files
 ```
 for f in /home/froglady/projects/rrg-ben/for_jade/2025_allo_bamz/*bam; do
