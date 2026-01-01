@@ -21,6 +21,7 @@ cut -f4 FINAL_annotation_depth_exons.bed > FINAL_genes_depth_exons.bed
 # retry splitting
 ```
 cut -f 4 /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/FINAL_annotation_depth_exons.bed > allo_laev
+split -C 20m -d allo_laev allo_laev_genes
 ```
 
 # grabbing all bed positions from laevis dictionary file
