@@ -1,16 +1,17 @@
 
 # maybe need this first?
 ```
-sbatch ../../jade_scripts/samtools_depthpersite.sh list_of_bams.txt 
+sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh bams_list.txt 
 ```
 
 # use loop to run so many files
 ```
 for f in /home/froglady/projects/rrg-ben/for_jade/2025_allo_bamz/*bam; do
-  sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh ${f} .
+  sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh ${f} 
 done
 ```
-
+# with bubbles for depth bc some alleles present only in M
+#
 
 sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh *bam .
 
