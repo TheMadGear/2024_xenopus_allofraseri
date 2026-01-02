@@ -1,4 +1,10 @@
 
+
+# job with original folder 6352381
+# job in jade_scripts 6352378
+
+
+
 # maybe need this first?
 ```
 sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh bams_list.txt 
