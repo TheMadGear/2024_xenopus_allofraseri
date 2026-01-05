@@ -11,7 +11,7 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /ho
 
 # human & laevis
 ```
-blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa -outfmt 6 -out human_laev_CDS_depth_pos.txt
+blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out human_laev_CDS_depth_pos.txt
 ```
 
 
