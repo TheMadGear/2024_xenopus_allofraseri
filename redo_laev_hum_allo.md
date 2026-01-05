@@ -32,5 +32,7 @@ cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA
 # one exon per gene (longest)
 # hit to LAEVIS that has longest size
 
+# just for annotation- grab biggest exon from each gene > new file
+
 
 
