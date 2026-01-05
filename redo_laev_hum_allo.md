@@ -18,4 +18,19 @@ blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /ho
 mv human_laev_CDS_depth_pos.txt human_laev_CDS_depth_pos.bed
 ```
 
+# ok
+```
+# copy tx. files to MY folder
+
+cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts* .
+
+```
+# blast XL against human
+
+# exon 1 and exon 2 from 
+# pick longest one
+# one exon per gene (longest)
+# hit to LAEVIS that has longest size
+
+
 
