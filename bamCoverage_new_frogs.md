@@ -21,6 +21,13 @@ for f in /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/*bam; do
 done
 ```
 
+# of course it didn't run them all
+```
+sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh male_Z23738_nobubble_sorted_rg.bam   
+
+sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh female_allo_17A7_nobubble_sorted_rg.bam
+```
+
 
 
 
