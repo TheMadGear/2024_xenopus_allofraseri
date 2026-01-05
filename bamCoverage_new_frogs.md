@@ -1,21 +1,34 @@
-
-
-# job with original folder 6352381
-# job in jade_scripts 6352378
-
-
-
-# maybe need this first?
+# script to move bam files from Ben's folder to /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/
 ```
-sbatch ../../froglady/2024_allo/jade_scripts/samtools_depthpersite.sh bams_list.txt 
+#!/bin/sh
+#SBATCH --job-name=copy_files
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --time=40:00:00
+#SBATCH --mem=16gb
+#SBATCH --output=copy_files.%J.out
+#SBATCH --error=copy_files.%J.err
+#SBATCH --account=rrg-ben
+
+
+cp /home/froglady/projects/rrg-ben/for_jade/2025_allo_bamz/*bam /home/froglady/projects/rrg-ben/for_jade/2025_allo_bamz/*bai /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/
 ```
 
 # use loop to run so many files
 ```
-for f in /home/froglady/projects/rrg-ben/for_jade/2025_allo_bamz/*bam; do
+for f in /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/*bam; do
   sbatch /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/try_bam_coverage.sh ${f} 
 done
 ```
+
+
+
+
+
+
+
+
+
 # with bubbles for depth bc some alleles present only in M
 #
 
