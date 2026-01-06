@@ -28,6 +28,7 @@ cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA
 
 # parse laevis information into columns
 # only using largest exon per gene to get annotation for each gene because length-wise this will be the best match
+# for each UNIQUE laevis gene, extract largest exon
 ```
 column -s "_" -t human_laev_CDS_depth_pos.bed > laev_hum_large_exon.bed
 
