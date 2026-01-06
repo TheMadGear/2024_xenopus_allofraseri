@@ -25,6 +25,15 @@ mv human_laev_CDS_depth_pos.txt human_laev_CDS_depth_pos.bed
 cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts* .
 
 ```
+
+# parse laevis information into columns
+# only using largest exon per gene to get annotation for each gene because length-wise this will be the best match
+```
+column -s "_" -t human_laev_CDS_depth_pos.bed > laev_hum_large_exon.bed
+
+column -s ":" -t laev_hum_large_exon.bed > laev_hum_large.bed
+
+```
 # blast XL against human
 
 # exon 1 and exon 2 from 
