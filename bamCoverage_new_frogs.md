@@ -72,3 +72,20 @@ bamCoverage -b ${1} --outFileFormat bedgraph --binSize 100 --ignoreDuplicates --
 EOF
 
 ```
+
+
+# loop run all files
+```
+for f in ./*bam; do
+  sbatch ./bam_cov.sh ${f} 
+done
+```
+
+
+
+
+
+
+# alternate run:
+# in folder /home/froglady/projects/rrg-ben/froglady/2024_allo/depth_bams/ using bam_cov.sh
+
