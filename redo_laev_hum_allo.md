@@ -35,6 +35,14 @@ column -s "_" -t human_laev_CDS_depth_pos.bed > laev_hum_large_exon.bed
 column -s ":" -t laev_hum_large_exon.bed > laev_hum_large.bed
 
 ```
+
+# currently not working: (out delimiter probably inserts a new delimiter for all columns)
+```
+cut -d "      " -f 8 --output-delimiter "-" laev_hum_large.bed > LH_test.bed
+```
+
+
+
 # blast XL against human
 
 # exon 1 and exon 2 from 
