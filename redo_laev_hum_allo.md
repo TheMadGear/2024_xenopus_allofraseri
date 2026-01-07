@@ -1,4 +1,4 @@
-
+# this mostly takes place in for_jade and associated directories
 
 
 # redo blast to make sure laevis names in each file (laev_hum & laev_allo) match
