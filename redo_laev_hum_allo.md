@@ -41,6 +41,10 @@ column -s ":" -t laev_hum_large_exon.bed > laev_hum_large.bed
 awk '{gsub("-","	",$8)}1' laev_hum_large.bed > LH_test.bed
 ```
 
+# this almost does what I want but only includes col 1-6
+```
+awk 'BEGIN{OFS="_"} {print $1, $2, $3, $4, $5, $6}' LH_test.bed > LH_gene.bed
+```
 
 
 # blast XL against human
