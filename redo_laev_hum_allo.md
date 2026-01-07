@@ -36,9 +36,9 @@ column -s ":" -t laev_hum_large_exon.bed > laev_hum_large.bed
 
 ```
 
-# currently not working: (out delimiter probably inserts a new delimiter for all columns)
+# YEEHOO it replaces the "-" in column 8 (position on chromosome) into 2 columns (start & end- 8 & 9)
 ```
-cut -d "      " -f 8 --output-delimiter "-" laev_hum_large.bed > LH_test.bed
+awk '{gsub("-","	",$8)}1' laev_hum_large.bed > LH_test.bed
 ```
 
 
