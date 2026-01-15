@@ -194,7 +194,10 @@ cut -f 1,2,7,8,12 merged_laev_hum_ann.out > laev_hum_bed.bed
 ```
 
 ```
+# splits laevis information into columns
 sed -i -e 's/|/      /g' copy_merged_laev_hum_ann.out
+# splits gene name from location
+sed -i ’s/://‘ copy_merged_laev_hum_ann.out
 
 ```
 
