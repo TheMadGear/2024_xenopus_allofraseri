@@ -190,8 +190,17 @@ cut -f 1,2,7,8,12 merged_laev_hum_ann.out > laev_hum_bed.bed
 
 # grab list of laev genes & other info
 ```
-cut -f 1 laev_hum_bed.bed
+# cut -f 1 laev_hum_bed.bed
 ```
+
+```
+sed -i -e 's/|/      /g' copy_merged_laev_hum_ann.out
+
+```
+
+
+
+
 # check if laevis gene name matches in each dataset, THEN add human gene name to allo/laev dataset
 ```
 if[no gene name]; then
