@@ -199,7 +199,8 @@ sed -i -e 's/|/      /g' copy_merged_laev_hum_ann.out
 # splits gene name from location
 sed -i ’s/:/	/‘ copy_merged_laev_hum_ann.out
 # splits location into start & stop columns- cols 5 & 6
-sed -i ’s/-/	/‘ copy_merged_laev_hum_ann.out
+# DONT DO THIS not all columns have positions
+# sed -i ’s/-/	/‘ copy_merged_laev_hum_ann.out
 ```
 
 
