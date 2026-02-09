@@ -27,6 +27,10 @@ R
 install.packages("ggplot2", repos = "https://cloud.r-project.org/")
 ```
 
+# exon db won't run
+```
+nohup Rscript ./R_exon_annotation.Rmd &
+```
 
 
 
