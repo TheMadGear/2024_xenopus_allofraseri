@@ -5,7 +5,13 @@
 nohup Rscript ./2025_M_v_F_depth_in_windowz_include_outlierz.R &
 ```
 
+# now try using alliancecan & sbatch
+```
+# 	‘/tmp/RtmpcuzMaL/downloaded_packages’
 
+R
+install.packages("ggplot2", repos = "https://cloud.r-project.org/")
+```
 
 
 
