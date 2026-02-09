@@ -7,6 +7,7 @@ nohup Rscript ./2025_M_v_F_depth_in_windowz_include_outlierz.R &
 
 # now try using alliancecan & sbatch
 ```
+# below code installs pkgs here:
 # 	‘/tmp/RtmpcuzMaL/downloaded_packages’
 
 R
