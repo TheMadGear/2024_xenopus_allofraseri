@@ -32,7 +32,9 @@ install.packages("ggplot2", repos = "https://cloud.r-project.org/")
 nohup Rscript ./R_exon_annotation.Rmd &
 ```
 
-
+```
+nohup Rscript ./ re-annotate.R &
+```
 
 
 
