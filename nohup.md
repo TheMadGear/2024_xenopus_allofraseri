@@ -36,5 +36,40 @@ nohup Rscript ./R_exon_annotation.Rmd &
 nohup Rscript ./ re-annotate.R &
 ```
 
+# AS OF EOD Feb 10:
+
+# annotation:
+```
+# in /Users/jadebohbot
+nohup Rscript ./re-annotate.R &
+```
+
+
+# fix_bam
+
+# script to run R script
+```
+
+#!/bin/sh
+#SBATCH --job-name=rscript
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3-24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=rscript.%J.out
+#SBATCH --error=rscript.%J.err
+#SBATCH --account=rrg-ben
+
+module load StdEnv/2023 r/4.5.0
+
+R CMD BATCH /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/new_2025_M_v_F_depth_in_windowz_include_outlierz.R 
+```
+
+
+
+
+
+
+
 
 
