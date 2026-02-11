@@ -47,6 +47,10 @@ nohup Rscript ./re-annotate.R &
 
 # fix_bam
 
+# script named ./2_run_r.sh
+
+# done in /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/
+
 # script to run R script
 ```
 
