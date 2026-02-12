@@ -57,4 +57,7 @@ awk 'BEGIN{OFS="_"} {print $1, $2, $3, $4, $5, $6}' LH_test.bed > LH_gene.bed
 # just for annotation- grab biggest exon from each gene > new file
 
 
+awk -F'\t' 'BEGIN {OFS = FS} {$1="XBXL10_1g1_LOC108704873_XBmRNA2_XM_041586392.1_Chr1L:55236-55432"; print $0}' human_laev_CDS_depth_pos.bed 
+
+
 
