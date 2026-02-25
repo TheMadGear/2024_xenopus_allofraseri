@@ -26,7 +26,26 @@ cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA
 
 ```
 
-# run R script on compute canada
+# run R script on compute canada- use first script to run second script:
+```
+#!/bin/sh
+#SBATCH --job-name=rscript2_annotate
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3-24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=rscript2.%J.out
+#SBATCH --error=rscript2.%J.err
+#SBATCH --account=rrg-ben
+
+# run with sbatch ./run_annotate.sh
+
+module load StdEnv/2023 r/4.5.0
+
+R CMD BATCH /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate/re-annotate_2.R
+```
+
+
 ```
 library(ggplot2)
 library(MLEcens)
