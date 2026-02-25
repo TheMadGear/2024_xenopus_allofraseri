@@ -1,4 +1,4 @@
-# this mostly takes place in for_jade and associated directories
+# this mostly takes place in for_jade and /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate
 
 
 # redo blast to make sure laevis names in each file (laev_hum & laev_allo) match
