@@ -1,8 +1,11 @@
 # this mostly takes place in for_jade and /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate
 
-
-# redo blast to make sure laevis names in each file (laev_hum & laev_allo) match
 #  XENLA_10.1_Xenbase.transcripts.fa file for XL transcripts matches CDS only fasta
+
+## files:
+## laevis: /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta
+## human: /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable
+## allo: /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable
 
 ## allo & laevis
 ```
