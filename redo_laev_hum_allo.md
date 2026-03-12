@@ -16,9 +16,7 @@ mv allo_CDS_depth_pos.txt allo_CDS_depth_pos.bed
 
 # human & laevis
 ```
-blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out human_laev_CDS_depth_pos.txt
-# change to bed file
-mv human_laev_CDS_depth_pos.txt human_laev_CDS_depth_pos.bed
+blastn -task dc-megablast -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out mega_human_laev_CDS_depth_pos.txt
 ```
 
 # ok
