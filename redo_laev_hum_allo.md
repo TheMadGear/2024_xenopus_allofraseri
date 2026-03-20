@@ -303,3 +303,12 @@ write.table(end_tab, file = "exon_annotation_final.txt", sep = "\t", row.names =
 
 
 
+
+
+
+# fixing directionality of exons after the fact
+```
+# use this in for_jade directory to grab direction of each position, pull into new file, and download to laptop to parse in R
+awk -F "\t" '{print $1, $4, $5, $7}' XENLA_10.1_Xenbase.gtf > gtf_dir.txt
+```
+
