@@ -312,3 +312,13 @@ write.table(end_tab, file = "exon_annotation_final.txt", sep = "\t", row.names =
 awk -F "\t" '{print $1, $4, $5, $7}' XENLA_10.1_Xenbase.gtf > gtf_dir.txt
 ```
 
+# before above need to pull into bash to run in R
+```
+# pull copy of ann_done from R and direc2 from R to bash
+
+# create run_r.sh
+
+# create R_script.R
+
+```
+
