@@ -318,7 +318,66 @@ awk -F "\t" '{print $1, $4, $5, $7}' XENLA_10.1_Xenbase.gtf > gtf_dir.txt
 
 # create run_r.sh
 
-# create R_script.R
+#!/bin/sh
+#SBATCH --job-name=rscript2_dir
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3-24:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=rscript2.%J.out
+#SBATCH --error=rscript2.%J.err
+#SBATCH --account=rrg-ben
+
+module load StdEnv/2023 r/4.5.0
+
+R CMD BATCH /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate/direction.R
+
+```
+
+# create direction.R
+```
+library(ggplot2)
+library(MLEcens)
+library (ggplot2)
+library(tidyverse)
+library(reshape2)
+library(dplyr)
+library(data.table)
+library(tidyr)
+library(ggrepel)
+
+
+ann_done <- /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate/alter_ann_done.txt
+
+direc2 <- /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate/laev_exon_direction.txt
+
+ann_done$dir <- rep(NA, nrow(ann_done))
+
+for(x in 1:nrow(direc2))
+{
+
+  # grabs laev position
+  bee <- direc2[x,1]
+  # grabs direction
+  dir <- direc2[x,2]
+
+  # output is rows that match laev position
+  grepT <- grep(bee, ann_done$laev_full)
+
+  # if/else assigning correct cells
+  if(length(grepT) == 0)
+  {}else{
+
+    # assigns direction to grepped rows
+    ann_done[grepT, "dir"] <- dir
+
+
+    }
+}
+
+
+write.table(ann_done, file = "ann_done_directional.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
+
 
 ```
 
