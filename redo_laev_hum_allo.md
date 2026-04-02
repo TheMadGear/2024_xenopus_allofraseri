@@ -27,6 +27,21 @@ cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA
 
 ```
 
+# to get packages installed do as follows in unix:
+```
+# puts you in R mode
+R
+
+# install with mirror
+install.packages(c("ggplot2", “MLEcens”, “tidyverse”, “reshape2”, “dplyr”, “data.table”, “tidyr”, “ggrepel”), repos = "https://cloud.r-project.org/")
+
+# exit
+q()
+
+# can now run
+```
+
+
 # run R script on compute canada- use first script to run second script:
 ```
 #!/bin/sh
