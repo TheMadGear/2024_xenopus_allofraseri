@@ -38,6 +38,14 @@
 
 # Exosap
 
+1) mix, pipette into original tubes then run on exosap
+* exo1: 0.125
+* fastAP: 1
+* ddH2O
+2) pipette 7 μl product into new tubes (2 tubes, 7 μl each per sample) then add primer and water
+* product: 7
+* F *OR* R
+* ddH2O: 3
 
 
 
