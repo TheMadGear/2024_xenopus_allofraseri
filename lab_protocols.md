@@ -44,7 +44,7 @@
 * ddH2O; 4
 2) pipette 7 μl product into new tubes (2 tubes, 7 μl each per sample) then add primer and water
 * product: 7
-* F *OR* R
+* F *OR* R: 1
 * ddH2O: 3
 
 
