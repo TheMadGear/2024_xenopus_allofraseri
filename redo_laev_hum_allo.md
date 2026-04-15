@@ -396,3 +396,34 @@ write.table(ann_done, file = "ann_done_directional.txt", sep = "\t", row.names =
 
 ```
 
+# did it to the wrong file..... appending
+
+```
+ann <- read.table("/home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate/ann_real.txt", header = T, fill = TRUE)
+
+
+
+ann_dir <- read.table("/home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate/ann_done_directional.txt", header = T, fill = TRUE)
+
+
+for(x in 1:nrow(ann))
+{
+  
+  ind2 <-  which(ann_dir[x,"laev_full"] == ann[,"laev_pos"])
+  
+  ann[ind2,"dir"] <- ann_dir[x, "dir"]
+  
+}
+
+
+
+write.table(ann, file = "ann_done_directional.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
+```
+
+
+
+
+
+
+
+
