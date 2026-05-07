@@ -1,33 +1,30 @@
-# this mostly takes place in for_jade and /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate
+### this mostly takes place in for_jade and /home/froglady/projects/rrg-ben/froglady/2024_allo/new_bam/annotate
 
-#  XENLA_10.1_Xenbase.transcripts.fa file for XL transcripts matches CDS only fasta
+### files:
+### laevis: /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta
+### human: /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable
+### allo: /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable
 
-## files:
-## laevis: /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta
-## human: /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable
-## allo: /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable
-
-## allo & laevis
+### allo & laevis
 ```
 blastn -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta_blastable -outfmt 6 -out allo_CDS_depth_pos.txt
 # change to bed file
 mv allo_CDS_depth_pos.txt allo_CDS_depth_pos.bed
 ```
 
-# human & laevis
+### human & laevis
 ```
 blastn -task dc-megablast -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out mega_human_laev_CDS_depth_pos.txt
 ```
 
-# ok
+### copy tx. files to MY folder
 ```
-# copy tx. files to MY folder
 
 cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts* .
 
 ```
 
-# to get packages installed do as follows in unix:
+### to get packages installed do as follows in unix:
 ```
 # puts you in R mode
 R
@@ -42,7 +39,7 @@ q()
 ```
 
 
-# run R script on compute canada- use first script to run second script:
+### run R script on compute canada- use first script to run second script:
 ```
 #!/bin/sh
 #SBATCH --job-name=rscript2_annotate
@@ -321,13 +318,13 @@ write.table(end_tab, file = "exon_annotation_final.txt", sep = "\t", row.names =
 
 
 
-# fixing directionality of exons after the fact
+### fixing directionality of exons after the fact
 ```
 # use this in for_jade directory to grab direction of each position, pull into new file, and download to laptop to parse in R
 awk -F "\t" '{print $1, $4, $5, $7}' XENLA_10.1_Xenbase.gtf > gtf_dir.txt
 ```
 
-# before above need to pull into bash to run in R
+### before above need to pull into bash to run in R
 ```
 # pull copy of ann_done from R and direc2 from R to bash
 
