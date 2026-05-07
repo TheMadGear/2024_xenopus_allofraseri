@@ -17,7 +17,7 @@ mv allo_CDS_depth_pos.txt allo_CDS_depth_pos.bed
 blastn -task dc-megablast -query /home/froglady/projects/rrg-ben/for_jade/XL_CDS_only.fasta -db /home/froglady/projects/rrg-ben/for_jade/human_transcriptome/gencode.v42.transcripts.fa_blastable -outfmt 6 -out mega_human_laev_CDS_depth_pos.txt
 ```
 
-### copy tx. files to MY folder
+### copy tx. files to MY folder (will not work in for_jade because owned by Ben)
 ```
 
 cp /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase.transcripts* .
