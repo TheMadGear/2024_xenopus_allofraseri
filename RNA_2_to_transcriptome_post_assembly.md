@@ -1,19 +1,23 @@
-## index with bwa-mem
+### mostly done with this:
+#### /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome
+
+
+### index with bwa-mem
 ```
 screen -S bwa_index -L
 bwa index allo_trinity_assembly.Trinity.fasta
 ```
-## create .fai file?
+### create .fai file?
 ```
  samtools faidx allo_trinity_assembly.Trinity.fasta
 ```
 
-## map to transcriptome with bwa-mem
-# bwa_mem.sh is in transcriptome directory
+### map to transcriptome with bwa-mem
+### bwa_mem.sh is in transcriptome directory
 
 currently going off of these instructions: https://angus.readthedocs.io/en/2013/rnaseq_bwa.html
 
-## map cutadapt-trimmed RNAseq files to transcriptome with bwa-mem
+### map cutadapt-trimmed RNAseq files to transcriptome with bwa-mem
 ```
 #!/bin/sh
 #SBATCH --job-name=bwa_align
@@ -46,7 +50,7 @@ done
 
 ```
 
-## then use picard to create .dict file
+### then use picard to create .dict file
 ```
 #!/bin/sh
 #SBATCH --job-name=picard_dict_fai
@@ -70,7 +74,7 @@ samtools faidx ${1}.fa
 java -jar $EBROOTPICARD/picard.jar CreateSequenceDictionary REFERENCE=${1}.fa.gz OUTPUT=${1}.dict
 ```
 
-## use picard to add readgroups
+### use picard to add readgroups
 ```
 
 # run with sbatch ./picard_readgroups.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/
@@ -96,9 +100,8 @@ do
 done
 ```
 
-## DO NOT deduplicate 
-
-## haplotype caller
+### DO NOT deduplicate 
+### haplotype caller
 ```
 #!/bin/sh
 #SBATCH --job-name=HaplotypeCaller
@@ -126,8 +129,8 @@ done
 ```
 
 
-## combine GVCFs using DBI or GATK
-## first, create bed file from genome dictionary file for contigs & contig length
+### combine GVCFs using DBI or GATK
+### first, create bed file from genome dictionary file for contigs & contig length
 ```
 cut -f2,3 allo_trinity_assembly.Trinity.dict > allo_transcript_contigs.bed
 sed -i -e 's/SN://g'  allo_transcript_contigs.bed
@@ -135,12 +138,12 @@ sed -i -e 's/ LN:/ 1 /g' allo_transcript_contigs.bed
 vi allo_transcript_contigs.bed # remove first line
 ```
 
-# split into for so combine/genotype works
+### split into for so combine/genotype works
 ```
 split -n 10 -d allo_transcript_contigs.bed  RNA_transcript
 ```
 
-# add .bed suffix
+### add .bed suffix
 ```
 for f in  RNA_transcript0*;
 do 
