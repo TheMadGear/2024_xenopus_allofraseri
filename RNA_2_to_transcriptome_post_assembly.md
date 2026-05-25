@@ -162,6 +162,10 @@ mkdir new_temp_dir0
 sbatch ./DBI_GVCF_import_RNA_tx.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/allo_trinity_assembly.Trinity.fasta /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/ /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/RNA_transcript00.bed /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/new_temp_dir0/ db_temp_dir0
 
 ```
+# running combine GVCFs again
+```
+sbatch ./DBI_GVCF_import_RNA_tx.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/allo_trinity_assembly.Trinity.fasta /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/ /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/RNA_transcript00.bed /home/froglady/projects/rrg-ben/froglady/2024_allo/jade_scripts/newly/ newlynewly
+```
 
 # above script (DBI_GVCF_import_RNA_tx.sh)
 ```
