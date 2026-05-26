@@ -212,6 +212,53 @@ sed -i -e 's/ LN:/ 1 /g' allo_genome_contigs.bed
 vi allo_genome_contigs.bed # remove first line
 ```
 
+# DBI COMBINE DOUBLE CHECK ?
+```
+#!/bin/sh
+#SBATCH --job-name=STAR_GenomicsDBImport
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3-12:00:00
+#SBATCH --mem=24gb
+#SBATCH --output=STAR_GenomicsDBImport.%J.out
+#SBATCH --error=STAR_GenomicsDBImport.%J.err
+#SBATCH --account=rrg-ben
+
+
+# This script will read in the *.g.vcf file names in a directory, and 
+# make and execute the GATK command "GenotypeGVCFs" on these files. 
+
+
+# jade execution:
+# sbatch ./STAR_DBI_import.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/ /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_genome_contigs.bed /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/ genome_temp_db
+
+# args:
+# genome ref assembly
+	# /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta
+# path to GVCF files (only path)
+	# /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/
+# bed file- make NEW GENOME bed file
+	#/home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo_genome_contigs.bed
+# temporary directory path
+	# /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI
+# database path and directory prefix (non-existent or empty directory)
+	# genome_temp_db
+
+module load nixpkgs/16.09 gatk/4.1.0.0
+
+commandline="gatk --java-options -Xmx20G GenomicsDBImport -R ${1}"
+for file in ${2}/*_ssecond_rg.bam_allchrs.g.vcf
+do
+    commandline+=" -V ${file}"
+done
+# split job up into multiple bed files if it won't finish but need to rename temp files and directories
+commandline+=" -L ${3} --tmp-dir=${4} --batch-size 50 --genomicsdb-workspace-path ${4}${5}"
+ # does loop just run, but commandline is only run for the last sample?
+${commandline}
+```
+
+
+
 # run DBI genotype gvcf
 ```
 #!/bin/sh
