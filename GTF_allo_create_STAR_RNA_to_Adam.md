@@ -308,6 +308,7 @@ ${commandline}
 # execute like this:
 # sbatch variant_filter_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/_out.vcf
 
+# NEW
 # sbatch ./variant_filter_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/temp1/help1help2_out.vcf
 
 
@@ -345,6 +346,9 @@ gatk --java-options -Xmx8G VariantFiltration -V ${1}\
 
 # execute like this:
 # sbatch ./select_variants_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/empty_DBI/genome_temp_db/_out.vcf_filtered.vcf.gz
+
+# NEW
+# sbatch ./select_variants_DNA_to_DNA.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/temp1/help1help2_out.vcf_filtered.vcf.gz
 
 module load nixpkgs/16.09 gatk/4.1.0.0
 
