@@ -158,3 +158,7 @@ do
 
 done
 ```
+
+```
+ls -1 *secondAligned.sortedByCoord.out.bam_rg.bam.gtf > list_gtf.txt
+```
