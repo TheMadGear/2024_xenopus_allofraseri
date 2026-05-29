@@ -128,3 +128,33 @@ STAR --runMode alignReads \
      --outSAMattributes Standard
 done
 ```
+
+```
+sbatch ./stringtie.sh /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/
+```
+
+```
+#!/bin/sh
+#SBATCH --job-name=stringtie_gtf
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=stringtie_gtf.%J.out
+#SBATCH --error=stringtie_gtf.%J.err
+#SBATCH --account=rrg-ben
+
+
+# run with
+# sbatch ./stringtie.sh dir_name
+
+module load StdEnv/2023 stringtie/3.0.1
+
+
+for file in ${1}/*secondAligned.sortedByCoord.out.bam_rg.bam
+do
+
+	stringtie ${file} -o ${file}.gtf
+
+done
+```
