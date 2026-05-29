@@ -162,3 +162,22 @@ done
 ```
 ls -1 *secondAligned.sortedByCoord.out.bam_rg.bam.gtf > list_gtf.txt
 ```
+
+### now merge her.....
+```
+#!/bin/sh
+#SBATCH --job-name=stringtie_merge
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3:00:00
+#SBATCH --mem=8gb
+#SBATCH --output=stringtie_merge.%J.out
+#SBATCH --error=stringtie_merge.%J.err
+#SBATCH --account=rrg-ben
+
+module load StdEnv/2023 stringtie/3.0.1
+
+
+stringtie --merge -o RNA_to_genome.gtf /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/list_gtf.txt
+
+```
