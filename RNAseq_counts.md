@@ -181,3 +181,40 @@ module load StdEnv/2023 stringtie/3.0.1
 stringtie --merge -o RNA_to_genome.gtf /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/list_gtf.txt
 
 ```
+
+## and now we COUNT
+### runs each file through featureCounts script
+```
+for file in /home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/*secondAligned.sortedByCoord.out.bam_rg.bam
+do
+	sbatch ./feature_counts.sh ${file} ${file::-28}_COUNTS
+done
+```
+
+### the script itself
+```
+#!/bin/sh
+#SBATCH --job-name=featureCounts
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=3:00:00
+#SBATCH --mem=4Gb
+#SBATCH --output=featureCounts.%J.out
+#SBATCH --error=featureCounts.%J.err
+#SBATCH --account=rrg-ben
+
+# sbatch ./feature_counts.sh inputbam output_counts
+
+module load samtools/1.22.1 subread/2.0.6
+module load StdEnv/2023 star/2.7.11b
+
+# must use -s 0 because the data are unstranded
+# must use -p because the data are paired
+# use --countReadPairs to count read pairs instead of reads
+# use -C to prevent counting of chimeric reads
+# -T is the number of threads
+featureCounts -T 4 -s 0 -p --countReadPairs -C \
+  -a/home/froglady/projects/rrg-ben/froglady/2024_allo/transcriptome/DNA_files/RNA_to_genome.gtf \
+  -o ${2} \
+  ${1}
+```
