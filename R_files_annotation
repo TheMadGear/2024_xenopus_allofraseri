@@ -1,0 +1,2680 @@
+# below is the one for editing (in R)
+
+
+
+
+# NEW ONE for depth is called 29_bamFiles.Rmd
+
+# NEW ONE for annotation is called re-annotate.R, up-to-date copy on comp canada
+
+
+
+# plot annotated coloured contigs and plot duplicated exons separately
+
+# gtf
+# use star, map to reference genome TWICE
+# each RNAseq file, 10 maps, maps reads using STAR
+# define coordinates where it maps
+
+
+# why 6777 missing points
+# keep any exon that is within or overlaps the coverage window
+# look at exons that overlap with high depth windows
+# across whole genome
+
+```{r}
+library(ggplot2)
+#install.packages("MLEcens")
+library(MLEcens)
+```
+```{r}
+library (ggplot2)
+library(tidyverse)
+library(reshape2)
+
+#setwd("/Users/jadebohbot/Downloads/Masters_Documents/Depth")
+```
+
+
+# Reading in data/setting up dataframe!
+
+
+# oh goodness new data read-in!!!
+```{r}
+
+# ladies first :)
+
+F_17A7 <- read.table("/Users/jadebohbot/female_allo_17A7_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_17A7) <- c("contig","start","stop","F_17A7")
+
+std_1 <- sd(F_17A7$F_17A7, na.rm = TRUE)
+F_17A7$F_17A7 <- sapply(F_17A7$F_17A7,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_17AB <- read.table("/Users/jadebohbot/female_allo_17AB_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_17AB) <- c("contig","start","stop","F_17AB")
+
+std_1 <- sd(F_17AB$F_17AB, na.rm = TRUE)
+F_17AB$F_17AB <- sapply(F_17AB$F_17AB,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_17C2 <- read.table("/Users/jadebohbot/female_allo_17C2_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_17C2) <- c("contig","start","stop","F_17C2")
+
+std_1 <- sd(F_17C2$F_17C2, na.rm = TRUE)
+F_17C2$F_17C2 <- sapply(F_17C2$F_17C2,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+#"~/female_allo_17E2_nobubble_sorted_rg.bam_bamCoverage.bw"
+
+F_17E2 <- read.table("/Users/jadebohbot/female_allo_17E2_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_17E2) <- c("contig","start","stop","F_17E2")
+
+std_1 <- sd(F_17E2$F_17E2, na.rm = TRUE)
+F_17E2$F_17E2 <- sapply(F_17E2$F_17E2,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_BJE3487 <- read.table("/Users/jadebohbot/female_BJE3487_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_BJE3487) <- c("contig","start","stop","F_BJE3487")
+
+std_1 <- sd(F_BJE3487$F_BJE3487, na.rm = TRUE)
+F_BJE3487$F_BJE3487 <- sapply(F_BJE3487$F_BJE3487,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_BJE3488 <- read.table("/Users/jadebohbot/female_BJE3488_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_BJE3488) <- c("contig","start","stop","F_BJE3488")
+
+std_1 <- sd(F_BJE3488$F_BJE3488, na.rm = TRUE)
+F_BJE3488$F_BJE3488 <- sapply(F_BJE3488$F_BJE3488,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_BJE3501 <- read.table("/Users/jadebohbot/female_BJE3501_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_BJE3501) <- c("contig","start","stop","F_BJE3501")
+
+std_1 <- sd(F_BJE3501$F_BJE3501_depth, na.rm = TRUE)
+F_BJE3501$F_BJE3501 <- sapply(F_BJE3501$F_BJE3501,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+F_BJE3502 <- read.table("/Users/jadebohbot/female_BJE3502_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_BJE3502) <- c("contig","start","stop","F_BJE3502")
+
+std_1 <- sd(F_BJE3502$F_BJE3502, na.rm = TRUE)
+F_BJE3502$F_BJE3521 <- sapply(F_BJE3502$F_BJE3502,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_camF1 <- read.table("/Users/jadebohbot/female_camF1_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_camF1) <- c("contig","start","stop", "F_camF1")
+
+std_1 <- sd(F_camF1$F_camF1, na.rm = TRUE)
+F_camF1$F_camF1 <- sapply(F_camF1$F_camF1,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+F_Z23698 <- read.table("/Users/jadebohbot/female_Z23698_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_Z23698) <- c("contig","start","stop", "F_Z23698")
+
+std_1 <- sd(F_Z23698$F_Z23698, na.rm = TRUE)
+F_Z23698$F_Z23698 <- sapply(F_Z23698$F_Z23698,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_Z23702 <- read.table("/Users/jadebohbot/female_Z23702_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_Z23702) <- c("contig","start","stop", "F_Z23702")
+
+std_1 <- sd(F_Z23702$F_Z23702_depth, na.rm = TRUE)
+F_Z23702$F_Z23702 <- sapply(F_Z23702$F_Z23702,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_Z23721 <- read.table("/Users/jadebohbot/female_Z23721_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_Z23721) <- c("contig","start","stop", "F_Z23721")
+
+std_1 <- sd(F_Z23721$F_Z23721, na.rm = TRUE)
+F_Z23721$F_Z23721 <- sapply(F_Z23721$F_Z23721,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+
+F_Z23726 <- read.table("/Users/jadebohbot/female_Z23726_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_Z23726) <- c("contig","start","stop", "F_Z23726")
+
+std_1 <- sd(F_Z23726$F_Z23726, na.rm = TRUE)
+F_Z23726$F_Z23726 <- sapply(F_Z23726$F_Z23726,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+F_Z23732 <- read.table("/Users/jadebohbot/female_Z23732_nobubble_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_Z23732) <- c("contig","start","stop", "F_Z23732")
+
+std_1 <- sd(F_Z23732$F_Z23732, na.rm = TRUE)
+F_Z23732$F_Z23732 <- sapply(F_Z23732$F_Z23732,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+F_Z23733 <- read.table("/Users/jadebohbot/female_Z23733_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(F_Z23733) <- c("contig","start","stop", "F_Z23733")
+
+std_1 <- sd(F_Z23733$F_Z23733, na.rm = TRUE)
+F_Z23733$F_Z23733 <- sapply(F_Z23733$F_Z23733,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+
+
+# THE BOYSSSSSSS
+
+M_17A1 <- read.table("/Users/jadebohbot/male_allo_17A1_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_17A1) <- c("contig","start","stop", "M_17A1")
+
+std_1 <- sd(M_17A1$M_17A1, na.rm = TRUE)
+M_17A1$M_17A1 <- sapply(M_17A1$M_17A1,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_18A1 <- read.table("/Users/jadebohbot/male_allo_18A1_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_18A1) <- c("contig","start","stop", "M_18A1")
+
+std_1 <- sd(M_18A1$M_18A1, na.rm = TRUE)
+M_18A1$M_18A1 <- sapply(M_18A1$M_18A1,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_18AF <- read.table("/Users/jadebohbot/male_allo_18AF_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_18AF) <- c("contig","start","stop", "M_18AF")
+
+std_1 <- sd(M_18AF$M_18AF, na.rm = TRUE)
+M_18AF$M_18AF <- sapply(M_18AF$M_18AF,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_190F <- read.table("/Users/jadebohbot/male_allo_190F_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_190F) <- c("contig","start","stop", "M_190F")
+
+std_1 <- sd(M_190F$M_190F, na.rm = TRUE)
+M_190F$M_190F <- sapply(M_190F$M_190F,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_1873 <- read.table("/Users/jadebohbot/male_allo_1873_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_1873) <- c("contig","start","stop", "M_1873")
+
+std_1 <- sd(M_1873$M_1873, na.rm = TRUE)
+M_1873$M_1873 <- sapply(M_1873$M_1873,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_1876 <- read.table("/Users/jadebohbot/male_allo_1876_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_1876) <- c("contig","start","stop", "M_1876")
+
+std_1 <- sd(M_1876$M_1876, na.rm = TRUE)
+M_1876$M_1876 <- sapply(M_1876$M_1876,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_BJE3485 <- read.table("/Users/jadebohbot/male_BJE3485_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_BJE3485) <- c("contig","start","stop", "M_BJE3485")
+
+std_1 <- sd(M_BJE3485$M_BJE3485, na.rm = TRUE)
+M_BJE3485$M_BJE3485 <- sapply(M_BJE3485$M_BJE3485,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_BJE3486 <- read.table("/Users/jadebohbot/male_BJE3486_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_BJE3486) <- c("contig","start","stop", "M_BJE3486")
+
+std_1 <- sd(M_BJE3486$M_BJE3486, na.rm = TRUE)
+M_BJE3486$M_BJE3486 <- sapply(M_BJE3486$M_BJE3486,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_BJE3495 <- read.table("/Users/jadebohbot/male_BJE3495_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_BJE3495) <- c("contig","start","stop", "M_BJE3495")
+
+std_1 <- sd(M_BJE3495$M_BJE3495, na.rm = TRUE)
+M_BJE3495$M_BJE3495 <- sapply(M_BJE3495$M_BJE3495,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+M_BJE3496 <- read.table("/Users/jadebohbot/male_BJE3496_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_BJE3496) <- c("contig","start","stop", "M_BJE3496")
+
+std_1 <- sd(M_BJE3496$M_BJE3496, na.rm = TRUE)
+M_BJE3496$M_BJE3496 <- sapply(M_BJE3496$M_BJE3496,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_camM5 <- read.table("/Users/jadebohbot/male_camM5_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_camM5) <- c("contig","start","stop", "M_camM5")
+
+std_1 <- sd(M_camM5$M_camM5, na.rm = TRUE)
+M_camM5$M_camM5 <- sapply(M_camM5$M_camM5,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+M_Z23701 <- read.table("/Users/jadebohbot/male_Z23701_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_Z23701) <- c("contig","start","stop", "M_Z23701")
+
+std_1 <- sd(M_Z23701$M_Z23701, na.rm = TRUE)
+M_Z23701$M_Z23701 <- sapply(M_Z23701$M_Z23701,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_Z23739 <- read.table("/Users/jadebohbot/male_Z23739_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_Z23739) <- c("contig","start","stop", "M_Z23739")
+
+
+std_1 <- sd(M_Z23739$M_Z23739, na.rm = TRUE)
+M_Z23739$M_Z23739 <- sapply(M_Z23739$M_Z23739,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+M_Z23738 <- read.table("/Users/jadebohbot/male_Z23738_sorted_rg.bam_bamCoverage.bw", header = F)
+colnames(M_Z23738) <- c("contig","start","stop", "M_Z23738")
+
+std_1 <- sd(M_Z23738$M_Z23738, na.rm = TRUE)
+M_Z23738$M_Z23738 <- sapply(M_Z23738$M_Z23738,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+
+
+# remove outliers
+# join
+
+
+
+
+```
+
+```{r}
+library(dplyr)
+
+# ladies first!
+a <-  full_join(F_17A7, F_17AB, by = c('contig'='contig', 'start'='start', 'stop'='stop')) 
+
+b <- full_join(a, F_17C2, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+c <- full_join(b, F_17E2, by = c('contig'='contig', 'start'='start', 'stop'='stop')) 
+
+d <- full_join(c, F_BJE3487, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+e <- full_join(d, F_BJE3488, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+f <- full_join(e, F_BJE3501, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+g <- full_join(f, F_BJE3502, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+h <- full_join(g, F_camF1, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+i <- full_join(h, F_Z23702, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+j <- full_join(i, F_Z23721, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+k <- full_join(j, F_Z23726, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+l <- full_join(k, F_Z23732, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+m <- full_join(l, F_Z23733, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+all_girls <- m
+
+# now the boys......
+
+a <-  full_join(M_17A1, M_1873, by = c('contig'='contig', 'start'='start', 'stop'='stop')) 
+
+b <- full_join(a, M_1876, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+c <- full_join(b, M_18A1, by = c('contig'='contig', 'start'='start', 'stop'='stop')) 
+
+d <- full_join(c, M_18AF, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+e <- full_join(d, M_190F, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+f <- full_join(e, M_BJE3485, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+g <- full_join(f, M_BJE3486, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+h <- full_join(g, M_BJE3495, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+i <- full_join(h, M_BJE3496, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+j <- full_join(i, M_camM5, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+k <- full_join(j, M_Z23701, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+l <- full_join(k, M_Z23739, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+m <- full_join(l, M_Z23738, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+all_boys <- m
+
+
+
+all_frogs <- full_join(all_boys, all_girls, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+```
+
+
+
+
+
+
+```{r}
+# gets female average, male average and M-F 
+# then removes
+
+all_frogs$female_av <- rowMeans(all_frogs[18:32], na.rm = TRUE)
+  
+all_frogs$male_av <- rowMeans(all_frogs[4:17], na.rm = TRUE)
+
+all_frogs$M_F_dif <- all_frogs$male_av - all_frogs$female_av
+
+
+
+```
+
+
+
+
+```{r}
+# gets averages for male & female per position
+
+all_frogs$female_av <- rowMeans(all_frogs[18:32], na.rm = TRUE)
+  
+all_frogs$male_av <- rowMeans(all_frogs[4:17], na.rm = TRUE)
+
+
+```
+
+
+
+
+
+
+```{r}
+# full scale with very low depth position
+ggplot(frog_av, aes(x = M_F_dif)) +
+  geom_histogram(bins = 3000) + 
+  geom_vline(xintercept = -0.1489561 , color = "hotpink") +
+  geom_vline(xintercept = 0.2151511 , color = "dodgerblue")
+```
+
+```{r}
+# only shows middle
+ggplot(frog_av, aes(x = M_F_dif)) +
+  geom_histogram(bins = 1000) + 
+  geom_vline(xintercept = -0.1489561 , color = "hotpink") +
+  geom_vline(xintercept = 0.2151511 , color = "dodgerblue") +
+  xlim(-0.15, 0.15) +
+  ylim(0, 1000)
+```
+
+```{r}
+
+
+
+boy_highs <- subset(all_frogs, M_F_dif > 0.2151511)
+
+girl_lows <- subset(all_frogs, M_F_dif < -0.1489561)
+
+girl_boy_ext <- rbind(boy_highs, girl_lows)
+
+
+
+
+```
+
+
+``` {r}
+
+# girl_boy_ext <- full_join(girl_lows, boy_highs, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+max(all_frogs$M_F_dif, na.rm = TRUE)
+min(all_frogs$M_F_dif, na.rm = TRUE)
+
+# gets unique contigs with high/low positions
+
+# change this so it includes depth values
+unique_high_low <- c(unique(boy_highs$contig), unique(girl_lows$contig))
+
+
+boy_tig <- unique(boy_highs$contig)
+girl_tig <- unique(girl_lows$contig)
+
+#high_tigs <- subset(all_frogs, contig = boy_tig[1:10,])
+
+n <- nrow(boy_highs) + nrow(girl_lows)
+
+extreme_pos <- data.frame(contig = c(), start = c(), stop = c(), M_F_dif = c())
+
+for(x in 1:nrow(boy_highs))
+{
+  this_round <- subset(all_frogs, contig == boy_highs[1,x], select = c(contig, start, stop, M_F_dif))
+  
+  extreme_pos <- rbind(extreme_pos, this_round)
+  
+}
+
+
+
+# beautiful execution
+extreme_pos <- extreme_pos[complete.cases(extreme_pos),]
+
+tail(extreme_pos)
+```
+
+
+
+
+```{r}
+
+# reading in and rearranging dataset
+# ann <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/CDS_switched_allo_ordered_contigs.bed", header = F, fill = TRUE)
+
+ann <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/allo_depth_pos.txt", header = F, fill = TRUE)
+
+
+
+# fix column datatype
+ann$V1 <-as.factor(ann$V1)
+ann$V2 <- as.numeric(ann$V2)
+ann$V5 <- as.factor(ann$V5)
+
+# rename columns
+colnames(ann) <- c("contigs", "start", "stop", "laev", "direction")
+
+
+
+```
+
+``` {r}
+
+
+# switches bed start & stop
+unique(ann$start < ann$stop)
+
+levels(ann$direction) <- c("+", "-")
+
+neg_vec <- ann$start < ann$stop
+
+which_neg <- which(neg_vec == FALSE)
+
+# subset of only negative values
+neg_ann <- subset(ann, subset = neg_vec)
+
+# woahhhhh does this work? IT WORKKKKKSSSSSSS
+  stemp <- ann[which_neg,2]
+  etemp <- ann[which_neg,3]
+  # switch column values
+  ann[which_neg,3] <- stemp
+  ann[which_neg,2] <- etemp
+  
+  unique(ann$start < ann$stop)
+  
+```
+
+```{r}
+# write a function that writes a graph so can automatically do each graph in one line with contigs as args
+# first arg is the tig name (in quotes)
+tig_graph <- function(tig)
+{
+
+# GRABBING EXONS
+  # subset exon positions from ONLY contig of interest
+c1724_exons <- subset(ann, contigs == tig)
+
+ordered_ex <- c1724_exons[order(c1724_exons$start),]
+
+# depth data
+c1724_depth <- subset(all_frogs, contig == tig)
+
+rexon <- ordered_ex[ , c(2, 3)]
+rexon[,3] <- rep(-2.5, nrow(rexon))
+rexon[,4] <- rep(-2.4, nrow(rexon))
+rexon <- as.data.frame(rexon)
+colnames(rexon) <- c("x1", "x2", "y1", "y2")
+
+# SUBSETTING ???
+  
+contig <- subset(ann, contigs == tig)
+
+# depth data
+contig_depth <- subset(all_frogs, contig == tig)
+
+# MAKING GRAPH
+  # plot
+ggplot() +
+  geom_point(contig_depth, mapping = aes(x = contig_depth$start, y = contig_depth$M_F_dif)) +
+  xlab("Position in Contig (Mb)") +
+  ylab("Av. M-F Depth") +
+geom_rect(data = rexon, mapping = aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), fill = "darkgreen")
+
+}
+
+
+```
+
+```{r}
+
+unique(girl_boy_ext$contig)
+
+head(order(girl_boy_ext$M_F_dif))
+
+girl_boy_ext[95,]
+
+```
+
+
+
+```{r}
+jpeg("./tig00000697_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00000697")
+dev.off()
+
+# top 3 male
+
+jpeg("./tig00007285_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00007285")
+dev.off()
+
+jpeg("./tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./tig00009533_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009533")
+dev.off()
+
+
+
+
+# putative sex chromosome
+jpeg("./tig00006777_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00006777")
+dev.off()
+
+
+#tig00006777
+```
+
+
+
+##############
+
+# this bit parses the laevis/human file
+```{r}
+#laev_hum <- read.table("/Users/jadebohbot/copy_merged_laev_hum_ann.out", header = F, fill = TRUE)
+#head(laev_hum)
+
+library(dplyr)
+
+#laev_hum <- read.table("/Users/jadebohbot/LH_test.bed", header = F, fill = TRUE)
+
+#tail(laev_hum)
+
+
+#laev_hum$V8 <- as.numeric(laev_hum$V8)
+#laev_hum$V9 <- as.numeric(laev_hum$V9)
+
+#laev_hum$ex_length <- (laev_hum$V9 - laev_hum$V8)
+
+
+
+
+
+#rename(laev_hum, c("V3"="gene_name", "V7"="chrom", "V8"="L_start", "V9"="L_stop"))
+
+
+
+#LH_small <- laev_hum[,c(3,7:9,22,1:2,4:6,10:21)]
+
+#colnames(LH_small) <- c("gene", "chrom", "L_start", "L_stop", "ex_length")
+#LH_small$ex_length
+
+
+```
+
+
+```{r}
+# retry unparsed file 
+
+L_H <- read.table("/Users/jadebohbot/human_laev_CDS_depth_pos.bed", header = F, fill = TRUE)
+A_L <- read.table("/Users/jadebohbot/allo_CDS_depth_pos.bed", header = F, fill = TRUE)
+
+
+head(L_H$V1)
+
+V3 <- as.numeric(L_H$V3)
+```
+
+
+
+```{r}
+laev_split <- str_split_fixed(L_H$V1, "_", 7)
+LH_sp <- cbind(laev_split, L_H)
+colnames(LH_sp) <- c("L1", "L2", "gene_laev", "L3", "L4", "L5", "L6")
+
+l_split <- str_split_fixed(LH_sp$L6, ":", 2)
+
+lh_new <- cbind(l_split, LH_sp)
+
+colnames(lh_new) <- c("chrom", "pos")
+
+lsplit <- str_split_fixed(lh_new$pos, "-", 2)
+
+newL <- cbind(lsplit, lh_new)
+
+colnames(newL) <- c("L_start", "L_stop", "chrom", "pos", "laev1", "laev2", "gene_name", "laev3", "laev4", "laev5", "laev6", "laev_full", "human", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+
+newL$L_start <- as.numeric(newL$L_start)
+newL$L_stop <- as.numeric(newL$L_stop)
+
+
+newL$ex_length <- newL$L_stop - newL$L_start
+
+newL
+
+```
+
+
+
+# same exons
+```{r}
+# loop through unique gene names
+
+
+my_df <- data.frame(gene = c(), chrom = c(), L_start = c(), L_stop = c(), ex_length = c(), V1 = c(), V2 = c(), v4 = c(), v5 = c(), v6 = c(), v10 = c(), v11 = c(), v12 = c(), v13 = c(), v14 = c(), v15 = c(), v16 = c(), v17 = c(), v18 = c(), v19 = c(), v20 = c(), v21 = c())
+
+unq_gene <- unique(newL$gene_name)
+
+
+write.table(sub, file = "example_hum_laev_filter.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
+
+
+```
+
+
+
+
+```{r}
+
+# break up human columns, grab acronym
+# take whatever gene acronym most frequent
+# acronym per exon, smush together to make one representative exon
+# don't fuse the L and S copies
+
+
+# splits human info into columns
+try_spl <- str_split_fixed(newL$human, "\\|", 8)
+try_spl <- as.data.frame(try_spl)
+
+hum_ann <- cbind(try_spl, newL)
+
+# rename V1-V8
+
+colnames(hum_ann) <- c("H_trancript", "H_gene", "H_ortho_g", "H_ortho_t", "tx_name", "H_gene_name", "unknown", "function", "L_start", "L_stop", "chrom", "pos", "laev1", "laev2", "gene_name", "laev3", "laev4", "laev5", "laev6", "laev_full", "human", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+
+```
+
+```{r}
+# loop through unique gene names
+
+# break up human columns, grab acronym
+# take whatever gene acronym most frequent
+# acronym per exon, smush together to make one representative exon
+# don't fuse the L and S copies- if == need to maintain case and L/S vs human with no L/S- split L & S to new column
+
+# convert each hum & laev gene name to all lowercase
+hum_ann$gene_name <- str_to_upper(hum_ann$gene_name)
+hum_ann$H_gene_name <- str_to_upper(hum_ann$H_gene_name)
+
+
+#my_df <- data.frame()
+#colnames(my_df) <- c("H_trancript", "H_gene", "H_ortho_g", "H_ortho_t", "tx_name", "gene_name", "unknown", "function", "L_start", "L_stop", "chrom", "pos", "laev1", "laev2", "gene_name", "laev3", "laev4", "laev5", "laev6", "laev_full", "human", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+
+
+# gets rid of L/S ENDING
+# split at .
+L_S <- as.data.frame(str_split_fixed(hum_ann$gene_name, "\\.", 2))
+
+hum_ann$gene_name <- L_S$V1
+
+hum_ann <- cbind(L_S$V2, hum_ann)
+
+names(hum_ann)[names(hum_ann) == "L_S$V2"] <- "LS_subgenome"
+
+# DOUBLE make sure capslock is equivalent
+
+
+unq_gene <- unique(hum_ann$gene_name)
+head(unq_gene)
+x <- 40
+
+
+# i want all the blast information, human_gene, laev_gene, laev_start, laev_stop
+end_dat <- data.frame()
+
+# have to check unique blast info
+
+final_laev <- data.frame(H_gene_name = c(), L_start = c(), L_stop = c(), L_chrom = c(), L_gene_name = c(), L_full = c())
+
+
+
+unq <- unique(hum_ann$laev_full)
+
+```
+
+```{r}
+
+# WORKING COPY !!!@
+
+
+# probably put another loop around this to make sure it does it for each exon
+final_laev <- data.frame(H_gene_name = c(), L_start = c(), L_stop = c(), L_chrom = c(), L_gene_name = c(), L_full = c(), L_S = c())
+
+unq <- unique(hum_ann$laev_full)
+
+    # THIS is IMPORTANT bit, I think can be adapted to just run this
+    for(z in 1:length(unique(hum_ann$laev_full)))
+    {
+      
+  # subsets 1 laev exon and gets index & unique human gene names
+  sub <- subset(hum_ann, laev_full == unq[z])
+  
+  
+
+      
+      
+  # subset each unique exon into separate dataframe
+  sub1 <- subset(hum_ann, laev_full == unq[z]) 
+  
+  # subsets hum/laev to get best pident & length
+  max_pid <- subset(sub1, pident == max(pident))
+  max_len <- subset(max_pid, length == max(length))  
+  # which(max_len$laev_full == unq[z])
+  n_gene <- nrow(max_len)
+
+  # concats human gene names if multiple
+  hum_gene <- unique(hum_ann[n_gene,"H_gene_name"])
+  squish <- paste(hum_gene, collapse = "_")
+  squish1 <- rep(squish, n_gene)
+    
+  # dataframe to concat
+    sub_df <- data.frame(H_gene_name = c(squish1), L_start = c(max_len[,"L_start"]), L_stop = c(max_len[,"L_stop"]), L_chrom = c(max_len[,"chrom"]), L_gene_name = c(max_len[,"gene_name"]), L_full = c(max_len[,"laev_full"]), L_S = c(max_len[,"LS_subgenome"]))
+    
+  final_laev <- rbind(final_laev, sub_df)
+    
+    }
+
+    
+    final_laev
+
+```
+
+```{r}
+# need to check if human gene name for each laev_full is the same
+```
+
+```{r}
+# check how many LOC uncharacterized before this
+
+LOC <- str_extract(final_laev$L_gene_name, "LOC")
+class(LOC)
+length(which(LOC == "LOC"))
+
+```
+
+
+```{r}
+# A_L PARSING HERE
+
+# make sure laev_full matches
+
+
+colnames(A_L) <- c("laev_full", "allo_tig", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+
+length(unique(A_L$laev_full))
+
+length(unique(final_laev$L_full))
+
+AL_now_laev <- unique(A_L$laev_full)
+
+LH_now_laev <- unique(final_laev$L_full)
+
+#sub1 <- subset(final_laev, L_full == now_laev[2])
+#sub2 <-subset(A_L, laev_full == AL_now_laev[2])
+
+LHA_ann <- data.frame(allo_tig = c(), sstart = c(), send = c(), laev_full = c(), H_gene_name = c())
+#colnames(LHA_ann) <- c("allo_tig", "sstart", "send", "AL_pident", "H_gene_name")
+
+# loops through each unique laev_full info
+#
+
+#missed_AL <- AL_now_laev[x] %in% A_L
+#missed_HL <-  subset(final_laev, L_full == AL_now_laev[1])
+
+for(x in 1:length(unique(A_L$laev_full)))
+{
+  #rm(final_allo) # TRY USING THIS TO ERASE ???
+  # grabs allo positions with laev code
+  sub2 <-subset(A_L, laev_full == AL_now_laev[x])
+  
+  # grabs human genes with laev code
+  sub1 <- subset(final_laev, L_full == LH_now_laev[x])
+  
+  # subsets allo to get max pident & length
+  max_pid2 <- subset(sub2, pident == max(pident))
+  max_len2 <- subset(max_pid2, length == max(length)) 
+  
+  n_hum <- nrow(sub1)
+  n_allo <- nrow(max_len2)
+  
+  # check if unique 
+  
+  
+  if(n_hum == 0)
+  {
+    # ignore, or make a row where it shows allo information, and laev is NA
+    
+    #final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep(NA, n_hum)))
+  }else if(n_hum != n_allo)
+  {
+    # 2 cases: 
+      
+      # allo > human: mark "unknown exon (LOC)", something in allo & laev, not found in humans
+    
+  if(length(unique(sub1$H_gene_name) == 1))
+  {
+   if(n_allo > n_hum)
+   {
+     
+     hum_val <- sub1[1,"H_gene_name"]
+     
+         # before running this, need to catch "dif num rows", add NA to non-matching exon
+    final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep(hum_val, n_allo)))
+     
+     
+   }else if(n_allo < n_hum)
+    {
+        hum_val <- sub1[1,"H_gene_name"]
+        final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep(hum_val, n_allo)))
+     
+   }
+    
+  } else
+  {
+    print(paste("non-collapsed:", x))
+  }
+    
+  }else
+  {
+    
+    # before running this, need to catch "dif num rows", add NA to non-matching exon
+    final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(sub1[,"H_gene_name"]))
+  }
+  
+  if(x == 200000)
+  {
+    print("above 200000")
+  }
+  
+}
+
+```
+
+
+```{r}
+final_laev
+```
+
+
+
+``` {r}
+    
+    
+    
+    
+    # append 1 exon row to full_sub
+    sub_df <- data.frame(H_gene_name = c(sub1[1,"H_gene_name"]), L_start = c(sub1[1,"L_start"]), L_stop = c(sub1[1,"L_stop"]), L_chrom = c(sub1[1,"chrom"]), L_gene_name = c(sub1[1,"gene_name"]), L_full = c(sub1), L_S = c(sub1[1,"LS_subgenome"]))
+    
+    # do all the stuff
+    # then rbind each sub-subset
+    full_sub <- rbind(sub_df, full_sub)
+    
+    
+    # laev_full checks subgenome
+    # checks all the same name
+  if(length(unique(hum_gene)) == 1) 
+  {
+    
+    sub_df <- data.frame(H_gene_name = c(sub[1,"H_gene_name"]), L_start = c(sub[1,"L_start"]), L_stop = c(sub[1,"L_stop"]), L_chrom = c(sub[1,"chrom"]), L_gene_name = c(sub[1,"gene_name"]), L_full = c(sub[1,"laev_full"]), L_S = c(sub[1,"LS_subgenome"]))
+    
+  }
+      
+    
+
+
+```
+
+
+
+
+
+
+
+``` {r}
+
+for(x in 1:length(unq_gene))
+{
+  
+
+  
+
+  
+  
+  # check to make sure L_start, L_stop are the same for each position (i.e. that 2 laev exons will not get collapsed into 1)
+  # code basically checks that laev full info is all the same
+  final_laev <- data.frame(H_gene_name = c(), L_start = c(), L_stop = c(), L_chrom = c(), L_gene_name = c(), L_full = c(), L_S = c())
+  full_sub <- data.frame(H_gene_name = c(), L_start = c(), L_stop = c(), L_chrom = c(), L_gene_name = c(), L_full = c(), L_S = c())
+  
+  
+  # finds each unique full laev position
+  unq_laev <- unique(sub$laev_full)
+
+  # if all subsetted are same laev exon
+  if(length(unique(sub$laev_full)))
+  {
+    
+    
+    # laev_full checks subgenome
+    # checks all the same name
+  if(length(unique(hum_gene)) == 1) # NEED TO SWITCH THIS INSIDE OTHER ELSE/FOR THING TO MAKE SURE LAEV_FULL IS UNIQUE
+  {
+    
+    sub_df <- data.frame(H_gene_name = c(sub[1,"H_gene_name"]), L_start = c(sub[1,"L_start"]), L_stop = c(sub[1,"L_stop"]), L_chrom = c(sub[1,"chrom"]), L_gene_name = c(sub[1,"gene_name"]), L_full = c(sub[1,"laev_full"]), L_S = c(sub[1,"LS_subgenome"]))
+    
+  }
+    
+  }
+  else # if there's more than one gene (IN LAEV OR HUMAN OR BOTH?)
+  {
+    
+    
+    if(length(unique(sub$laev_full)) == 1)
+    {
+      # just one laev
+    }
+    else
+    {
+      
+      
+      
+      
+      
+      
+      
+    }
+    
+    
+    
+    # THIS is IMPORTANT bit, I think can be adapted to just run this
+    for(z in 1:length(unique(sub$laev_full)))
+    {
+      
+    # subset each unique exon into separate dataframe
+    sub1 <- subset(sub, laev_full == unq_laev[z])
+    
+      if(length(unique(hum_gene)) == 1) 
+  {
+    
+    sub_df <- data.frame(H_gene_name = c(sub[1,"H_gene_name"]), L_start = c(sub[1,"L_start"]), L_stop = c(sub[1,"L_stop"]), L_chrom = c(sub[1,"chrom"]), L_gene_name = c(sub[1,"gene_name"]), L_full = c(sub[1,"laev_full"]), L_S = c(sub[1,"LS_subgenome"]))
+    
+      }
+    
+    
+      # subsets 1 gene and gets index 
+  sub <- subset(hum_ann, gene_name == unq_gene[x])
+  subgenome <- sub$LSsubgenome
+  n_gene <- which(hum_ann$gene_name == unq_gene[x])
+  hum_gene <- hum_ann[n_gene,"H_gene_name"]
+    
+    
+    
+    
+    
+    
+    
+    
+    # append 1 exon row to full_sub
+    sub_df <- data.frame(H_gene_name = c(sub1[1,"H_gene_name"]), L_start = c(sub1[1,"L_start"]), L_stop = c(sub1[1,"L_stop"]), L_chrom = c(sub1[1,"chrom"]), L_gene_name = c(sub1[1,"gene_name"]), L_full = c(sub1), L_S = c(sub1[1,"LS_subgenome"]))
+    
+    # do all the stuff
+    # then rbind each sub-subset
+    full_sub <- rbind(sub_df, full_sub)
+    
+    
+    # laev_full checks subgenome
+    # checks all the same name
+  if(length(unique(hum_gene)) == 1) 
+  {
+    
+    sub_df <- data.frame(H_gene_name = c(sub[1,"H_gene_name"]), L_start = c(sub[1,"L_start"]), L_stop = c(sub[1,"L_stop"]), L_chrom = c(sub[1,"chrom"]), L_gene_name = c(sub[1,"gene_name"]), L_full = c(sub[1,"laev_full"]), L_S = c(sub[1,"LS_subgenome"]))
+    
+  }
+      
+    }
+
+
+        }
+  
+
+  full_sub <- rbind(final_laev, sub_df)
+  
+  
+  
+  
+  
+}
+sub$human
+
+# LS_subgenome, H_gene_name, L_start, L_stop, L_chrom, gene_name, H_full, L_full MAYBE pident
+
+
+
+```
+
+``` {r}
+
+write.table(sub, file = "example_hum_laev_filter.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
+
+
+hum_ann$gene_name
+
+# GOTTA grab out whether it's L or S copy
+# LOC positions don't have L or S after it, is this because each LOC number is specific to the subgenome?
+# NO NO it will do this anyways because R will register gene names as different due to .L or .S suffix
+
+bloop <- c(1, 2, 3)
+
+
+1 %in$ bloop
+
+which(bloop == 2)
+
+
+
+identity()
+
+hum_ann$gene_name
+
+
+
+
+```
+
+
+
+
+
+# FINISHED ABOVE HERE ANNOTATIONS
+
+#########################################################
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# recreate original boy_girl_extreme
+
+# n_M <- length(boy_highs)
+
+# n_F <- length(girl_lows)
+
+
+# boy_girl_extreme <- data.frame(boy_tig = c(unique_high_low), sex = c(rep("male_high", n_M), rep("fem_low", n_F)))
+```
+
+
+```{r}
+
+
+
+# extreme_pos is the new boy_girl_extreme
+
+# finding male-specific depth positions
+for (x in 4:17)
+{
+  check_tig <- subset(all_frogs, contig == boy_girl_extreme$boy_high_low[x], select = c(start, stop, M_F_dif))
+
+range <- subset(check_tig, M_F_dif >= 2000, select = c(start, M_F_dif))
+
+start <- min(range)
+
+end <- max(range) + 100000
+
+sex <- range$M_F_dif
+  
+boy_girl_extreme$start[x] <- start
+boy_girl_extreme$end[x] <- end
+boy_girl_extreme$sex[x] <- sex
+  
+}
+
+
+for (x in 18:32)
+{
+  check_tig <- subset(all_frogs, contig == boy_girl_extreme$boy_high_low[x], select = c(start, stop, M_F_dif))
+
+range <- subset(check_tig, M_F_dif <= -2000, select = c(start, M_F_dif))
+
+start <- min(range$start)
+
+end <- max(range$start) + 100000
+
+sex <- range$M_F_dif # FIND SOME WAY TO GET POSITION
+  
+boy_girl_extreme$start[x] <- start
+boy_girl_extreme$end[x] <- end
+
+boy_girl_extreme$sex[x] <- sex
+  
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+# THIS CHUNK IS WHERE YOU WOULD PUT SEX DIFFERENCE INSTEAD OF "male_high"
+
+# finding super high (male) or super low (female) positions!
+
+boy_highs <- subset(all_frogs, M_F_dif > 2000)
+
+girl_lows <- subset(all_frogs, M_F_dif < -2000)
+
+
+
+
+unique_high_low <- c(unique(boy_highs$contig), unique(girl_lows$contig))
+
+unique_girl <- unique(girl_lows$contig)
+n_girl <- length(unique_girl)
+
+unique_boy <- unique(boy_highs$contig)
+n_boy <- length(unique_boy)
+
+
+
+
+
+boy_girl_extreme <- data.frame(boy_high_low = c(unique_high_low), sex = c(rep("male_high", n_boy), rep("fem_low", n_girl)))
+
+boy_girl_extreme
+
+  
+
+# finding male-specific depth positions
+for (x in 1:12)
+{
+  check_tig <- subset(all_frogs, contig == boy_girl_extreme$boy_high_low[x], select = c(start, stop, M_F_dif))
+
+range <- subset(check_tig, M_F_dif >= 2000, select = c(start, M_F_dif))
+
+start <- min(range)
+
+end <- max(range) + 100000
+
+sex <- range$M_F_dif
+  
+boy_girl_extreme$start[x] <- start
+boy_girl_extreme$end[x] <- end
+boy_girl_extreme$sex[x] <- sex
+  
+}
+
+
+for (x in (13):nrow(boy_girl_extreme))
+{
+  check_tig <- subset(all_frogs, contig == boy_girl_extreme$boy_high_low[x], select = c(start, stop, M_F_dif))
+
+range <- subset(check_tig, M_F_dif <= -2000, select = c(start, M_F_dif))
+
+start <- min(range$start)
+
+end <- max(range$start) + 100000
+
+sex <- range$M_F_dif # FIND SOME WAY TO GET POSITION
+  
+boy_girl_extreme$start[x] <- start
+boy_girl_extreme$end[x] <- end
+
+boy_girl_extreme$sex[x] <- sex
+  
+}
+
+boy_girl_extreme
+
+# NOTHING FOUND in excel sheet for c11059
+                                 
+```  
+
+
+
+
+``` {r}
+
+# the boys.....
+
+e <- full_join(d, BJE3485, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+f <-   full_join(e, BJE3486, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+g <- full_join(f, BJE3495, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+  
+h <-   full_join(g, BJE3496, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+i <- full_join(h, Z23738, by = c('contig'='contig', 'start'='start', 'stop'='stop'))
+
+depth_per_site <- i
+
+colnames(depth_per_site) <- c("contig", "start", "stop", "F_BJE3487_depth", "F_BJE3488_depth", "F_BJE3501_depth", 
+                              "F_BJE3502_depth", "F_Z23732_depth", 
+                              "M_BJE3485_depth","M_BJE3486_depth",
+                              "M_BJE3495_depth","M_BJE3496_depth",
+                              "M_Z23738_depth")
+
+depth_per_site$female_av <- rowMeans(depth_per_site[4:8], na.rm = TRUE)
+  
+depth_per_site$male_av <- rowMeans(depth_per_site[9:13], na.rm = TRUE)
+
+depth_per_site$M_F_dif <- depth_per_site$male_av - depth_per_site$female_av
+
+
+all_frogs <- depth_per_site[complete.cases(depth_per_site),]
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# depth per site 
+# M
+BJE3485 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3485_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3485) <- c("contig","start","stop","BJE3485_depth")
+
+# remove outliers
+std_1 <- sd(BJE3485$BJE3485_depth, na.rm = TRUE)
+BJE3485$BJE3485_depth <- sapply(BJE3485$BJE3485_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_1*3)),r,NA))
+
+# M 
+BJE3486 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3486_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3486) <- c("contig","start","stop","BJE3486_depth")
+
+# remove outliers
+std_2 <- sd(BJE3486$BJE3486_depth, na.rm = TRUE)
+BJE3486$BJE3486_depth <- sapply(BJE3486$BJE3486_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_2*3)),r,NA))
+
+
+# M
+BJE3495 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3495_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3495) <- c("contig","start","stop","BJE3495_depth")
+
+std_3 <- sd(BJE3495$BJE3495_depth, na.rm = TRUE)
+BJE3495$BJE3495_depth <- sapply(BJE3495$BJE3495_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_3*3)),r,NA))
+
+# M
+BJE3496 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3496_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3496) <- c("contig","start","stop","BJE3496_depth")
+
+# removing outliers
+std_4 <- sd(BJE3496$BJE3496_depth, na.rm = TRUE)
+BJE3496$BJE3496_depth <- sapply(BJE3496$BJE3496_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_4*3)),r,NA))
+
+# M
+Z23738 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/Z23738_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(Z23738) <- c("contig","start","stop","Z23738_depth")
+
+# remove outliers
+std_5 <- sd(Z23738$Z23738_depth, na.rm = TRUE)
+Z23738$Z23738_depth <- sapply(Z23738$Z23738_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_5*3)),r,NA))
+
+# F
+BJE3487 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3487_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3487) <- c("contig","start","stop","BJE3487_depth")
+
+# remove outliers
+std_6 <- sd(BJE3487$BJE3487_depth, na.rm = TRUE)
+BJE3487$BJE3487_depth <- sapply(BJE3487$BJE3487_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_6*3)),r,NA))
+
+# F
+BJE3488 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3488_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3488) <- c("contig","start","stop","BJE3488_depth")
+
+# remove outliers
+std_7 <- sd(BJE3488$BJE3488_depth, na.rm = TRUE)
+BJE3488$BJE3488_depth <- sapply(BJE3488$BJE3488_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_7*3)),r,NA))
+
+# F
+BJE3501 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3501_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3501) <- c("contig","start","stop","BJE3501_depth")
+
+# remove outliers
+std_8 <- sd(BJE3501$BJE3501_depth, na.rm = TRUE)
+BJE3501$BJE3501_depth <- sapply(BJE3501$BJE3501_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_8*3)),r,NA))
+
+# F
+BJE3502 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3502_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(BJE3502) <- c("contig","start","stop","BJE3502_depth")
+
+# remove outliers
+std_9 <- sd(BJE3502$BJE3502_depth, na.rm = TRUE)
+BJE3502$BJE3502_depth <- sapply(BJE3502$BJE3502_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_9*3)),r,NA))
+
+# F
+Z23732 <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/Z23732_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+colnames(Z23732) <- c("contig","start","stop","Z23732_depth")
+
+# remove outliers
+std_10 <- sd(Z23732$Z23732_depth, na.rm = TRUE)
+Z23732$Z23732_depth <- sapply(Z23732$Z23732_depth,
+                          function(r) ifelse( (is.numeric(r))&&(r<(std_10*3)),r,NA))
+
+```
+
+
+
+
+```{r}
+
+# THIS CHUNK IS WHERE YOU WOULD PUT SEX DIFFERENCE INSTEAD OF "male_high"
+
+# finding super high (male) or super low (female) positions!
+
+boy_highs <- subset(all_frogs, M_F_dif > 2000)
+
+girl_lows <- subset(all_frogs, M_F_dif < -2000)
+
+
+
+
+unique_high_low <- c(unique(boy_highs$contig), unique(girl_lows$contig))
+
+unique_girl <- unique(girl_lows$contig)
+n_girl <- length(unique_girl)
+
+unique_boy <- unique(boy_highs$contig)
+n_boy <- length(unique_boy)
+
+
+
+
+
+boy_girl_extreme <- data.frame(boy_high_low = c(unique_high_low), sex = c(rep("male_high", n_boy), rep("fem_low", n_girl)))
+
+boy_girl_extreme
+
+  
+
+# finding male-specific depth positions
+for (x in 1:12)
+{
+  check_tig <- subset(all_frogs, contig == boy_girl_extreme$boy_high_low[x], select = c(start, stop, M_F_dif))
+
+range <- subset(check_tig, M_F_dif >= 2000, select = c(start, M_F_dif))
+
+start <- min(range)
+
+end <- max(range) + 100000
+
+sex <- range$M_F_dif
+  
+boy_girl_extreme$start[x] <- start
+boy_girl_extreme$end[x] <- end
+boy_girl_extreme$sex[x] <- sex
+  
+}
+
+
+for (x in (13):nrow(boy_girl_extreme))
+{
+  check_tig <- subset(all_frogs, contig == boy_girl_extreme$boy_high_low[x], select = c(start, stop, M_F_dif))
+
+range <- subset(check_tig, M_F_dif <= -2000, select = c(start, M_F_dif))
+
+start <- min(range$start)
+
+end <- max(range$start) + 100000
+
+sex <- range$M_F_dif # FIND SOME WAY TO GET POSITION
+  
+boy_girl_extreme$start[x] <- start
+boy_girl_extreme$end[x] <- end
+
+boy_girl_extreme$sex[x] <- sex
+  
+}
+
+boy_girl_extreme
+
+# NOTHING FOUND in excel sheet for c11059
+                                 
+```  
+
+
+# new
+########################################
+
+
+
+
+
+
+```{r}
+
+# reading in and rearranging dataset
+ann <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/CDS_switched_allo_ordered_contigs.bed", header = F, fill = TRUE)
+
+# fix column datatype
+ann$V1 <-as.factor(ann$V1)
+ann$V2 <- as.numeric(ann$V2)
+ann$V5 <- as.factor(ann$V5)
+
+# rename columns
+colnames(ann) <- c("contigs", "start", "stop", "laev", "direction")
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+# working function
+###################################################
+
+
+```{r}
+# write a function that writes a graph so can automatically do each graph in one line with contigs as args
+# first arg is the tig name (in quotes)
+tig_graph <- function(tig)
+{
+
+# GRABBING EXONS
+  # subset exon positions from ONLY contig of interest
+c1724_exons <- subset(ann, contigs == tig)
+
+ordered_ex <- c1724_exons[order(c1724_exons$start),]
+
+# depth data
+c1724_depth <- subset(all_frogs, contig == "tig00001724")
+
+rexon <- ordered_ex[ , c(2, 3)]
+rexon[,3] <- rep(-6000, nrow(rexon))
+rexon[,4] <- rep(-5700, nrow(rexon))
+rexon <- as.data.frame(rexon)
+colnames(rexon) <- c("x1", "x2", "y1", "y2")
+
+# SUBSETTING ???
+  
+contig <- subset(ann, contigs == tig)
+
+# depth data
+contig_depth <- subset(all_frogs, contig == tig)
+
+# MAKING GRAPH
+  # plot
+ggplot() +
+  geom_point(contig_depth, mapping = aes(x = contig_depth$start, y = contig_depth$M_F_dif)) +
+  xlab("Position in Contig (Mb)") +
+  ylab("Av. M-F Depth") +
+  ylim(-6000, 6000) +
+geom_rect(data = rexon, mapping = aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), fill = "darkgreen")
+
+}
+
+
+```
+
+
+
+
+
+``` {r}
+
+
+# switches bed start & stop
+unique(ann$start < ann$stop)
+
+levels(ann$direction) <- c("+", "-")
+
+neg_vec <- ann$start < ann$stop
+
+which_neg <- which(neg_vec == FALSE)
+
+# subset of only negative values
+neg_ann <- subset(ann, subset = neg_vec)
+
+# woahhhhh does this work? IT WORKKKKKSSSSSSS
+  stemp <- ann[which_neg,2]
+  etemp <- ann[which_neg,3]
+  # switch column values
+  ann[which_neg,3] <- stemp
+  ann[which_neg,2] <- etemp
+  
+  unique(ann$start < ann$stop)
+  
+```
+
+
+
+
+```{r}
+# export data here in case of issue
+
+write.table(ann, file = "bed_switch_annotated.bed", sep = "\t", row.names = FALSE, col.names = FALSE)
+
+
+```
+
+
+
+
+
+  
+```{r}
+
+boy_girl_extreme_bed <- boy_girl_extreme[,c(1, 3, 4, 2)]
+
+
+# CODE THAT SLAYSSSSSS
+write.table(boy_girl_extreme_bed, "boy_girl_extreme.bed", sep = "\t", col.names = FALSE, row.names = FALSE)
+
+n_boy + n_girl
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+# WORKING EXON LOOP (FOREACH)
+```{r}
+
+# THIS ONE ACTUALLY WORKS
+# TRYING IS NOT SUBSETTING CORRECTLY
+
+
+
+
+# subsetting high depth contigs
+trying <- ann[ann[,1] %in% boy_girl_extreme_bed[1,1],]
+
+# empty df to fill
+bloop <- data.frame(contig = c(), overlap1 = c(), overlap2 = c(), start = c(), stop = c(), laev = c(), sex = c())
+
+
+     
+for(x in 1:length(boy_girl_extreme_bed$boy_high_low))
+{
+  
+  # grabs & subsets data from one contig
+  sub <- which(ann[,1] == boy_girl_extreme_bed[x,1])
+  trying <- ann[sub,]
+  
+  # checks if each exon is within high depth boundaries
+    overlap <- between(x = c(trying[,2], trying[,3]), left = boy_girl_extreme_bed[x,2], right = boy_girl_extreme_bed[x,3])
+    
+      # number of current contig exon positions
+    n <- nrow(overlap)
+  
+    # making df
+    # AND now not working because overwrites whole length
+    odd <- seq(from=1, to=length(overlap), by=2)
+    even <- seq(from=2, to=length(overlap), by=2)
+    
+    # this bit is logging
+    # add exon start, stop, laev and direction
+    goop <- data.frame(contig = rep(boy_girl_extreme_bed[x,1], each = length(overlap)/2), overlap1 = c(overlap[odd]), overlap2 = c(overlap[even]), start = c(trying[,2]), stop = c(trying[,3]), laev = c(trying[,4]), sex = c(boy_girl_extreme_bed[x,4]))
+    bloop <- rbind(bloop, goop)
+    
+  
+}
+# right now "dir" is only + but all start < stop
+view(bloop)
+#rep(boy_girl_extreme_bed[x,1], times = n)
+
+ex_pos_b <- bloop %>%
+  mutate(ex_pos = ifelse(overlap1 == TRUE & overlap2 == TRUE, "within",
+                         ifelse(overlap1 == FALSE & overlap2 == FALSE, "no overlap", 
+                                ifelse(overlap1 == TRUE & overlap2 == FALSE, "right overlap", 
+                                       ifelse(overlap1 == FALSE & overlap2 == TRUE, "left overlap", NA)))))
+
+unique(ex_pos_b$ex_pos)
+
+```
+
+
+
+
+```{r}
+
+within <- ex_pos_b[ex_pos_b$ex_pos=="within",]
+unique(within$contig)
+
+pretty <- ex_pos_b[,c(1, 4:8)]
+#pretty
+
+prettier <- subset(pretty, ex_pos != "no overlap")
+view(prettier)
+head(prettier)
+```
+
+```{r}
+arrange(prettier, desc(sex))
+range(prettier$sex)
+
+girls <- subset(prettier, sex < 0)
+boys <- subset(prettier, sex > 0)
+
+
+sd(girls$sex)
+sd(boys$sex)
+
+sd(all_frogs$M_F_dif)
+
+```
+
+
+```{r}
+#arrange(girls, desc(sex))
+
+#arrange(boys, desc(sex))
+
+write.table(girls, "female_depth_exons.bed", sep = "\t", col.names = FALSE, row.names = FALSE)
+
+write.table(boys, "male_depth_exons.bed", sep = "\t", col.names = FALSE, row.names = FALSE)
+
+write.table(prettier, "annotation_depth_exons.bed", sep = "\t", col.names = FALSE, row.names = FALSE)
+view(girls)
+
+head(girls$laev)
+
+```
+
+
+```{r}
+# export to excel, do excel stuff, now back here!
+
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("readxl")
+library(readxl)
+
+laev_pos <- read_excel("male_filtered_ex_excel.xlsx", col_names = FALSE)
+
+ann_sum <- laev_pos %>% 
+  group_by(...6) %>%
+  mutate(gene_sum = n()) %>%
+  ungroup()
+
+
+
+ann_man <- ann_sum %>%
+  arrange(desc(gene_sum))
+
+view(ann_man)
+```
+
+
+```{r}
+
+
+start_df <- as.numeric(stringr::str_split_fixed(ann_man$...11, "-", 2)[,1])
+stop_df <- as.numeric(stringr::str_split_fixed(ann_man$...11, "-", 2)[,2])
+
+
+blast_fast <- data.frame(name_laev = c(paste(ann_man$...10, ":", ann_man$...11)), start_L = c(start_df), stop_L = c(stop_df), allo = c(paste(ann_man$...1, ":", ann_man$...2, "-", ann_man$...3)), gene_name = c(ann_man$...6))
+
+
+
+```
+
+
+```{r}
+write.table(blast_fast, "male_filtered_blast_depth.bed", sep = "\t", col.names = FALSE, row.names = FALSE)
+```
+
+
+```{r}
+
+ann_sum <- ann_man %>% 
+  group_by(...6) %>%
+  mutate(gene_sum = n()) %>%
+  ungroup()
+
+#unq_genes <- unique(gene = c(ann_man$...6), count = c())
+
+#gene_list <- distinct(ann_man, ...6, gene_sum)
+
+#head(gene_list)
+
+#write.table(gene_list, "candidate_genes_allo.xls", sep = "\t", col.names = FALSE, row.names = FALSE)
+
+```
+
+
+
+
+
+
+
+```{r}
+# should I normalize again before doing this or is RPKM enough?
+#install.packages("fmsb")
+#library(fmsb)
+#percentile(all_frogs$M_F_dif)
+```
+
+```{r}
+quantile(all_frogs$M_F_dif, probs = c(0.025, 0.975))
+
+quantile(all_frogs$M_F_dif, probs = c(0.001, 0.999))
+
+quantile(all_frogs$M_F_dif)
+```
+
+```{r}
+#par(mfrow =c(1,2))
+ggplot(all_frogs, aes(x = M_F_dif)) +
+  geom_histogram(bins = 200) + 
+  geom_vline(xintercept= -1380.333, color = "hotpink") +
+  geom_vline(xintercept= 1559.414 , color = "dodgerblue")
+```
+
+```{r}
+
+
+sig_boy_highs <- subset(all_frogs, M_F_dif > 1559.414)
+
+sig_girl_lows <- subset(all_frogs, M_F_dif < -1380.333)
+
+unique(sig_boy_highs$contig)
+
+```
+
+
+
+
+
+
+
+# names of coding seqs
+# grab laevis seq from tx. with bedtools
+# have .dict > do an egrep and can pull names from laevis
+# name, length, other info
+# use cut and sed to make bed file
+# bed file should be like geneName  1 12233
+# grab laevis seq with bedtools
+# then blast against human tx. to get annotation
+# get human annotation for every window, every gene
+# remove duplicates
+
+
+```{r}
+
+ggplot(all_frogs, aes(x = M_F_dif)) +
+  geom_histogram(bins = 200) + ylim(0,20) + 
+  geom_vline(xintercept= -1380.333, color = "hotpink") +
+  geom_vline(xintercept= 1559.414 , color = "dodgerblue")
+```
+
+```{r}
+#testy <- read.table("./top3_allo_depth_annotation.bed.xslx", header = F)
+```
+
+
+
+# counts of each bin
+# number of windows
+# extract information from histogram
+# which windows are from which counts
+  # find extreme ones, which windows have extreme values
+# rank windows by ratio
+# sort, use head/tail to pull out top few
+# for these windows, what genes are in them
+# tuesday @ 9:30 ben
+
+# top hit from human tx. from high windows
+# blast allo against human tx., get annotation from that (this way can get LOC annotations)
+
+
+# populations with sex specific expression which has resolved expression
+# populations where sex-linkage resolves sex antagonism
+# preference phenomenon
+
+# are they actually 
+
+# sex-biased expression could actually mean no sexual antagonism- are we actually capturing the moment of sexual antagonism
+or a mechanism that causes accumulation of SBGs
+
+#########################################################
+
+# matching up all allo/laev and laev/human
+# need a key to match the different laevis vals
+
+```{r}
+#allo_laev <- read.table( header = F)
+
+hum_laev <- read.table("/Users/jadebohbot/Downloads/Masters_Documents/Depth/BJE3485_sorted_rg_dedup.bam_bamCoverage.bw", header = F)
+
+```
+
+```{r}
+
+allo_laev <- read.table("/Users/jadebohbot/XENLA_10.1_Xenbase.transcripts/laev_hum_bed.bed", header = F, sep = "\t")
+
+hum_laev <- read.csv("/Users/jadebohbot/laev_hum_bed.bed", header = F, sep = "\t")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+# MAKE SURE this grabs correct tigs
+
+# USE THIS FUNCTION TO PULL exon positions WITHIN high depth boundary
+
+# THIS ONE IS ONLY FOR MALES
+
+small_depth_graph <- function(tig)
+{
+
+# GRABBING EXONS
+  # subset exon positions from ONLY contig of interest
+c1724_exons <- subset(ann, contigs == tig)
+
+ordered_ex <- c1724_exons[order(c1724_exons$start),]
+
+# depth data
+c1724_depth <- subset(all_frogs, contig == tig)
+
+rexon <- ordered_ex[ , c(2, 3)]
+rexon[,3] <- rep(-6000, nrow(rexon))
+rexon[,4] <- rep(-5700, nrow(rexon))
+rexon <- as.data.frame(rexon)
+colnames(rexon) <- c("x1", "x2", "y1", "y2")
+
+# SUBSETTING ???
+  
+contig <- subset(ann, contigs == tig)
+
+# depth data
+contig_depth <- subset(all_frogs, contig == tig)
+
+high_depth_start <- subset(boy_girl_extreme_bed, boy_high_low == tig, select = c(start))
+
+high_depth_start <- high_depth_start[1,1]
+
+high_depth_end <- subset(boy_girl_extreme_bed, select = c(end))
+
+high_depth_end <- high_depth_end[1,1]
+
+# HERE is where you limit the x-limits to be only high depth
+# use extreme_boy_girl_bed
+# MAKING GRAPH
+  # plot
+ggplot() +
+  geom_point(contig_depth, mapping = aes(x = contig_depth$start, y = contig_depth$M_F_dif)) +
+  xlab("Position in Contig (Mb)") +
+  ylab("Av. M-F Depth") +
+  xlim(c(high_depth_start, high_depth_end)) +
+geom_rect(data = rexon, mapping = aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), fill = "darkgreen")
+
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# graph function for only high depth (22 tigs)
+##########################################
+```{r}
+# write a function that writes a graph so can automatically do each graph in one line with contigs as args
+# first arg is the tig name (in quotes)
+
+
+# THIS ONE IS ONLY FOR MALES
+
+high_depth_graph <- function(tig)
+{
+
+# GRABBING EXONS
+  # subset exon positions from ONLY contig of interest
+c1724_exons <- subset(ann, contigs == tig)
+
+ordered_ex <- c1724_exons[order(c1724_exons$start),]
+
+# depth data
+c1724_depth <- subset(all_frogs, contig == "tig00001724")
+
+rexon <- ordered_ex[ , c(2, 3)]
+rexon[,3] <- rep(-6000, nrow(rexon))
+rexon[,4] <- rep(-5700, nrow(rexon))
+rexon <- as.data.frame(rexon)
+colnames(rexon) <- c("x1", "x2", "y1", "y2")
+
+# SUBSETTING ???
+  
+contig <- subset(ann, contigs == tig)
+
+# depth data
+contig_depth <- subset(all_frogs, contig == tig)
+
+high_depth_start <- subset(boy_girl_extreme_bed, boy_high_low == tig, select = c(start))
+
+high_depth_start <- high_depth_start[1,1]
+
+high_depth_end <- subset(boy_girl_extreme_bed, select = c(end))
+
+high_depth_end <- high_depth_end[1,1]
+
+# HERE is where you limit the x-limits to be only high depth
+# use extreme_boy_girl_bed
+# MAKING GRAPH
+  # plot
+ggplot() +
+  geom_point(contig_depth, mapping = aes(x = contig_depth$start, y = contig_depth$M_F_dif)) +
+  xlab("Position in Contig (Mb)") +
+  ylab("Av. M-F Depth") +
+  xlim(c(high_depth_start, high_depth_end)) +
+geom_rect(data = rexon, mapping = aes(xmin = x1, xmax = x2, ymin = y1, ymax = y2), fill = "darkgreen")
+
+}
+
+
+```
+
+
+
+# graphs
+################################################
+
+```{r}
+jpeg("./male_tig00001724_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00001724")
+dev.off()
+
+jpeg("./male_tig00004787_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00004787")
+dev.off()
+
+jpeg("./male_tig00006146_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00006146")
+dev.off()
+
+jpeg("./male_tig00007799_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00007799")
+dev.off()
+
+jpeg("./male_tig00008988_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00008988")
+dev.off()
+
+jpeg("./male_tig00010342_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00010342")
+dev.off()
+
+jpeg("./male_tig00010385_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00010385")
+dev.off()
+
+jpeg("./male_tig00010587_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00010587")
+dev.off()
+
+jpeg("./male_tig00011059_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00011059")
+dev.off()
+
+jpeg("./male_tig00011066_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00011066")
+dev.off()
+
+jpeg("./male_tig00011077_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00011077")
+dev.off()
+
+jpeg("./male_tig00011945_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00011945")
+dev.off()
+
+
+
+```
+
+```{r}
+jpeg("./fem_tig00003839_closeup_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00003839")
+dev.off()
+
+
+jpeg("./fem_tig00005862_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00005862")
+dev.off()
+
+jpeg("./fem_tig00008322_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00008322")
+dev.off()
+
+jpeg("./fem_tig00009134_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00009134")
+dev.off()
+
+jpeg("./fem_tig00009138_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00009138")
+dev.off()
+
+jpeg("./fem_tig00009681_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00009681")
+dev.off()
+
+jpeg("./fem_tig00009985_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00009985")
+dev.off()
+
+jpeg("./fem_tig00011480_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00011480")
+dev.off()
+
+jpeg("./fem_tig00011926_closeup_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+high_depth_graph("tig00011926")
+dev.off()
+
+
+```
+
+
+
+```{r}
+
+# contigs with high male depth
+
+jpeg("./tig00001724_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00001724")
+dev.off()
+
+jpeg("./tig00004787_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00004787")
+dev.off()
+
+jpeg("./tig00006146_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00006146")
+dev.off()
+
+jpeg("./tig00007799_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00007799")
+dev.off()
+
+jpeg("./tig00008988_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008988")
+dev.off()
+
+jpeg("./tig00010342_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010342")
+dev.off()
+
+jpeg("./tig00010385_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010385")
+dev.off()
+
+jpeg("./tig00010587_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010587")
+dev.off()
+
+jpeg("./tig00011059_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011059")
+dev.off()
+
+jpeg("./tig00011066_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011066")
+dev.off()
+
+jpeg("./tig00011077_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011077")
+dev.off()
+
+jpeg("./tig00011945_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011945")
+dev.off()
+
+
+
+
+
+
+
+
+```
+
+```{r}
+# low female positions
+
+jpeg("./fem_tig00003839_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00003839")
+dev.off()
+
+jpeg("./fem_tig00005862_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00005862")
+dev.off()
+
+jpeg("./fem_tig00008322_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008322")
+dev.off()
+
+jpeg("./fem_tig00009134_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009134")
+dev.off()
+
+jpeg("./fem_tig00009138_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009138")
+dev.off()
+
+jpeg("./fem_tig00009681_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009681")
+dev.off()
+
+jpeg("./fem_tig00009985_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009985")
+dev.off()
+
+jpeg("./fem_tig00011480_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011480")
+dev.off()
+
+jpeg("./fem_tig00011926_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011926")
+dev.off()
+
+
+```
+
+
+
+###################################################
+
+
+
+```{r}
+
+# contigs from Chr7L
+
+# cabcoco1.L Chr7L:11722536..11722705
+jpeg("./allo_Chr7L_tig00011029_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00011029")
+dev.off()
+
+
+#wdr11.L Chr7L:14127179..14127332
+# also contig 11029 
+jpeg("./allo_Chr7L_tig00010976_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010976")
+dev.off()
+
+
+# hmx2.L Chr7L:14784178..14784698
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+# also contig 6146
+
+jpeg("./allo_Chr7L_tig00008587_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008587")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00012378_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00012378")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00012378_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00012378")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00006886_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00006886")
+dev.off()
+
+# acrbp.L	Chr7L:15258322..15258552 (involved with sperm)
+
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+# and 6146 here
+
+# inpp5a.L Chr7L:15398256..15398375
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00006146_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00006146")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00005690_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00005690")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00006777_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00008587_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008587")
+dev.off()
+
+# glrx3.L Chr7L:16919497..16919698
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+
+jpeg("./allo_Chr7L_tig00005690_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00005690")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00010671_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010671")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00008586_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008586")
+dev.off()
+ 
+# mgmt.L Chr7L:17498790..17498920
+
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+# foxi2.L Chr7L:18615238..18615764
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00008584_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008584")
+dev.off()
+
+
+# aldh18a Chr7L:19936811..19937022
+
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00006777_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00006777")
+dev.off()
+
+# dhx32.L Chr7L:19719202..19719489 (same as aldh18a1)
+
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00006777_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00006777")
+dev.off()
+
+
+# cyp26c1.L  ~21Mb
+jpeg("./allo_Chr7L_tig00010978_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00010978")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00008582_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008582")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00009979_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009979")
+dev.off()
+
+
+# znf518a.L Chr7L:20851953..20866084 
+
+jpeg("./allo_Chr7L_tig00009681_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009681")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00009979_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009979")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00008582_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008582")
+dev.off()
+
+# blnk.L Chr7L Chr7L:20911006..20911159
+
+jpeg("./allo_Chr7L_tig00009681_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009681")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00009979_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009979")
+dev.off()
+
+jpeg("./allo_Chr7L_tig00008582_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00008582")
+dev.off()
+
+
+# LOC108696132 Chr7L:21021862..21021995
+# dntt.L Chr7L:21092094..21270652
+# ventx3.2.L Chr7L:21731065..21734295
+# XL_kndc1.L Chr7L:21826097..21918131
+
+jpeg("./allo_Chr7L_tig00009681_exons.jpg",w=7, h=3.0, units ="in", bg="transparent", res = 200)
+tig_graph("tig00009681")
+dev.off()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
+
+
+
+# OK now to create the gtf file
+############################################
+
+# USE ANN DATA
+
+# columns needed
+
+* seqname **** ann$contigs
+* source (program or data)
+* feature (exon) ****
+* start **** (ann$start)
+* end **** (ann$stop)
+* score
+* strand **** (ann$V5)
+* frame
+* attribute **** (gene AND laevis equivalent)
+
+
+```{r}
+setwd("/Users/jadebohbot")
+system("wget https://download.xenbase.org/xenbase/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz")
+system("wget https://download.xenbase.org/xenbase/Genomics/JGI/Xenla10.1/XENLA_10.1_Xenbase_longest.gff3.gz")
+
+```
+
+```{r}
+download.file("https://download.xenbase.org/xenbase/Genomics/JGI/Xenla10.1/XENLA_10.1_genome.fa.gz", destfile = "/Users/jadebohbot", method = "wget", extra = "-r -p --random-wait")
+
+```
+
+
+```{r}
+
+library('rtracklayer')
+library('devtools')
+library('Rsubread')
+
+```
+
+
+
+
+```{r}
+
+```
+
+
+# AFTER THIS just saving from annotation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# subset each unique laevis exon 
+sub1 <- subset(subbing, laev_full == unq[z]) 
+
+# subsets hum/laev to get best pident & length
+max_pid <- subset(sub1, pident == max(pident))
+max_len <- subset(max_pid, length == max(length))  
+# which(max_len$laev_full == unq[z])
+n_gene <- nrow(max_len)
+
+# concats human gene names if multiple
+# MAYBE THIS PART FILTERS TOO MUCH
+hum_gene <- unique(sub1[n_gene,"H_gene_name"])
+squish <- paste(hum_gene, collapse = "_")
+squish1 <- rep(squish, n_gene)
+
+
+
+
+# THIS is IMPORTANT bit, I think can be adapted to just run this
+
+final_laev <- data.frame(H_gene_name = c(), L_start = c(), L_stop = c(), L_chrom = c(), L_gene_name = c(), L_full = c(), L_S = c())
+
+for(z in 1:length(unique(hum_ann$laev_full)))
+{
+  
+  # subset each unique laevis exon 
+  sub1 <- subset(hum_ann, laev_full == unq[z]) 
+  
+  # subsets hum/laev to get best pident & length
+  max_pid <- subset(sub1, pident == max(pident))
+  max_len <- subset(max_pid, length == max(length))  
+  # which(max_len$laev_full == unq[z])
+  n_gene <- nrow(max_len)
+  
+  # concats human gene names if multiple
+  hum_gene <- unique(hum_ann[n_gene,"H_gene_name"])
+  squish <- paste(hum_gene, collapse = "_")
+  squish1 <- rep(squish, n_gene)
+  
+  # dataframe to concat
+  sub_df <- data.frame(H_gene_name = c(squish1), L_start = c(max_len[,"L_start"]), L_stop = c(max_len[,"L_stop"]), L_chrom = c(max_len[,"chrom"]), L_gene_name = c(max_len[,"gene_name"]), L_full = c(max_len[,"laev_full"]), L_S = c(max_len[,"LS_subgenome"]))
+  
+  final_laev <- rbind(final_laev, sub_df)
+  
+}
+
+
+# HERE SHE STILL HAS ALL GENE NAMES (3372 unique genes)
+length(unique(hum_ann$H_gene_name))
+length(unique(final_laev$H_gene_name))
+
+nrow(hum_ann)
+nrow(final_laev)
+
+
+# check how many LOC uncharacterized before this
+
+LOC <- str_extract(final_laev$L_gene_name, "LOC")
+class(LOC)
+length(which(LOC == "LOC"))
+
+
+
+
+
+#read.table("/Users/jadebohbot/human_laev_CDS_depth_pos.bed", header = F, fill = TRUE)
+
+# testing
+################################################################################################################
+
+
+
+
+
+
+
+
+
+# need to fix brackets
+# need to make it so if human match is 0, will pull laevis match from allo/laev dat
+
+
+for(x in 1:10)
+{
+  #rm(final_allo) # TRY USING THIS TO ERASE ???
+  # grabs allo positions with laev code
+  sub2 <-subset(A_L, laev_full == AL_now_laev[x])
+  
+  # grabs human genes with laev code
+  sub1 <- subset(final_laev, L_full == AL_now_laev[x])
+  
+  # subsets allo to get max pident & length
+  max_pid2 <- subset(sub2, pident == max(pident))
+  max_len2 <- subset(max_pid2, length == max(length)) 
+  
+  n_hum <- nrow(sub1)
+  n_allo <- nrow(max_len2)
+  
+  # check if unique 
+  
+  
+  if(n_hum == 0)
+  {
+    # ignore, or make a row where it shows allo information, and laev is NA
+    final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep(NA, n_allo)), L_gene_name = c(sub1[, "L_gene_name"])
+    
+    
+    #final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep(NA, n_hum)))
+  }else if(n_hum != n_allo)
+  {
+    # 2 cases: 
+    
+    # allo > human: mark "unknown exon (LOC)", something in allo & laev, not found in humans
+    
+    if(length(unique(sub1$H_gene_name) == 1))
+    {
+      
+      hum_val <- sub1[1,"H_gene_name"]
+      
+      # before running this, need to catch "dif num rows", add NA to non-matching exon
+      final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep(hum_val, n_allo)), L_gene_name = c(sub1[, "L_gene_name"])
+      
+      
+    }else
+    {
+      final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(rep("NON-COLLAPSED", n_allo)), L_gene_name = c(sub1[, "L_gene_name"])
+      
+    }
+    
+  }else # SAME # ALLO & HUMAN
+  {
+    
+    # before running this, need to catch "dif num rows", add NA to non-matching exon
+    final_allo <- data.frame(allo_tig = c(max_len2[,"allo_tig"]), sstart = c(max_len2[,"sstart"]), send = c(max_len2[,"send"]), laev_full = c(max_len2[,"laev_full"]), H_gene_name = c(sub1[,"H_gene_name"]), L_gene_name = c(sub1[, "L_gene_name"])
+  }
+  
+  end_tab <- rbind(end_tab, final_allo)
+  
+}
+
+
+
+subset(final_laev, L_full == "XBXL10_1g1_LOC108704873_XBmRNA2_XM_041586392.1_Chr1L:46948-47000")
+
+
