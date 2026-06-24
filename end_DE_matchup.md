@@ -1,4 +1,6 @@
 
+# occurs in /transcriptome/DNA_files/
+
 # import up/downregulated tx. to unix
 # remove header
 ```
@@ -25,17 +27,19 @@ sed 's/ / /g' downreg_info.bed > downreg_info1.bed
 
 ```
 awk -F "\t" '{print $1, $2, $3}' upreg_info1.bed > upreg_info2.bed
-
+awk -F "\t" '{print $1, $2, $3}' downreg_info1.bed > downreg_info2.bed
 ```
 
 ```
 sed 's/ / /g' upreg_info2.bed > upreg_info3.bed
-
+sed 's/ / /g' downreg_info2.bed > downreg_info3.bed
 ```
 
 # bedtools grab fasta from allo assembly
 ```
 bedtools getfasta -fi /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed upreg_info3.bed -fo upreg.fasta
+bedtools getfasta -fi /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed downreg_info3.bed -fo downreg.fasta
+
 ```
 
 # blast against laevis
