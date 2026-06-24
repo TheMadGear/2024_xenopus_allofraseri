@@ -38,12 +38,21 @@ sed 's/ / /g' downreg_info2.bed > downreg_info3.bed
 # bedtools grab fasta from allo assembly
 ```
 bedtools getfasta -fi /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed upreg_info3.bed -fo upreg.fasta
-bedtools getfasta -fi /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed downreg_info3.bed -fo downreg.fasta
 
+bedtools getfasta -fi /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed downreg_info3.bed -fo downreg.fasta\
 ```
 
-# blast against laevis
+# blast against laevis (using sbatch)
+```
+sbatch ./blast.sh
+```
 
+```
+blastn -query downreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -out downreg_blast_laev.out
+
+
+
+```
 
 
 
