@@ -13,7 +13,9 @@ grep -f downregulated_overlap_allo.csv RNA_to_genome.gtf  > downreg_info.txt
 
 # make bed file
 
-# blast against laevis or allo annotation?
+# bedtools grab fasta from allo assembly
+
+# blast against laevis
 
 
 
