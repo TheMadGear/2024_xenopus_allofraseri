@@ -12,8 +12,31 @@ grep -f downregulated_overlap_allo.csv RNA_to_genome.gtf  > downreg_info.txt
 ```
 
 # make bed file
+```
+awk -F "\t" '{print $1, $4, $5, $9}' upreg_info.txt > upreg_info.bed
+awk -F "\t" '{print $1, $4, $5, $9}' downreg_info.txt > downreg_info.bed
+```
+
+# fix tabs
+```
+sed 's/ / /g' upreg_info.bed > upreg_info1.bed
+sed 's/ / /g' downreg_info.bed > downreg_info1.bed
+```
+
+```
+awk -F "\t" '{print $1, $2, $3}' upreg_info1.bed > upreg_info2.bed
+
+```
+
+```
+sed 's/ / /g' upreg_info2.bed > upreg_info3.bed
+
+```
 
 # bedtools grab fasta from allo assembly
+```
+bedtools getfasta -fi /home/froglady/projects/rrg-ben/for_jade/Adam_allo_genome_assembly_with_bubbles/allo.fasta.contigs.fasta -bed upreg_info3.bed -fo upreg.fasta
+```
 
 # blast against laevis
 
