@@ -54,10 +54,11 @@ blastn -query upreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_all
 ```
 # PARSE IN R to create bed file with extra columns
 
-# read in to unix, remove quotes
+# read in to unix, remove quotes, including annotation file
 ```
 cat upreg_parse.bed | tr -d '"' > upreg_p.bed
 cat downreg_parse.bed | tr -d '"' > downreg_p.bed
+cat exon_annotation_final.txt | tr -d '"' > exon_annotation_final_NQ.txt
 ```
 
 
