@@ -54,24 +54,24 @@ blastn -query upreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_all
 ```
 # PARSE IN R to create bed file with extra columns
 
+# remove header
+```
+tail -n +2 flipped_annotation.bed > flipped_annotation1.bed
+```
+
 # read in to unix, remove quotes, including annotation file
 ```
 cat upreg_parse.bed | tr -d '"' > upreg_p.bed
 cat downreg_parse.bed | tr -d '"' > downreg_p.bed
-cat exon_annotation_final.txt | tr -d '"' > exon_annotation_final_NQ.txt
+cat flipped_annotation1.bed | tr -d '"' > flipped_annotation2.bed
 ```
 
-# remove header
-```
-tail -n +2 exon_annotation_final_NQ.txt > exon_annotation_final_NQ1.txt
-```
-
-# FIRST HAVE TO FLIP BED COORDS
+# FIRST HAVE TO FLIP BED COORDS (done in R)
 
 
 # check intersection
 ```
-intersectBed -wa -wb -a exon_annotation_final_DONE.txt -b upreg_p1.bed downreg_p1.bed -names up down -wo
+intersectBed -wa -wb -a flipped_annotation2.bed -b upreg_p1.bed downreg_p1.bed -names up down 
 ```
 
 
