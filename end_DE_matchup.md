@@ -61,7 +61,10 @@ cat downreg_parse.bed | tr -d '"' > downreg_p.bed
 cat exon_annotation_final.txt | tr -d '"' > exon_annotation_final_NQ.txt
 ```
 
-
+# remove header
+```
+tail -n +2 exon_annotation_final_NQ.txt > exon_annotation_final_NQ1.txt
+```
 
 
 
