@@ -66,6 +66,9 @@ cat exon_annotation_final.txt | tr -d '"' > exon_annotation_final_NQ.txt
 tail -n +2 exon_annotation_final_NQ.txt > exon_annotation_final_NQ1.txt
 ```
 
+# FIRST HAVE TO FLIP BED COORDS
+
+
 # check intersection
 ```
 intersectBed -wa -wb -a exon_annotation_final_DONE.txt -b upreg_p1.bed downreg_p1.bed -names up down -wo
