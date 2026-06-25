@@ -50,9 +50,19 @@ sbatch ./blast.sh
 ```
 blastn -query downreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -out downreg_blast_laev.out
 
-
-
+blastn -query upreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -out upreg_blast_laev.out
 ```
+# PARSE IN R to create bed file with extra columns
+
+# read in to unix, remove quotes
+```
+cat upreg_parse.bed | tr -d '"' > upreg_p.bed
+cat downreg_parse.bed | tr -d '"' > downreg_p.bed
+```
+
+
+
+
 
 
 
