@@ -242,8 +242,19 @@ grep("Sca*", GTF4$V1)
 
 # check intersection HERE USE LAEVIS GTF INSTEAD
 ```
-intersectBed -wa -wb -a flipped_annotation2.bed -b upreg_p1.bed downreg_p1.bed -names up down 
+intersectBed -wa -wb -a GTF_proper1.bed -b  up_fixed1.bed  down_fixed1.bed -names up down 
 ```
+
+
+
+
+
+
+
+
+# BELOW ALL WRONG
+
+
 
 # grab only gene names (also direction of expression but this will not matter- can pull out every copy of gene of interest and see expression direction)
 ```
