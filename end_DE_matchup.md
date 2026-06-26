@@ -161,15 +161,26 @@ awk -F "\t" '{print $5, $12, $13, $4}' upreg_p.bed > upreg_p1x.bed
 ```
 sed 's/ / /g' downreg_p1x.bed > downreg_x.bed
 sed 's/ / /g' upreg_p1x.bed > upreg_x.bed
+sed 's/ / /g' XEN_FULL_GTF.bed > XEN_FULL_GTF1.bed
 ```
 
 
-
-
-
-
-
 # turn laevis full gtf file into a bed file PLUS column with gene names to do bedIntersect on
+
+```
+awk -F "\t" '{print $1, $4, $5, $9}' /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase_longest.gtf > XEN_FULL.gtf
+```
+
+# keeps reverting to spaces FIXED
+```
+awk 'BEGIN{OFS="\t"} {print $1, $2, $3, $4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"_"$12"_"$13"_"$14"_"$15"_"$16"_"$17"_"$18"_"$19"_"$20"_"$21"_"$22"_"$23"_"$24}' XEN_FULL_GTF1.bed > XEN_FULL_GTF_fixed.bed
+```
+
+# BELOW not fixed yet
+
+
+
+
 
 # check intersection HERE USE LAEVIS GTF INSTEAD
 ```
