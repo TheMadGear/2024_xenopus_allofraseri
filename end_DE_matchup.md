@@ -171,10 +171,7 @@ sed 's/ / /g' XEN_FULL_GTF.bed > XEN_FULL_GTF1.bed
 awk -F "\t" '{print $1, $4, $5, $9}' /home/froglady/projects/rrg-ben/for_jade/XENLA_10.1_Xenbase.transcripts/XENLA_10.1_Xenbase_longest.gtf > XEN_FULL.gtf
 ```
 
-# keeps reverting to spaces FIXED
-```
-awk 'BEGIN{OFS="\t"} {print $1, $2, $3, $4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"_"$12"_"$13"_"$14"_"$15"_"$16"_"$17"_"$18"_"$19"_"$20"_"$21"_"$22"_"$23"_"$24}' XEN_FULL_GTF1.bed > XEN_FULL_GTF_fixed.bed
-```
+# keeps reverting to spaces FIXED in R
 
 # BELOW not fixed yet
 
@@ -211,7 +208,6 @@ downnn[which_neg,"direction"] <- "-"
   
 
 ```
-
 ```{r}
 
 GTF <- read.csv("/Users/jadebohbot/XEN_FULL_GTF.bed", header = F)
@@ -231,9 +227,12 @@ GTF2$V4 <- gsub("\\ ","_", GTF2$V4)
 
 MT <- which(GTF2$V1 == "MT")
 
-SCA <- grep("Sca*", GTF2$V1)
+
 
 GTF3 <- GTF2[-c(MT),]
+
+
+SCA <- grep("Sca*", GTF3$V1)
 
 GTF4 <- GTF3[-c(SCA),]
 
