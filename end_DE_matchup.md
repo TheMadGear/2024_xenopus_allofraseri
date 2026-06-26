@@ -52,7 +52,7 @@ blastn -query downreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_a
 
 blastn -query upreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_allo/XENLA_v10.1/laevis_reference_genome.fa_blastable -outfmt 6 -out upreg_blast_laev.out
 ```
-# PARSE IN R to create bed file with extra columns
+# PARSE IN R to create bed file with extra columns AND filter by PIDENT so each unique allo location has the best pident match
 
 # remove header
 ```
