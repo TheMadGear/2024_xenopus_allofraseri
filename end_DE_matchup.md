@@ -68,14 +68,15 @@ cat flipped_annotation1.bed | tr -d '"' > flipped_annotation2.bed
 
 # FIRST HAVE TO FLIP BED COORDS (done in R)
 
+
+# check intersection HERE USE LAEVIS GTF INSTEAD
+```
+intersectBed -wa -wb -a flipped_annotation2.bed -b upreg_p1.bed downreg_p1.bed -names up down 
+```
+
 # grab only gene names (also direction of expression but this will not matter- can pull out every copy of gene of interest and see expression direction)
 ```
 awk -F "\t" '{print $5, $7}' up_down_genes.txt > DE_genes_only.txt
-```
-
-# check intersection
-```
-intersectBed -wa -wb -a flipped_annotation2.bed -b upreg_p1.bed downreg_p1.bed -names up down 
 ```
 
 # grab only unique genes
