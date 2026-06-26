@@ -138,7 +138,7 @@ colnames(up1) <- c("tig", "start", "stop", "pos", "Chr_laev", "pident", "length"
 write.table(down1, file = "downreg_parse.bed", sep = "\t", row.names = FALSE, col.names = F)
 ```
 
-# remove header
+# remove header NOT NEEDED, NO ANN
 ```
 tail -n +2 flipped_annotation.bed > flipped_annotation1.bed
 ```
@@ -150,14 +150,24 @@ cat downreg_parse.bed | tr -d '"' > downreg_p.bed
 cat flipped_annotation1.bed | tr -d '"' > flipped_annotation2.bed
 ```
 
-# FIRST HAVE TO FLIP BED COORDS (done in R)
-
-
 # fixing LAEVIS GTF here
 # use awk to turn upreg_p.bed and downreg_p.bed into bed files with additional allo info
 ```
-
+awk -F "\t" '{print $5, $12, $13, $4}' downreg_p.bed > downreg_p1x.bed
+awk -F "\t" '{print $5, $12, $13, $4}' upreg_p.bed > upreg_p1x.bed
 ```
+
+# fix tab delimit
+```
+sed 's/ / /g' downreg_p1x.bed > downreg_x.bed
+sed 's/ / /g' upreg_p1x.bed > upreg_x.bed
+```
+
+
+
+
+
+
 
 # turn laevis full gtf file into a bed file PLUS column with gene names to do bedIntersect on
 
