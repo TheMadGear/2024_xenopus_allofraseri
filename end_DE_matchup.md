@@ -54,6 +54,90 @@ blastn -query upreg.fasta  -db /home/froglady/projects/rrg-ben/froglady/2024_all
 ```
 # PARSE IN R to create bed file with extra columns AND filter by PIDENT so each unique allo location has the best pident match
 
+```{r}
+# for loop here to filter by pident
+
+unq_allo <- unique(upreg$V1)
+
+fill_frame <- data.frame(V1 = c(), V2 = c(), pident = c(), length = c(), V5 = c(), V6 = c(), V7 = c(),
+                         V8 = c(), V9 = c(), V10 = c(), V11 = c(), V12 = c())
+colnames(upreg) <- c("V1", "V2", "pident", "length", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+
+# set colnames for pident and length
+
+for(a in 1:length(unq_allo))
+{
+  sub <- subset(upreg, V1 == unq_allo[a])
+  max_pid <- subset(sub, pident == max(pident))
+  max_len <- subset(max_pid, length == max(length))   
+  
+  fill_frame <- rbind(fill_frame, max_len)
+}
+
+upp <- fill_frame
+
+```
+
+```{r}
+unq_allo1 <- unique(downreg$V1)
+
+fill_frame1 <- data.frame(V1 = c(), V2 = c(), pident = c(), length = c(), V5 = c(), V6 = c(), V7 = c(),
+                         V8 = c(), V9 = c(), V10 = c(), V11 = c(), V12 = c())
+colnames(downreg) <- c("V1", "V2", "pident", "length", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12")
+
+# set colnames for pident and length
+
+for(a in 1:length(unq_allo1))
+{
+  sub <- subset(downreg, V1 == unq_allo1[a])
+  max_pid <- subset(sub, pident == max(pident))
+  max_len <- subset(max_pid, length == max(length))   
+  
+  fill_frame1 <- rbind(fill_frame1, max_len)
+}
+
+nrow(fill_frame1)
+nrow(downreg)
+length(unq_allo1)
+
+downn <- fill_frame1
+
+```
+
+
+```{r}
+
+now_split <- as.data.frame(str_split_fixed(upp$V1, ":", 2))
+
+now_split1 <- as.data.frame(str_split_fixed(now_split$V2, "-", 2))
+
+
+pos <- cbind(now_split$V1, now_split1$V1, now_split1$V2)
+
+up1 <- cbind(pos, upp)
+
+colnames(up1) <- c("tig", "start", "stop", "pos", "Chr_laev", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "eval", "bitscore")
+
+write.table(up1, file = "upreg_parse.bed", sep = "\t", row.names = FALSE, col.names = F)
+
+```
+
+
+```{r}
+now_split <- as.data.frame(str_split_fixed(downn$V1, ":", 2))
+
+now_split1 <- as.data.frame(str_split_fixed(now_split$V2, "-", 2))
+
+
+pos <- cbind(now_split$V1, now_split1$V1, now_split1$V2)
+
+down1 <- cbind(pos, downn)
+
+colnames(up1) <- c("tig", "start", "stop", "pos", "Chr_laev", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "eval", "bitscore")
+
+write.table(down1, file = "downreg_parse.bed", sep = "\t", row.names = FALSE, col.names = F)
+```
+
 # remove header
 ```
 tail -n +2 flipped_annotation.bed > flipped_annotation1.bed
