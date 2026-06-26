@@ -212,6 +212,34 @@ downnn[which_neg,"direction"] <- "-"
 
 ```
 
+```{r}
+
+GTF <- read.csv("/Users/jadebohbot/XEN_FULL_GTF.bed", header = F)
+
+GTF <- GTF[2:nrow(GTF),]
+
+GTF1 <- data.frame(V1 = c(GTF))
+
+GTF2 <- as.data.frame(str_split_fixed(GTF1$V1, "\\ ", 4))
+
+
+
+```
+
+```{r}
+GTF2$V4 <- gsub("\\ ","_", GTF2$V4)
+
+MT <- which(GTF2$V1 == "MT")
+
+SCA <- grep("Sca*", GTF2$V1)
+
+GTF3 <- GTF2[-c(MT),]
+
+GTF4 <- GTF3[-c(SCA),]
+
+grep("Sca*", GTF4$V1)
+
+```
 
 # check intersection HERE USE LAEVIS GTF INSTEAD
 ```
