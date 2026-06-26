@@ -69,6 +69,14 @@ cat flipped_annotation1.bed | tr -d '"' > flipped_annotation2.bed
 # FIRST HAVE TO FLIP BED COORDS (done in R)
 
 
+# fixing LAEVIS GTF here
+# use awk to turn upreg_p.bed and downreg_p.bed into bed files with additional allo info
+```
+
+```
+
+# turn laevis full gtf file into a bed file PLUS column with gene names to do bedIntersect on
+
 # check intersection HERE USE LAEVIS GTF INSTEAD
 ```
 intersectBed -wa -wb -a flipped_annotation2.bed -b upreg_p1.bed downreg_p1.bed -names up down 
