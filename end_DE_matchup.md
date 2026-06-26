@@ -178,6 +178,7 @@ awk 'BEGIN{OFS="\t"} {print $1, $2, $3, $4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"
 
 # BELOW not fixed yet
 
+# NEED TO flip pos so start<end in up/down files
 
 
 
