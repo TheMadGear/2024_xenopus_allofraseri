@@ -178,9 +178,39 @@ awk 'BEGIN{OFS="\t"} {print $1, $2, $3, $4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"
 
 # BELOW not fixed yet
 
-# NEED TO flip pos so start<end in up/down files
+# NEED TO flip pos so start<end in up/down files (done for both- only down shown)
+
+```{r}
+
+# switches bed start & stop
+
+unique(downnn$sstart < downnn$send)
 
 
+downnn$direction <- rep("+", nrow(downnn))
+levels(downnn$direction) <- c("+", "-")
+
+neg_vec <- downnn$sstart < downnn$send
+unique(neg_vec)
+
+which_neg <- which(neg_vec == FALSE)
+
+downnn[which_neg,"direction"] <- "-"
+
+# subset of only negative values
+#neg_ann <- subset(ann_done, subset = neg_vec)
+
+# woahhhhh does this work? IT WORKKKKKSSSSSSS
+  stemp <- downnn[which_neg,2]
+  etemp <- downnn[which_neg,3]
+  # switch column values
+  downnn[which_neg,3] <- stemp
+  downnn[which_neg,2] <- etemp
+  
+  unique(downnn$sstart < downnn$send)
+  
+
+```
 
 
 # check intersection HERE USE LAEVIS GTF INSTEAD
